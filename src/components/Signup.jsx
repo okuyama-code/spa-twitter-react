@@ -1,19 +1,18 @@
 import React from 'react'
-import { IoIosLogIn } from "react-icons/io"
-import { Link } from 'react-router-dom'
-// https://qiita.com/Ryo9597/items/83473a0d64eb92edb467　html
+import { SiGnuprivacyguard } from "react-icons/si";
+import { Link } from 'react-router-dom';
 
-// https://zenn.dev/prune/books/32a2fd62831c7f/viewer/5e7791 実装
-const Login = () => {
+
+const Signup = () => {
   return (
     <div className='flex flex-col h-screen login_bg'>
       <div className='flex-auto'>
         <div className='flex justify-center mt-20'>
           <div className='w-9/12 border border-gray-200 rounded-xl login_bg_opacity'>
           <div class="my-16 text-center">
-          <Link to="/">ホーム画面に戻る</Link>
+            <Link to="/">ホーム画面に戻る</Link>
 
-            <h2 class="text-4xl font-bold">ログイン</h2>
+            <h2 class="text-4xl font-bold">新規登録</h2>
             <form className='mt-12'>
               <div className='mb-3'>
                 <input
@@ -35,9 +34,8 @@ const Login = () => {
                 type='submit'
                 className='mb-3 text-xl w-4/12 bg-blue-500 text-white rounded hover:opacity-75 p-2 flex items-center justify-center mx-auto'
               >
-                ログイン<IoIosLogIn size={30} className='ml-2' />
+                登録する<SiGnuprivacyguard size={30} className='ml-2' />
               </button>
-
             </form>
           </div>
           </div>
@@ -47,4 +45,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup

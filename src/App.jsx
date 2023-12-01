@@ -1,11 +1,11 @@
+import { Link } from 'react-router-dom';
 import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-        <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div className=''>
+      <Link to="/signup" className='mr-2'>新規登録へ</Link>
+      <Link to="/login">ログインへ</Link>
     </div>
   );
 }
