@@ -1,9 +1,9 @@
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      aaa
+      新規登録機能を作成していく
     </div>
   );
 }
