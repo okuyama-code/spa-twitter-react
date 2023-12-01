@@ -3,7 +3,9 @@ import './App.scss';
 function App() {
   return (
     <div className="App">
-      新規登録機能を作成していく
+        <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
     </div>
   );
 }
