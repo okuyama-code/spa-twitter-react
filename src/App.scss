@@ -8,3 +8,22 @@
     background-color: rgb(139, 130, 130, 0.2);
   }
 }
+
+
+// ========= Home ===========
+.homeContainer {
+  display: flex;
+  width: 100%;
+  background-color: aquamarine;
+}
+
+// =========== sidebar =================
+.sidebar {
+  flex: 3;
+  height: 100vh;
+}
+
+// =========== timeLine ===============
+.timeLine {
+  flex: 9;
+}
