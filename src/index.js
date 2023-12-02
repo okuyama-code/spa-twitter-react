@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Login from './components/Login';
+import Login from './pages/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from './components/Signup';
+import Signup from './pages/Signup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

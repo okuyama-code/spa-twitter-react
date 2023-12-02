@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Sidebar from './Sidebar';
-import TimeLine from './TimeLine';
+import Sidebar from '../components/Sidebar';
+import TimeLine from '../components/TimeLine';
 
 const Home = () => {
   return (

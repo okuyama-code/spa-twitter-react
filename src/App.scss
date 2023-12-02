@@ -19,11 +19,28 @@
 
 // =========== sidebar =================
 .sidebar {
-  flex: 3;
+  flex: 2;
   height: 100vh;
+  border-right: 1px solid black;
+
+
+}
+
+@media screen and (max-width: 1280px) {
+  .sidebar {
+    flex: 1.5;
+    height: 100vh;
+    border-right: 1px solid black;
+
+    ul {
+      float: right;
+      margin-right: 10px;
+    }
+
+  }
 }
 
 // =========== timeLine ===============
 .timeLine {
-  flex: 9;
+  flex: 9.5;
 }
