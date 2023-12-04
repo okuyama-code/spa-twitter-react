@@ -6,7 +6,7 @@ import TimeLine from '../components/timeLine/TimeLine';
 
 const Home = () => {
   return (
-    <div className='home_body'>
+    <div >
       <div>
         <Link to="/signup" className='mr-2'>新規登録へ</Link>
         <Link to="/login">ログインへ</Link>
