@@ -1,73 +1,78 @@
 export const Users = [
   {
     id: 1,
-    profilePicture: "asesets/person/icon.png",
-    username: "okuyama"
+    profilePicture: "assets/person/icon.png",
+    name: "okuyama",
+    username: "okuyama0121"
   },
   {
     id: 2,
-    profilePicture: "asesets/person/minyon.jpeg",
-    username: "パク・ミニョン"
+    profilePicture: "assets/person/minyon.jpeg",
+    name: "パク・ミニョン",
+    username: "minyon1"
   },
   {
     id: 3,
-    profilePicture: "asesets/person/hanSohi.jpeg",
-    username: "ハン・ソヒ"
+    profilePicture: "assets/person/hanSohi.jpeg",
+    name: "ハン・ソヒ",
+    username: "sohi1"
   },
   {
     id: 4,
-    profilePicture: "asesets/person/yuna.jpeg",
-    username: "ユナ"
+    profilePicture: "assets/person/yuna.jpeg",
+    name: "ユナ",
+    username: "yuna1"
   },
   {
     id: 5,
-    profilePicture: "asesets/person/rei.jpeg",
-    username: "レイ"
+    profilePicture: "assets/person/rei.jpeg",
+    name: "レイ",
+    username: "rei1"
   },
 ];
 
 export const Posts = [
   {
     id: 1,
-    desc: "一番の努力家になる。丁寧に時間をかけて基礎からコツコツやる",
-    photo: "assets/post/medorano.jpeg",
-    data: "5分前",
+    desc: "丁寧に時間をかけて基礎からコツコツやる！",
+    photo: "assets/post/cotucotu.jpeg",
+    date: "5分前",
     userId: 1,
     like: 4,
     comment: 2,
   },
   {
     id: 2,
-    desc: "頑張っている人はかっこいい",
+    desc: "頑張っている人はかっこいい!",
     photo: "assets/post/minyon3.jpeg",
-    data: "5分前",
+    date: "5分前",
     userId: 2,
     like: 2,
     comment: 3,
   },
   {
     id: 3,
-    desc: "ドラマ「マイネーム」の１ショット",
-    photo: "assets/post/sohi2.jpeg",
-    data: "5分前",
+    desc: "負けないで(^▽^)/",
+    photo: "assets/post/sohi3.png",
+    date: "5分前",
     userId: 3,
     like: 4,
     comment: 2,
   },
   {
     id: 4,
-    desc: "30際になってもこの美貌",
+    desc: "プログラミングできるってすごいね！！",
     photo: "assets/post/yuna2.jpeg",
-    data: "5分前",
+    date: "5分前",
     userId: 4,
     like: 4,
     comment: 2,
   },
   {
     id: 5,
-    desc: "一番の努力家になる。丁寧に時間をかけて基礎からコツコツやる",
+    desc: "将来性がある人は素敵！！",
     photo: "assets/post/rei2.jpeg",
-    data: "5分前",
+    date: "5分前",
     userId: 5,
     like: 4,
     comment: 2,

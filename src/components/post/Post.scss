@@ -27,10 +27,14 @@
   align-items: center;
 }
 
+.postName {
+  margin-left: 10px;
+}
+
 .postUsername {
   font-size: 15px;
-  font-weight: 550;
   margin: 0 10px;
+  color: rgb(114, 116, 118);
 }
 .postDate {
   font-size: 12px;
@@ -64,6 +68,8 @@
   height: 24px;
   margin-right: 5px;
   cursor: pointer;
+  margin-left: 10px;
+
 }
 
 .postLikeCounter {
@@ -73,10 +79,12 @@
 .postCommentText {
   border-bottom: 1px solid gray;
   font-size: 15px;
-  margin-right: 3px;
+  margin-right: 10px;
 }
 
 .postText {
   margin-left: 50px;
   padding-bottom: 20px;
 }
+
+
