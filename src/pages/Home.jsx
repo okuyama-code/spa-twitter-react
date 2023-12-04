@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import TimeLine from '../components/TimeLine';
+import TimeLine from '../components/timeLine/TimeLine';
+
 
 const Home = () => {
   return (
-    <>
+    <div className='home_body'>
       <div>
         <Link to="/signup" className='mr-2'>新規登録へ</Link>
         <Link to="/login">ログインへ</Link>
@@ -15,7 +16,7 @@ const Home = () => {
         <Sidebar />
         <TimeLine />
       </div>
-    </>
+    </div>
 
 
   )

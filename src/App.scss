@@ -11,36 +11,44 @@
 
 
 // ========= Home ===========
+.home_body {
+  background-color: aquamarine;
+}
+
 .homeContainer {
   display: flex;
   width: 100%;
-  background-color: aquamarine;
+
 }
 
 // =========== sidebar =================
 .sidebar {
-  flex: 2;
   height: 100vh;
+  width: 250px;
   border-right: 1px solid black;
-
+  position: fixed;
 
 }
 
 @media screen and (max-width: 1280px) {
   .sidebar {
-    flex: 1.5;
-    height: 100vh;
+    width: 200px;
     border-right: 1px solid black;
 
     ul {
       float: right;
       margin-right: 10px;
     }
-
   }
 }
 
 // =========== timeLine ===============
 .timeLine {
-  flex: 9.5;
+  margin-left: 250px;
+}
+
+@media screen and (max-width: 1280px) {
+  .timeLine {
+    margin-left: 200px;
+  }
 }
