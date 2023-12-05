@@ -1,4 +1,19 @@
-.modal {
+// =========== EditModal ========
+.edit_modal {
+  margin: 30px auto;
+  width: 80%;
+  height: 80vh;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+
+  // 常にスクロールバーを表示
+  overflow-y: scroll;
+}
+
+
+// =========== commentModal ====================
+.comment_modal {
   margin-left: 450px;
-  margin-top: 100px;
 }

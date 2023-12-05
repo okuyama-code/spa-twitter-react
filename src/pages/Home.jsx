@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
-import Modal from '../components/modal/Modal';
+import EditModal from '../components/modal/EditModal';
 
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
       <div className='homeContainer'>
         <Sidebar />
         {/* <TimeLine /> */}
-        <Modal />
+        <EditModal />
       </div>
     </div>
 

@@ -2,6 +2,24 @@ html {
   background-color: aquamarine;
 }
 
+// スクロールバーのカスタマイズ ===============
+// https://wemo.tech/535
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background: #aba9a9;
+  border-left: solid 1px #ececec;
+  border-radius: 0px 3px 3px 0px;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #747272;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+// ================== スクロールバーのカスタマイズ
 
 .login_bg {
   background: linear-gradient(to right, blue, rgb(221, 113, 131));
