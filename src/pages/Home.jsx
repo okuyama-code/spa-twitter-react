@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
+import Modal from '../components/modal/Modal';
 
 
 const Home = () => {
@@ -14,7 +15,8 @@ const Home = () => {
 
       <div className='homeContainer'>
         <Sidebar />
-        <TimeLine />
+        {/* <TimeLine /> */}
+        <Modal />
       </div>
     </div>
 
