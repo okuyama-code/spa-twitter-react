@@ -19,7 +19,9 @@ const Profile = () => {
     <>
       <div className="profile">
         <Sidebar />
+        {isEdit && (<EditModal />)}
         <div className='profileRight'>
+
           <div className="profileCover">
             <img src="assets/post/minyon3.jpeg" alt="" className='profileCoverImg'/>
             <img src="assets/person/icon.png" alt="" className='profileUserImg'/>
@@ -52,7 +54,6 @@ const Profile = () => {
 
             </div>
 
-            {isEdit && (<EditModal />)}
 
 
           </div>

@@ -92,6 +92,10 @@ html {
 
 
 // ============= Profile ===================
+.profile {
+  position: relative;
+  z-index: 0;
+}
 
 .profileRight {
     margin-left: 250px;

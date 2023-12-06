@@ -5,6 +5,12 @@
 
 // =========== EditModal ========
 .edit_modal {
+  // modalを重ねる関係
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
   margin: 30px auto;
   width: 600px;
   height: 80vh;
@@ -15,7 +21,6 @@
 
   // 常にスクロールバーを表示
   overflow-y: scroll;
-  z-index: 1;
 
 }
 
