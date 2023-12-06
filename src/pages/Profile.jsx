@@ -10,6 +10,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import PostAll from '../components/profilePosts/PostAll';
 import CommentAll from '../components/profilePosts/CommentAll';
+import { Link } from 'react-router-dom';
 
 
 
@@ -55,8 +56,8 @@ const Profile = () => {
             </div>
 
             <div className='follow_profile'>
-              <p><span>110</span> Following</p>
-              <p><span>100</span> Follower</p>
+              <p><Link to={{ pathname: "/followings" }}><span>110</span></Link> Following</p>
+              <p><Link to={{ pathname: "/followers" }}><span>100</span></Link> Follower</p>
             </div>
             <div className='profile_tabs'>
               <Tabs>
