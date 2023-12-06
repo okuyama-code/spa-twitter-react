@@ -1,16 +1,109 @@
+:root {
+--bg-black:rgb(56, 54, 54);
+--border-black: rgb(146, 146, 146);
+}
+
 // =========== EditModal ========
 .edit_modal {
   margin: 30px auto;
-  width: 80%;
+  width: 600px;
   height: 80vh;
   border: 1px solid black;
   border-radius: 5px;
-  background-color: black;
+  background-color: var(--bg-black);
   color: white;
 
   // 常にスクロールバーを表示
   overflow-y: scroll;
+  z-index: 1;
+
 }
+
+
+
+
+.close_icon {
+  margin: 10px;
+  font-size: 30px;
+  border-radius: 50%;
+  background: var(--bg-black);
+
+
+  &:hover {
+    transition: 0.3s ease;
+    background: var(--border-black);
+  }
+}
+
+.edit_h2 {
+  margin: 7px 0 0 40px;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.editButton {
+  margin: 10px 30px 5px 0;
+  border: 1px solid white;
+  padding: 0 20px;
+  font-size: 15px;
+  border-radius: 10px;
+
+  &:hover {
+    transition: 0.3s ease;
+    opacity: 0.7;
+  }
+
+}
+
+.edit_profile_img {
+  position: relative;
+  height: 290px;
+
+  .header_img {
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .icon_img {
+    height: 110px;
+    width: 110px;
+    border: 2px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 150px;
+    left: 30px;
+  }
+}
+
+.edit_form {
+  text-align: center;
+
+  input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background: var(--bg-black);
+    border: 1px solid var(--border-black);
+  }
+
+  textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background: var(--bg-black);
+    border: 1px solid var(--border-black);
+  }
+
+  .input_last {
+    margin-bottom: 50px;
+  }
+}
+
 
 
 // =========== commentModal ====================
