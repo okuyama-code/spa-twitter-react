@@ -192,3 +192,19 @@ html {
     margin-right: 7px;
   }
 }
+
+.profile_tabs {
+  .tablist {
+    background: rgb(107, 103, 103, 0.8);
+    text-align: center;
+
+    h2 {
+      padding: 2px 5px;
+      // margin-right: 10px;
+    }
+  }
+
+  .tabPanel {
+    margin-top: 10px;
+  }
+}

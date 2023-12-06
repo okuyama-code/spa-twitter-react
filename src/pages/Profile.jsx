@@ -5,6 +5,12 @@ import { FaLink } from "react-icons/fa6";
 import { FaBirthdayCake } from "react-icons/fa";
 import EditModal from '../components/modal/EditModal';
 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
+import 'react-tabs/style/react-tabs.css';
+import PostAll from '../components/profilePosts/PostAll';
+import CommentAll from '../components/profilePosts/CommentAll';
+
 
 
 const Profile = () => {
@@ -52,8 +58,22 @@ const Profile = () => {
               <p><span>110</span> Following</p>
               <p><span>100</span> Follower</p>
             </div>
+            <div className='profile_tabs'>
+              <Tabs>
+                <TabList className="tablist">
+                  <Tab><h2>投稿一覧</h2></Tab>
+                  <Tab><h2>コメント一覧</h2></Tab>
+                </TabList>
 
-            
+                <TabPanel className="tabPanel">
+                  <PostAll />
+                </TabPanel>
+                <TabPanel>
+                  <CommentAll />
+                </TabPanel>
+
+              </Tabs>
+            </div>
 
 
           </div>
