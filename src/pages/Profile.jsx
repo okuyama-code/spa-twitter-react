@@ -51,9 +51,9 @@ const Profile = () => {
             <div className='follow_profile'>
               <p><span>110</span> Following</p>
               <p><span>100</span> Follower</p>
-
             </div>
 
+            
 
 
           </div>
