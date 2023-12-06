@@ -10,7 +10,9 @@ const Signup = () => {
         <div className='flex justify-center mt-20'>
           <div className='w-9/12 border border-gray-200 rounded-xl login_bg_opacity'>
           <div class="my-16 text-center">
-            <Link to="/">ホーム画面に戻る</Link>
+            <Link to="/" className='signup_link'>
+              <p className='mb-2'>ホーム画面に戻る</p>
+            </Link>
 
             <h2 class="text-4xl font-bold">新規登録</h2>
             <form className='mt-12'>
@@ -37,6 +39,11 @@ const Signup = () => {
                 登録する<SiGnuprivacyguard size={30} className='ml-2' />
               </button>
             </form>
+            <Link to="/login">
+              <p className='signup_link'>
+                ログイン画面へ
+              </p>
+            </Link>
           </div>
           </div>
         </div>

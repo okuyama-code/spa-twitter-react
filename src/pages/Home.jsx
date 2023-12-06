@@ -8,15 +8,9 @@ import EditModal from '../components/modal/EditModal';
 const Home = () => {
   return (
     <div >
-      <div>
-        <Link to="/signup" className='mr-2'>新規登録へ</Link>
-        <Link to="/login">ログインへ</Link>
-      </div>
-
       <div className='homeContainer'>
         <Sidebar />
-        {/* <TimeLine /> */}
-        <EditModal />
+        <TimeLine />
       </div>
     </div>
 
