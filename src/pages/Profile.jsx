@@ -12,11 +12,15 @@ import PostAll from '../components/profilePosts/PostAll';
 import CommentAll from '../components/profilePosts/CommentAll';
 import { Link } from 'react-router-dom';
 
+// import { useRecoilState } from 'recoil';
+// import { isEditState } from '../atoms/isEditState';
+
 
 
 const Profile = () => {
 
   const [isEdit, setIsEdit] = useState(false);
+  // const [isEdit, setIsEdit] = useRecoilState(isEditState)
 
   const handleClick = () => {
     setIsEdit(!isEdit);
@@ -26,7 +30,7 @@ const Profile = () => {
     <>
       <div className="profile">
         <Sidebar />
-        {isEdit && (<EditModal />)}
+        {isEdit && (<EditModal isEdit={isEdit} handleClick={handleClick} />)}
         <div className='profileRight'>
 
           <div className="profileCover">

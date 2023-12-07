@@ -4,13 +4,16 @@ import { IoMdClose } from "react-icons/io";
 
 
 
-const EditModal = () => {
+const EditModal = ({ isEdit, handleClick }) => {
+  console.log(isEdit);
   return (
     <>
       <div className='edit_modal'>
         <div className='flex justify-between mt-1'>
           <div className='flex'>
-            <IoMdClose className='close_icon' />
+            <button onClick={handleClick}>
+              <IoMdClose className='close_icon' />
+            </button>
             <h2 className='edit_h2'>Edit Profile</h2>
           </div>
 
