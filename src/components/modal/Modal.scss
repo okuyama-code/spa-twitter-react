@@ -113,5 +113,38 @@
 
 // =========== commentModal ====================
 .comment_modal {
-  margin: 60px auto;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // z-index: 20;
+  border: 1px solid black;
+  margin: 30px auto;
+  width: 600px;
+  height: 80vh;
+  border-radius: 5px;
+  background: rgb(98, 92, 92);
+  color: white;
+
+  .comment_modal_header {
+    margin: 10px 0 0 20px;
+  }
+
+  .comment_modal_post {
+    margin: 10px 0 0 15px;
+    display: flex;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .comment_modal_post_username {
+      margin-left: 10px;
+      font-size: 0.9rem;
+      padding-top: 2px;
+      color: rgb(196, 193, 193);
+    }
+  }
+
 }
