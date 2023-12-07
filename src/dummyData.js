@@ -25,9 +25,9 @@ export const Users = [
   },
   {
     id: 5,
-    profilePicture: "assets/person/rei.jpg",
-    name: "レイ",
-    username: "rei1"
+    profilePicture: "assets/person/iu01.jpeg",
+    name: "IU",
+    username: "iu01"
   },
 ];
 
@@ -71,7 +71,7 @@ export const Posts = [
   {
     id: 5,
     desc: "将来性がある人は素敵！！",
-    photo: "assets/post/rei2.jpeg",
+    photo: "assets/post/iu.jpeg",
     date: "5分前",
     userId: 5,
     like: 4,

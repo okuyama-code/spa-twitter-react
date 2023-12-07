@@ -11,8 +11,8 @@ const Home = () => {
     <div >
       <div className='homeContainer'>
         <Sidebar />
-        {/* <TimeLine /> */}
-        <CommentModal />
+        <TimeLine />
+        {/* <CommentModal /> */}
       </div>
     </div>
 
