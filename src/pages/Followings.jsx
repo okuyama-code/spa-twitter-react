@@ -1,22 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaArrowLeft } from "react-icons/fa6";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Follow from '../components/follow/Follow';
+import Follower from '../components/follow/Follower';
+
 
 const Followings = () => {
   return (
     <div>
-      <Link to={{ pathname: "/" }}><span>戻る</span></Link>
-      <table>
-        <tr>
-          <td>Cell 1</td>
-          <td>Cell 2</td>
-          <td>Cell 3</td>
-        </tr>
-        <tr>
-          <td>Cell 4</td>
-          <td>Cell 5</td>
-          <td>Cell 6</td>
-        </tr>
-      </table>
+      <div className='flex following_header'>
+        <Link to={{ pathname: "/profile" }}><span className='following_header'><FaArrowLeft /></span></Link>
+        <div>
+          <h2>okuyama | HC</h2>
+          <p>@output0121</p>
+        </div>
+      </div>
+
+      <div className='profile_tabs'>
+        <Tabs>
+          <TabList className="tablist">
+            <Tab><h2>フォロー中</h2></Tab>
+            <Tab><h2>フォロワー</h2></Tab>
+          </TabList>
+
+          <TabPanel className="tabPanel">
+            <Follow />
+          </TabPanel>
+          <TabPanel>
+            <Follower />
+          </TabPanel>
+
+        </Tabs>
+      </div>
     </div>
   )
 }

@@ -222,3 +222,20 @@ html {
     margin-top: 10px;
   }
 }
+
+// ======== followページ =========
+.following_header {
+  span {
+    display: block;
+    margin: 20px;
+  }
+  div {
+
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      color: #747272;
+    }
+  }
+}

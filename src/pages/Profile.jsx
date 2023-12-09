@@ -61,7 +61,7 @@ const Profile = () => {
 
             <div className='follow_profile'>
               <p><Link to={{ pathname: "/followings" }}><span>110</span></Link> Following</p>
-              <p><Link to={{ pathname: "/followers" }}><span>100</span></Link> Follower</p>
+              <p><Link to={{ pathname: "/followings" }}><span>100</span></Link> Follower</p>
             </div>
             <div className='profile_tabs'>
               <Tabs>
