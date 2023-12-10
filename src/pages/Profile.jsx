@@ -38,8 +38,8 @@ const Profile = () => {
             <img src="assets/person/icon.png" alt="" className='profileUserImg'/>
             <button className='profileEditButton' onClick={handleClick}>Edit Profile</button>
             {/* followボタンはここ */}
-            <button className='profilefollowButton'>follow</button>
-            <button className='profileUnfollowButton'>follow解除</button>
+            {/* <button className='profilefollowButton'>follow</button>
+            <button className='profileUnfollowButton'>follow解除</button> */}
             {/* ここまで */}
           </div>
 

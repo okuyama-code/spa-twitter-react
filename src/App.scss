@@ -269,3 +269,63 @@ html {
     }
   }
 }
+
+//============= message ===================
+
+.message-box-header {
+  display: flex;
+  align-items: center;
+  background-color: #544a4a;
+  padding: 5px;
+  color: #a9a2a2;
+
+  h3 {
+    font-size: 30px;
+  }
+
+  p {
+    font-size: 1.7rem;
+    margin: 0 60px 0 10px;  //「上」､「右」､「下」､「左」を指定（時計回り）
+    color: #aca9a9;
+  }
+
+  .info-item {
+    font-size: 1.4rem;
+    margin-left: 60px;
+  }
+}
+
+.message-box-body {
+  p {
+    color: white;
+  }
+}
+
+
+.message-box-body-info {
+  display: grid;
+  grid-template-columns: 2fr 1fr ;
+
+}
+
+.message-box-body-info p {
+  background-color: rgb(56, 55, 55);
+  border: 1px solid beige;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 10px 40px 10px;
+}
+
+.message-box-body-info-other {
+  display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.message-box-body-info-other p {
+  background-color: rgb(91, 82, 82);
+  border: 1px solid beige;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
