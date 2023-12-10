@@ -243,6 +243,17 @@ html {
 }
 
 // ======== followページ =========
+.followContainer {
+  margin-left: 250px;
+}
+
+
+@media screen and (max-width: 1280px) {
+  .followContainer {
+    margin-left: 200px;
+  }
+}
+
 .following_header {
   span {
     display: block;
