@@ -5,4 +5,3 @@ signup → login → post → post-index → post-show → profile → post-dele
 ## TODO
 - DMページ作成
 - 通知ページ作成
-- 投稿のアイコンのlayout作成

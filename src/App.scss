@@ -6,6 +6,10 @@ html {
   background: var(--bg-colorful);
 }
 
+.x_scroll_none {
+  overflow-x: hidden;
+}
+
 // ============= ログイン関係 =================
 .signup_link {
   color: rgb(188, 187, 187);
@@ -278,7 +282,42 @@ html {
   }
 }
 
-//============= message ===================
+// ============== message ====================
+.message_header {
+  h2 {
+    padding: 10px;
+    font-weight: bolder;
+  }
+}
+
+.messages_name {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  h2 {
+    margin-left: 10px;
+  }
+}
+
+.messages_page_body {
+  margin: 0 10px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  
+}
+
+.messages_lists {
+  margin: 10px;
+}
+
+.messages_icon {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+//============= messageBox ===================
 
 .message-box-header {
   display: flex;

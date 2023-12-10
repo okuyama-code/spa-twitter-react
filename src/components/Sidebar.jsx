@@ -34,7 +34,7 @@ const Sidebar = () => {
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>通知</span>
           </li>
         </Link>
-        <Link to={{ pathname: "/messagebox" }}>
+        <Link to={{ pathname: "/messages" }}>
           <li className='flex items-center mb-3 sidebar_items'>
             <IoMailOutline size={40} className='mx-2 mb-3' />
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>DM</span>
