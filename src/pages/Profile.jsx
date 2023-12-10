@@ -50,7 +50,7 @@ const Profile = () => {
             <div className='profile_icons'>
               <div className='profile_icon'>
                 <FaLink />
-                <span>https://www.aaa.com</span>
+                <span className='profile_icon_link'><a  href='https://okucode-portfolio-site.vercel.app/' rel="noopener noreferrer" target="_blank" >https://okucode-portfolio-site.vercel.app/</a></span>
               </div>
               <div className='profile_icon2'>
                 <FaBirthdayCake />

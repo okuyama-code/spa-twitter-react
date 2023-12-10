@@ -213,6 +213,14 @@ html {
   }
 }
 
+.profile_icon_link {
+  color: rgb(64, 64, 193);
+  text-decoration: underline;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
 .follow_profile {
   display: flex;
   margin-top: 10px;
