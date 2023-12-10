@@ -18,7 +18,7 @@ const Followers = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
@@ -33,7 +33,7 @@ const Followers = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
@@ -48,7 +48,7 @@ const Followers = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
@@ -63,7 +63,7 @@ const Followers = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
       </div>
 
     </>

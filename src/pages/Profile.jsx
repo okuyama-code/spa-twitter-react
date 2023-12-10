@@ -32,9 +32,8 @@ const Profile = () => {
         <Sidebar />
         {isEdit && (<EditModal isEdit={isEdit} handleClick={handleClick} />)}
         <div className='profileRight'>
-
           <div className="profileCover">
-            <img src="assets/post/minyon3.jpeg" alt="" className='profileCoverImg'/>
+            <img src="assets/suisu0.jpg" alt="" className='profileCoverImg'/>
             <img src="assets/person/icon.png" alt="" className='profileUserImg'/>
             <button className='profileEditButton' onClick={handleClick}>Edit Profile</button>
             {/* followボタンはここ */}
