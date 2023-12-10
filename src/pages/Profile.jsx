@@ -37,12 +37,16 @@ const Profile = () => {
             <img src="assets/post/minyon3.jpeg" alt="" className='profileCoverImg'/>
             <img src="assets/person/icon.png" alt="" className='profileUserImg'/>
             <button className='profileEditButton' onClick={handleClick}>Edit Profile</button>
+            {/* followボタンはここ */}
+            <button className='profilefollowButton'>follow</button>
+            <button className='profileUnfollowButton'>follow解除</button>
+            {/* ここまで */}
           </div>
 
           <div className="profileInfo">
               <h4 className='profileInfoName'>Okuyama</h4>
               <p className='profileInfoUsername'>@okuyama0121</p>
-              <span className='profileInfoDesc'>千葉県在住。25歳。フッ軽です🏃23/3~8/8まで独学(500h)。23/8/9~HC。英語も学習中。ゴルフ、筋トレ、ランニング、ママさんバレー、将棋、カラオケ、登山、BBQ、フットサル。「努力の上の辛抱という棒を立てろ、この棒に花が咲く」 「常に自惚れず冷静に視座高く」「迷ったら、やる」</span>
+              <span className='profileInfoDesc'>千葉県在住。25歳。フッ軽です🏃23/3~8/8まで独学(500h)。23/8/9~HC。英語も学習中。ゴルフ、筋トレ、ランニング、ママさんバレー、将棋、カラオケ、登山、BBQ、フットサル。</span>
 
             <div className='profile_icons'>
               <div className='profile_icon'>

@@ -151,9 +151,28 @@ html {
   right: 40px;
   top: 270px;
   border: 1px solid black;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
+}
 
+.profilefollowButton {
+  position: absolute;
+  right: 150px;
+  top: 270px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  background: rgb(27, 155, 229);
+}
+
+.profileUnfollowButton {
+  position: absolute;
+  right: 220px;
+  top: 270px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  background: rgb(237, 55, 9);
 }
 
 .profileInfoName {
