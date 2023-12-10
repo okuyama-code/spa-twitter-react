@@ -1,15 +1,14 @@
 import React from 'react'
 import './Follow.scss'
 
-
-const Follower = () => {
+const Followings = () => {
   return (
     <>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
           <img src="assets/person/icon.png" alt="" className='follow_img' />
           <div>
-            <h2>鈴木Follower</h2>
+            <h2>鈴木</h2>
             <p>@suzuki01</p>
             <p>aaaaaaaaaaaaaa<br />
               aaaaaaaaaaaaaa<br />
@@ -70,4 +69,4 @@ const Follower = () => {
   )
 }
 
-export default Follower
+export default Followings
