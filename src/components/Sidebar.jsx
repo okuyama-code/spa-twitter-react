@@ -28,14 +28,18 @@ const Sidebar = () => {
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3 '>ホーム</span>
           </li>
         </Link>
-        <li className='flex items-center mb-3 sidebar_items'>
-          <IoMdNotificationsOutline size={40} className='mx-2 mb-3' />
-          <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>通知</span>
-        </li>
-        <li className='flex items-center mb-3 sidebar_items'>
-          <IoMailOutline size={40} className='mx-2 mb-3' />
-          <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>DM</span>
-        </li>
+        <Link to={{ pathname: "/notifications" }}>
+          <li className='flex items-center mb-3 sidebar_items'>
+            <IoMdNotificationsOutline size={40} className='mx-2 mb-3' />
+            <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>通知</span>
+          </li>
+        </Link>
+        <Link to={{ pathname: "/messages" }}>
+          <li className='flex items-center mb-3 sidebar_items'>
+            <IoMailOutline size={40} className='mx-2 mb-3' />
+            <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>DM</span>
+          </li>
+        </Link>
         <li className='flex items-center mb-3 sidebar_items'>
           <FaBookDead size={40} className='mx-2 mb-3' />
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>ブックマーク</span>
@@ -43,7 +47,7 @@ const Sidebar = () => {
         <Link to={{ pathname: "/profile" }}>
           <li className='flex items-center mb-3 sidebar_items'>
             <IoPersonSharp size={40} className='mx-2 mb-3' />
-            <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>Profile</span>
+            <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>プロフィール</span>
           </li>
         </Link>
         <li className='flex items-center mb-3 sidebar_items'>
@@ -55,7 +59,7 @@ const Sidebar = () => {
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>投稿</span>
         </li>
         <div>
-        
+
         <Link to="/login">
           <li className='flex items-center mb-3 sidebar_items'>
             ログイン

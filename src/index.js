@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Follow from './pages/Follow';
+import Message from './pages/Message';
+import Notification from './pages/Notification';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +21,9 @@ root.render(
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
         <Route path="followings" element={<Follow />} />
+        <Route path="messages" element={<Message />} />
+        <Route path="notifications" element={<Notification
+         />} />
 
       </Routes>
     </BrowserRouter>
