@@ -303,7 +303,12 @@ html {
   margin: 0 10px;
   margin-bottom: 10px;
   font-size: 1.2rem;
-  
+  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;  
+
 }
 
 .messages_lists {
@@ -376,3 +381,22 @@ html {
   margin: 10px;
 }
 
+
+// ============= notifications ========
+.notification_box {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid black;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  h3 {
+    margin-left: 10px;
+    font-size: 1.2rem;
+  }
+}

@@ -10,6 +10,7 @@ import Follow from './pages/Follow';
 import Notification from './pages/Notification';
 import MessageBox from './pages/MessageBox';
 import Messages from './pages/Messages';
+import PostShow from './pages/PostShow';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +26,8 @@ root.render(
         <Route path="messages" element={<Messages />} />
         <Route path="messagebox" element={<MessageBox />} />
         <Route path="notifications" element={<Notification
+         />} />
+        <Route path="postShow" element={<PostShow
          />} />
 
       </Routes>

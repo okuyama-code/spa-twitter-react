@@ -1,5 +1,6 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
+import { Link } from 'react-router-dom'
 
 const Messages = () => {
   return (
@@ -14,15 +15,19 @@ const Messages = () => {
         <div className='messages_lists'>
           <div className='messages_list'>
             <div className='flex items-center'>
+              <Link to={{ pathname: "/profile" }}>
               <img src="assets/person/iu01.jpeg" alt="" className='messages_icon' />
+              </Link>
+              <Link to={{ pathname: "/messageBox" }}>
               <div>
                 <div className='messages_name'>
                   <h2>UI</h2>
                   <p>@ui01</p>
                   <p>・Nov 20</p>
                 </div>
-                <p className='messages_page_body'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <p className='messages_page_body'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
               </div>
+              </Link>
             </div>
           </div>
           <div className='messages_list'>
