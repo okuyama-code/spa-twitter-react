@@ -1,5 +1,6 @@
 import React from 'react'
 import './Follow.scss'
+import { Button } from '@mui/material'
 
 const Followings = () => {
   return (
@@ -17,7 +18,8 @@ const Followings = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
+        <button className='UnfollowingButton'>フォロー解除</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
@@ -32,7 +34,7 @@ const Followings = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
@@ -47,7 +49,7 @@ const Followings = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>
@@ -62,7 +64,8 @@ const Followings = () => {
           </div>
         </div>
 
-        <button>following</button>
+        <button className='followingButton'>following</button>
+
       </div>
 
     </>

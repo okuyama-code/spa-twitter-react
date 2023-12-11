@@ -74,7 +74,7 @@ html {
 
 @media screen and (max-width: 1280px) {
   .sidebar {
-    width: 200px;
+    width: 120px;
 
 
     ul {
@@ -103,7 +103,7 @@ html {
 
 @media screen and (max-width: 1280px) {
   .timeLine {
-    margin-left: 220px;
+    margin-left: 140px;
     width: 80%;
   }
 }
@@ -121,7 +121,7 @@ html {
 
 @media screen and (max-width: 1280px) {
   .profileRight {
-    margin-left: 200px;
+    margin-left: 120px;
   }
 }
 
@@ -262,7 +262,7 @@ html {
 
 @media screen and (max-width: 1280px) {
   .followContainer {
-    margin-left: 200px;
+    margin-left: 120px;
   }
 }
 
@@ -307,7 +307,7 @@ html {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-webkit-text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;  
+	-o-text-overflow: ellipsis;
 
 }
 
@@ -399,4 +399,9 @@ html {
     margin-left: 10px;
     font-size: 1.2rem;
   }
+}
+
+// ============= postShow ====================
+.postShowWrapper {
+  padding: 20px;
 }

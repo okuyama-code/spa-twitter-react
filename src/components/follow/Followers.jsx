@@ -19,6 +19,7 @@ const Followers = () => {
         </div>
 
         <button className='followingButton'>following</button>
+        <button className='UnfollowingButton'>フォロー解除</button>
       </div>
       <div className='flex justify-between mb-5'>
         <div className='flex'>

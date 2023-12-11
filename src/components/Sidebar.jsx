@@ -8,6 +8,8 @@ import { IoPersonSharp } from "react-icons/io5";
 import { CiCircleMore } from "react-icons/ci";
 
 import { GiBirdTwitter } from "react-icons/gi";
+import { IoExitOutline } from "react-icons/io5";
+
 import { Link } from 'react-router-dom';
 
 
@@ -54,6 +56,10 @@ const Sidebar = () => {
           <CiCircleMore size={40} className='mx-2 mb-3' />
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>その他</span>
         </li>
+        <li className='flex items-center mb-3 sidebar_items'>
+          <IoExitOutline size={40} className='ml-3 mr-1 mb-3' />
+          <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>退会</span>
+        </li>
         <li className='flex items-center mb-3 sidebar_items post_side_icon'>
           <GiBirdTwitter size={50} className='mx-2 mb-3 mt-3' />
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>投稿</span>
@@ -65,7 +71,7 @@ const Sidebar = () => {
         </Link>
         <Link to="/postShow">
           <li className='flex items-center mb-3 sidebar_items'>
-            tweet詳細(仮)
+            投稿詳細
           </li>
         </Link>
       </ul>

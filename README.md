@@ -4,3 +4,4 @@ signup → login → post → post-index → post-show → profile → post-dele
 
 ## TODO
 - 投稿詳細ページ
+- homeでcommentModalの表示
