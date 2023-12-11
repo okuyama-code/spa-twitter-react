@@ -1,6 +1,6 @@
 import React from 'react'
 import './Follow.scss'
-import { Button } from '@mui/material'
+
 
 const Followings = () => {
   return (

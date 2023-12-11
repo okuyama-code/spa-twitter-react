@@ -25,7 +25,7 @@ const Messages = () => {
                   <p>@ui01</p>
                   <p>・Nov 20</p>
                 </div>
-                <p className='messages_page_body'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <p className='messages_page_body'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
               </div>
               </Link>
             </div>
