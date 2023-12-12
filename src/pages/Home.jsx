@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
-import EditModal from '../components/modal/EditModal';
+
 import CommentModal from '../components/modal/CommentModal';
 
 
