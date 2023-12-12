@@ -3,5 +3,4 @@
 signup → login → post → post-index → post-show → profile → post-delete → comment → comment-index → repost → likes → follow → unfollow → notification → message → bookmark → withdrawal(退会)
 
 ## TODO
-- 投稿詳細ページ
-- homeでcommentModalの表示
+- homeと投稿詳細ページでcommentModalの表示

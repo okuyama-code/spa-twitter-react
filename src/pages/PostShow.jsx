@@ -8,6 +8,8 @@ import { CiHeart } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 
 import { CiImageOn } from "react-icons/ci";
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -19,7 +21,9 @@ const PostShow = () => {
       <div className='followContainer'>
         <div className='postShowWrapper'>
           <div className='postShowHeader'>
-            <IoIosArrowRoundBack size={40} />
+            <Link to="/">
+              <IoIosArrowRoundBack size={40} />
+            </Link>
             <h2>Post</h2>
           </div>
           <div className="postShowName">
@@ -61,11 +65,40 @@ const PostShow = () => {
             </div>
           </form>
 
-          <div className='commentPostInfo'>
-            
-          </div>
-
         </div> {/* postShowWrapperの終わり  */}
+        <div className="commentPostWrapper">
+          <div className='commentPostInfo'>
+            <img src="assets/person/minyon.jpeg" alt="" />
+            <div>
+              <div className='flex items-center'>
+                <h3>パクミニョン</h3>
+                <p>@minyon01</p>
+              </div>
+              <p>ありがとうございます。</p>
+            </div>
+          </div>
+          <div className='flex'>
+            <FaRegComment className='commentToCommentIcon' />
+            <span className='commentToCommentIconNumber'>2</span>
+          </div>
+        </div>
+        <div className="commentPostWrapper">
+          <div className='commentPostInfo'>
+            <img src="assets/person/minyon.jpeg" alt="" />
+            <div>
+              <div className='flex items-center'>
+                <h3>パクミニョン</h3>
+                <p>@minyon01</p>
+              </div>
+              <p>ありがとうございます。</p>
+            </div>
+          </div>
+          <div className='flex'>
+            <FaRegComment className='commentToCommentIcon' />
+            <span className='commentToCommentIconNumber'>2</span>
+          </div>
+        </div>
+
       </div>
     </div>
   )
