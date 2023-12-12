@@ -16,7 +16,7 @@ const Home = () => {
       <div className='homeContainer'>
         <Sidebar />
         <TimeLine  isComment={isComment} handleClickComment={handleClickComment} />
-        {/* <CommentModal isComment={isComment} handleClickComment={handleClickComment}/> */}
+        {isComment && (<CommentModal isComment={isComment} handleClickComment={handleClickComment}/>)}
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import { IoIosArrowRoundBack } from "react-icons/io";
 
@@ -9,15 +9,19 @@ import { CiBookmark } from "react-icons/ci";
 
 import { CiImageOn } from "react-icons/ci";
 import { Link } from 'react-router-dom';
-
-
+import CommentModal from '../components/modal/CommentModal';
 
 
 
 const PostShow = () => {
+  const [isComment, setIsComment] = useState(false);
+  const handleClickComment = () => {
+    setIsComment(!isComment);
+  }
   return (
     <div className='followPage'>
       <Sidebar />
+      {isComment && (<CommentModal isComment={isComment} handleClickComment={handleClickComment}/>)}
       <div className='followContainer'>
         <div className='postShowWrapper'>
           <div className='postShowHeader'>
@@ -37,7 +41,9 @@ const PostShow = () => {
           <img src="assets/post/cotucotu.jpeg" alt="" className='postShowImg' />
           <div className="postShowIcons mt-4">
             <div className="PostIcon ">
-              <FaRegComment className='postIconIcon' />
+              <button onClick={handleClickComment}>
+                <FaRegComment className='postIconIcon' />
+              </button>
               <span className="IconCount">2</span>
             </div>
             <div className="PostIcon">

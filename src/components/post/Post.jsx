@@ -10,13 +10,12 @@ import { Link } from 'react-router-dom';
 
 
 // { post } は親であるtimeLineからpropsとして受け取っている。ちゃんと受け取れているのかconsole.logで確認できる。
-const Post = ({ post }) => {
+const Post = ({ post, isComment, handleClickComment }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
   // console.log(user[0].username);
   return (
     <>
-    <Link to="/postShow">
       <div className='post'>
         <div className="postWrapper">
           <div className="postTop">
@@ -32,13 +31,17 @@ const Post = ({ post }) => {
             </div>
           </div>
         </div>
-        <div className="postCenter">
-            <p className="postText">{post.desc}</p>
-            <img src={post.photo} alt="" className='postImg'/>
-        </div>
+        <Link to="/postShow">
+          <div className="postCenter">
+              <p className="postText">{post.desc}</p>
+              <img src={post.photo} alt="" className='postImg'/>
+          </div>
+        </Link>
         <div className="postIcons">
           <div className="PostIcon">
-            <FaRegComment className='postIconIcon' />
+            <button onClick={handleClickComment}>
+              <FaRegComment className='postIconIcon' />
+            </button>
             <span className="IconCount">{post.comment}</span>
           </div>
           <div className="PostIcon">
@@ -55,7 +58,6 @@ const Post = ({ post }) => {
           </div>
         </div>
       </div>
-    </Link>
     </>
   )
 }
