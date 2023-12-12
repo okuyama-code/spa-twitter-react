@@ -1,12 +1,13 @@
 import { RecoilRoot } from 'recoil';
 import './App.scss';
-import Home from './pages/Home';
+// import Home from './pages/Home';
+import Login from './pages/Login';
 
 function App() {
   // return <Profile />
   return (
     <RecoilRoot>
-      <Home />
+      <Login />
     </RecoilRoot>
 
   )

@@ -1,17 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosLogIn } from "react-icons/io"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { signIn } from '../lib/api/auth';
+import Cookies from 'js-cookie';
 // https://qiita.com/Ryo9597/items/83473a0d64eb92edb467　html
 
 // https://zenn.dev/prune/books/32a2fd62831c7f/viewer/5e7791 実装
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const login = async () => {
+    try {
+      const res = await signIn({ email, password });
+      Cookies.set("_access_token", res.headers["access-token"]);
+      Cookies.set("_client", res.headers["client"]);
+      Cookies.set("_uid", res.headers["uid"]);
+      navigate('/home');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <div className='flex flex-col h-screen login_bg'>
       <div className='flex-auto'>
         <div className='flex justify-center mt-20'>
           <div className='w-9/12 border border-gray-200 rounded-xl login_bg_opacity'>
           <div class="my-16 text-center">
-          <Link to="/" className='signup_link'>
+          <Link to="/home" className='signup_link'>
             <p className='mb-2'>ホーム画面に戻る</p>
           </Link>
 

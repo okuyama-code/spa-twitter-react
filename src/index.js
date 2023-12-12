@@ -11,6 +11,7 @@ import Notification from './pages/Notification';
 import MessageBox from './pages/MessageBox';
 import Messages from './pages/Messages';
 import PostShow from './pages/PostShow';
+import Home from './pages/Home';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route index element={<App />} />
+        <Route path="home" element={<Home />} />
         <Route path="signUp" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
