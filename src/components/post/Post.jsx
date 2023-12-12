@@ -33,8 +33,8 @@ const Post = ({ post, isComment, handleClickComment }) => {
         </div>
         <Link to="/postShow">
           <div className="postCenter">
-              <p className="postText">{post.desc}</p>
-              <img src={post.photo} alt="" className='postImg'/>
+            <p className="postText">{post.desc}</p>
+            <img src={post.photo} alt="" className='postImg'/>
           </div>
         </Link>
         <div className="postIcons">
