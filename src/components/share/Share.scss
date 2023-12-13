@@ -41,25 +41,16 @@
 .shareButtons {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin: 0 20px;
 }
 
-.shareOptions {
-  display: flex;
-  margin-left: 20px;
-
-}
 
 .shareOption {
-  display: flex;
-  align-items: center;
-  margin-right: 15px;
+  margin-left: 40px;
   cursor: pointer;
 }
 
-.shareIcon {
-  margin-right: 3px;
-}
 
 .shareOptionText {
   font-size: 14px;

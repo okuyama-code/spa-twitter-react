@@ -7,7 +7,6 @@ const CommentModal = ({ handleClickComment }) => {
   return (
     <div className='comment_modal'>
       <div className='comment_modal_header'>
-      {/* <button onClick={handleClick}> */}
         <button onClick={handleClickComment}>
           <IoMdClose className='close_icon' />
         </button>
@@ -20,7 +19,6 @@ const CommentModal = ({ handleClickComment }) => {
             <h3>パク・ミニョン</h3>
             <p className='comment_modal_post_username'>@minyon01</p>
           </div>
-          {/* TODO 投稿は改行が反映されるように */}
           <h3>返信したい投稿の内容です。難しいかもしれないが頑張ろう。<br />
           返信したい投稿の内容です。難しいかもしれないが頑張ろう。
           </h3>
