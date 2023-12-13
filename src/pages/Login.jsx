@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosLogIn } from "react-icons/io"
 import { Link, useNavigate } from 'react-router-dom'
-import { signIn } from '../lib/api/auth';
+import { getUser, signIn } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 
 const Login = () => {
@@ -9,10 +9,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    const f = async () => {
+      try {
+        const res = await getUser();
+        console.log(res);
+        if (res.data.isLogin) {
+          navigate("/home");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    f();
+  }, [navigate]);
+
   const login = async (e) => {
     try {
       e.preventDefault();
       const res = await signIn({ email, password });
+      console.log(res);
       navigate('/');
       Cookies.set("_access_token", res.headers["access-token"]);
       Cookies.set("_client", res.headers["client"]);

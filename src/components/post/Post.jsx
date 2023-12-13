@@ -6,14 +6,22 @@ import { FaRegComment } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import { Link } from 'react-router-dom';
+import { isCommentState } from '../../atoms/isCommentState';
+import { useRecoilState } from 'recoil';
 
 
 
 // { post } は親であるtimeLineからpropsとして受け取っている。ちゃんと受け取れているのかconsole.logで確認できる。
-const Post = ({ post, isComment, handleClickComment }) => {
+const Post = ({ post }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
   // console.log(user[0].username);
+  const [isComment, setIsComment] = useRecoilState(isCommentState);
+
+  const handleClickComment = () => {
+    setIsComment(!isComment);
+  }
+  
   return (
     <>
       <div className='post'>

@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
 
 import CommentModal from '../components/modal/CommentModal';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { isCommentState } from '../atoms/isCommentState';
 import { getUser } from '../lib/api/auth';
 import { useNavigate } from 'react-router-dom';
@@ -27,19 +27,19 @@ const Home = () => {
     f();
   }, [navigate]);
 
-  const [isComment, setIsComment] = useRecoilState(isCommentState);
+  const isComment = useRecoilValue(isCommentState);
 
-  const handleClickComment = () => {
-    setIsComment(!isComment);
-  }
+
 
   return (
     <div >
+      {/* {isLogin ? (<LoginHome />) :  } */}
       <div className='homeContainer'>
         <Sidebar />
-        <TimeLine  handleClickComment={handleClickComment} />
-        {isComment && (<CommentModal  handleClickComment={handleClickComment}/>)}
+        <TimeLine />
+        {isComment && (<CommentModal />)}
       </div>
+
     </div>
 
 

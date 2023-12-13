@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Sidebar from '../components/Sidebar'
 import { IoIosArrowRoundBack } from "react-icons/io";
 
@@ -10,18 +10,22 @@ import { CiBookmark } from "react-icons/ci";
 import { CiImageOn } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import CommentModal from '../components/modal/CommentModal';
+import { isCommentState } from '../atoms/isCommentState';
+import { useRecoilState } from 'recoil';
 
 
 
 const PostShow = () => {
-  const [isComment, setIsComment] = useState(false);
+  const [isComment, setIsComment] = useRecoilState(isCommentState);
+
   const handleClickComment = () => {
     setIsComment(!isComment);
   }
+
   return (
     <div className='followPage'>
       <Sidebar />
-      {isComment && (<CommentModal isComment={isComment} handleClickComment={handleClickComment}/>)}
+      {isComment && (<CommentModal />)}
       <div className='followContainer'>
         <div className='postShowWrapper'>
           <div className='postShowHeader'>

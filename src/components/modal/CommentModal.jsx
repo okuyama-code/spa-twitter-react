@@ -1,13 +1,21 @@
 import React from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { CiImageOn } from "react-icons/ci";
+import { useSetRecoilState } from 'recoil';
+import { isCommentState } from '../../atoms/isCommentState';
 
 
-const CommentModal = ({ handleClickComment }) => {
+const CommentModal = () => {
+  const setIsComment = useSetRecoilState(isCommentState);
+
+  const closeFalse = () => {
+    setIsComment(false);
+  }
+
   return (
     <div className='comment_modal'>
       <div className='comment_modal_header'>
-        <button onClick={handleClickComment}>
+        <button onClick={closeFalse}>
           <IoMdClose className='close_icon' />
         </button>
       </div>
@@ -31,7 +39,7 @@ const CommentModal = ({ handleClickComment }) => {
           <textarea name="" id="" cols="60" rows="5" placeholder='Post your reply'></textarea>
           <div className='flex items-center justify-between mx-4'>
             <CiImageOn className='img_icon'/>
-            <button>Reply</button>
+            <button >Reply</button>
           </div>
         </form>
 
