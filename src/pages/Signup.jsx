@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SiGnuprivacyguard } from "react-icons/si";
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from '../lib/api/auth';
+import { getUser, signUp } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 
 
@@ -9,6 +9,21 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const f = async () => {
+      try {
+        const res = await getUser();
+        console.log(res);
+        if (res.data.isLogin) {
+          navigate("/home");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    f();
+  }, [navigate]);
 
   const register = async (e) => {
     try {
