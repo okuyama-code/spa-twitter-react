@@ -64,9 +64,9 @@ const Sidebar = () => {
           <GiBirdTwitter size={50} className='mx-2 mb-3 mt-3' />
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>投稿</span>
         </li>
-        <Link to="/login">
+        <Link to="/signUp">
           <li className='flex items-center mb-3 sidebar_items'>
-            ログイン
+            新規登録
           </li>
         </Link>
         <Link to="/postShow">

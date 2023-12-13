@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SiGnuprivacyguard } from "react-icons/si";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signUp } from '../lib/api/auth';
+import Cookies from 'js-cookie';
 
 
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const register = async () => {
+    try {
+      const res = await signUp({ email, password });
+      Cookies.set("_access_token", res.headers["access-token"]);
+      Cookies.set("_client", res.headers["client"]);
+      Cookies.set("_uid", res.headers["uid"]);
+      // TODO ここがうまくいかない
+      navigate("/home");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <div className='flex flex-col h-screen login_bg'>
       <div className='flex-auto'>
@@ -20,26 +39,28 @@ const Signup = () => {
                 <input
                   type="email"
                   placeholder='you@gmail.com'
-                  name='email'
                   className='text-xl w-7/12 p-3 border rounded'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className='mb-5'>
                 <input
                   type="password"
                   placeholder='パスワード'
-                  name='password'
                   className='text-xl w-7/12 p-3 border rounded'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <button
-                type='submit'
                 className='mb-3 text-xl w-4/12 bg-blue-500 text-white rounded hover:opacity-75 p-2 flex items-center justify-center mx-auto'
+                onClick={register}
               >
                 登録する<SiGnuprivacyguard size={30} className='ml-2' />
               </button>
             </form>
-            <Link to="/login">
+            <Link to="/">
               <p className='signup_link'>
                 ログイン画面へ
               </p>

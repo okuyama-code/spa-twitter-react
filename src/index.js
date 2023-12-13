@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Login from './pages/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
@@ -21,10 +20,11 @@ root.render(
       <Routes>
         <Route index element={<App />} />
         <Route path="home" element={<Home />} />
+        
         <Route path="signUp" element={<Signup />} />
-        <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />
         <Route path="followings" element={<Follow />} />
+
         <Route path="messages" element={<Messages />} />
         <Route path="messagebox" element={<MessageBox />} />
         <Route path="notifications" element={<Notification
