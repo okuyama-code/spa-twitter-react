@@ -1,41 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IoIosLogIn } from "react-icons/io"
 import { Link, useNavigate } from 'react-router-dom'
-import { getUser, signIn } from '../lib/api/auth';
+import { signIn } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const login = async (e) => {
     try {
       e.preventDefault();
-      // const res = await signIn({ email, password });
-      // Cookies.set("_access_token", res.headers["access-token"]);
-      // Cookies.set("_client", res.headers["client"]);
-      // Cookies.set("_uid", res.headers["uid"]);
-      // navigate('/home');
+      const res = await signIn({ email, password });
+      navigate('/');
+      Cookies.set("_access_token", res.headers["access-token"]);
+      Cookies.set("_client", res.headers["client"]);
+      Cookies.set("_uid", res.headers["uid"]);
     } catch (e) {
       console.log(e);
     }
   };
-
-  // useEffect(() => {
-  //   const f = async () => {
-  //     try {
-  //       const res = await getUser();
-  //       console.log(res);
-  //       if (res.data.isLogin) {
-  //         navigate("home");
-  //       }
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-  //   f();
-  // }, [navigate]);
 
   return (
     <div className='flex flex-col h-screen login_bg'>

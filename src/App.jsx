@@ -1,7 +1,7 @@
 import './App.scss';
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { BrowserRouter,  Route, Routes,  } from 'react-router-dom'
+import { BrowserRouter,  Route, Routes, useNavigate } from 'react-router-dom'
 
 import { RecoilRoot } from 'recoil';
 import Login from './pages/Login';
@@ -13,9 +13,25 @@ import Notification from './pages/Notification';
 import PostShow from './pages/PostShow';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import { getUser } from './lib/api/auth';
 
 function App() {
+  // const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const f = async () => {
+  //     try {
+  //       const res = await getUser();
+  //       console.log(res);
+  //       if (res.data.isLogin) {
+  //         navigate("/");
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+  //   f();
+  // }, [navigate]);
 
   return (
     <RecoilRoot>
