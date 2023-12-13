@@ -5,5 +5,4 @@ export const isEditState = atom({
   default: false // 初期値
 })
 
-// 参考URL
-// https://qiita.com/itachi/items/69784d66dbe624ebaceb
+

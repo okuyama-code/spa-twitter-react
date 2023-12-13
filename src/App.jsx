@@ -13,6 +13,7 @@ import Notification from './pages/Notification';
 import PostShow from './pages/PostShow';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Page404 from './pages/Page404';
 
 function App() {
 
@@ -31,6 +32,8 @@ function App() {
           <Route path="notifications" element={<Notification
           />} />
           <Route path="postShow" element={<PostShow
+          />} />
+          <Route path="*" element={<Page404
           />} />
         </Routes>
       </BrowserRouter>

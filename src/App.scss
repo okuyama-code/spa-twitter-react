@@ -559,3 +559,39 @@ html {
     margin-right: 15px;
   }
 }
+
+.NotfoundWrapper {
+  text-align: center;
+  height: 100vh;
+  background: #aca9a9;
+  padding: 10px 0;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-bottom: 10px;
+  }
+
+  .notFoundPageP {
+    font-size: 1.3rem;
+    color: #1f1cf4;
+
+  }
+
+  .NotfoundList {
+    margin: 10px auto;
+    width: 550px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+
+  .notFoundPageBtn {
+    display: inline-block;
+    border: 3px solid black;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 20px 0;
+    font-size: 1.5rem;
+  }
+}
