@@ -10,16 +10,19 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import PostAll from '../components/profilePosts/PostAll';
 import CommentAll from '../components/profilePosts/CommentAll';
+import Page404 from './Page404';
 import { Link } from 'react-router-dom';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditState } from '../atoms/isEditState';
+import { isLoginState } from '../atoms/isLoginState';
 
 
 
 const Profile = () => {
-
+  const isLogin = useRecoilValue(isLoginState);
   const [isEdit, setIsEdit] = useRecoilState(isEditState);
+
 
   const handleClick = () => {
     setIsEdit(!isEdit);
@@ -27,7 +30,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="profile">
+      {isLogin ? (<div className="profile">
         <Sidebar />
         {isEdit && (<EditModal handleClick={handleClick} />)}
         <div className='profileRight'>
@@ -85,7 +88,9 @@ const Profile = () => {
 
           </div>
         </div>
-      </div>
+      </div>)
+      : <Page404 />}
+
     </>
   )
 }

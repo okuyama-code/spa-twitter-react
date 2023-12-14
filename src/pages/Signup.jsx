@@ -3,12 +3,19 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { Link, useNavigate } from 'react-router-dom';
 import { getUser, signUp } from '../lib/api/auth';
 import Cookies from 'js-cookie';
+import { useSetRecoilState } from 'recoil';
+import { isLoginState } from '../atoms/isLoginState';
 
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
+
+  const setIsLogin = useSetRecoilState(isLoginState);
+
 
   useEffect(() => {
     const f = async () => {
@@ -16,7 +23,7 @@ const Signup = () => {
         const res = await getUser();
         console.log(res);
         if (res.data.isLogin) {
-          navigate("/home");
+          navigate("/");
         }
       } catch (e) {
         console.log(e);
@@ -28,10 +35,11 @@ const Signup = () => {
   const register = async (e) => {
     try {
       e.preventDefault();
-      const res = await signUp({ email, password });
+      const res = await signUp({ email, password, name, username  });
       Cookies.set("_access_token", res.headers["access-token"]);
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
+      setIsLogin(Cookies.get("_access_token"));
       navigate("/");
     } catch (e) {
       console.log(e);
@@ -50,6 +58,24 @@ const Signup = () => {
 
             <h2 class="text-4xl font-bold">新規登録</h2>
             <form className='mt-12'>
+              <div className='mb-3'>
+                <input
+                  type="name"
+                  placeholder='okuyama'
+                  className='text-xl w-7/12 p-3 border rounded'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className='mb-3'>
+                <input
+                  type="username"
+                  placeholder='okuyama01'
+                  className='text-xl w-7/12 p-3 border rounded'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
               <div className='mb-3'>
                 <input
                   type="email"

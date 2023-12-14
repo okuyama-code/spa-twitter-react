@@ -1,17 +1,24 @@
 import React from 'react'
 import "./Modal.scss";
 import { IoMdClose } from "react-icons/io";
+import { useSetRecoilState } from 'recoil';
+import { isEditState } from '../../atoms/isEditState';
 
 
 
-const EditModal = ({ isEdit, handleClick }) => {
-  console.log(isEdit);
+const EditModal = () => {
+  const setIsEdit = useSetRecoilState(isEditState);
+
+  const modalClose = () => {
+    setIsEdit(false);
+  }
+
   return (
     <>
       <div className='edit_modal'>
         <div className='flex justify-between mt-1'>
           <div className='flex'>
-            <button onClick={handleClick}>
+            <button onClick={modalClose}>
               <IoMdClose className='close_icon' />
             </button>
             <h2 className='edit_h2'>Edit Profile</h2>

@@ -8,14 +8,14 @@ import { isCommentState } from '../../atoms/isCommentState';
 const CommentModal = () => {
   const setIsComment = useSetRecoilState(isCommentState);
 
-  const closeFalse = () => {
+  const modalClose = () => {
     setIsComment(false);
   }
 
   return (
     <div className='comment_modal'>
       <div className='comment_modal_header'>
-        <button onClick={closeFalse}>
+        <button onClick={modalClose}>
           <IoMdClose className='close_icon' />
         </button>
       </div>

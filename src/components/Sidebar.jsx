@@ -12,16 +12,19 @@ import { ImExit } from "react-icons/im";
 
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { isLoginState } from '../atoms/isLoginState';
+import { useSetRecoilState } from 'recoil';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-
+  const setIsLogin = useSetRecoilState(isLoginState);
 
   const logout = (e) => {
     e.preventDefault()
     Cookies.remove('_access_token');
     Cookies.remove('_client');
     Cookies.remove('_uid');
+    setIsLogin(Cookies.get("_access_token"))
     navigate('/');
   }
 

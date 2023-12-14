@@ -3,11 +3,17 @@ import { IoIosLogIn } from "react-icons/io"
 import { Link, useNavigate } from 'react-router-dom'
 import { getUser, signIn } from '../lib/api/auth';
 import Cookies from 'js-cookie';
+import { isLoginState } from '../atoms/isLoginState';
+import { useSetRecoilState } from 'recoil';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const setIsLogin = useSetRecoilState(isLoginState);
+
+
 
 
   useEffect(() => {
@@ -16,7 +22,7 @@ const Login = () => {
         const res = await getUser();
         console.log(res);
         if (res.data.isLogin) {
-          navigate("/home");
+          navigate("/");
         }
       } catch (e) {
         console.log(e);
@@ -30,10 +36,12 @@ const Login = () => {
       e.preventDefault();
       const res = await signIn({ email, password });
       console.log(res);
-      navigate('/');
       Cookies.set("_access_token", res.headers["access-token"]);
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
+      setIsLogin(Cookies.get("_access_token"))
+      navigate('/');
+
     } catch (e) {
       console.log(e);
     }

@@ -17,14 +17,14 @@ import Page404 from './pages/Page404';
 
 function App() {
 
-
+<Home />
   return (
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Login />} />
+          <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="home" element={<Home />} />
+          <Route path="Login" element={<Login />} />
           <Route path="profile" element={<Profile />} />
           <Route path="followings" element={<Follow />} />
           <Route path="messages" element={<Messages />} />
