@@ -20,7 +20,6 @@ const Login = () => {
     const f = async () => {
       try {
         const res = await getUser();
-        console.log(res);
         if (res.data.isLogin) {
           navigate("/");
         }
@@ -40,7 +39,7 @@ const Login = () => {
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"))
-      navigate('/');
+      navigate('/login');
 
     } catch (e) {
       console.log(e);

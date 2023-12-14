@@ -12,6 +12,7 @@ const Share = () => {
         <div className="shareTop">
           <Link to={{ pathname: "/profile" }}>
             <img src="/assets/person/icon.png" alt="" className='shareProfileImg'/>
+            {/* {currentUser.name} */}
           </Link>
           <input type="text" className='shareInput' placeholder='今何してるの？'/>
         </div>
