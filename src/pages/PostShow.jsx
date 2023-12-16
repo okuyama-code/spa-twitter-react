@@ -45,7 +45,7 @@ const PostShow = () => {
           <img src="assets/post/cotucotu.jpeg" alt="" className='postShowImg' />
           <div className="postShowIcons mt-4">
             <div className="PostIcon ">
-              <button onClick={handleClickComment}>
+              <button onClick={handleClickComment} disabled={isComment}>
                 <FaRegComment className='postIconIcon' />
               </button>
               <span className="IconCount">2</span>

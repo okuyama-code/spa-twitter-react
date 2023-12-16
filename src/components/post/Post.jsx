@@ -21,7 +21,7 @@ const Post = ({ post }) => {
   const handleClickComment = () => {
     setIsComment(!isComment);
   }
-  
+
   return (
     <>
       <div className='post'>
@@ -47,7 +47,7 @@ const Post = ({ post }) => {
         </Link>
         <div className="postIcons">
           <div className="PostIcon">
-            <button onClick={handleClickComment}>
+            <button onClick={handleClickComment} disabled={isComment}>
               <FaRegComment className='postIconIcon' />
             </button>
             <span className="IconCount">{post.comment}</span>

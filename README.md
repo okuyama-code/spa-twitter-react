@@ -5,4 +5,4 @@ signup → login → post → post-index → post-show → profile → post-dele
 # TODO
 - currentUserにオブジェクトを格納する。できたがもっといい方法を考えるor　/を/homeに変更する
 - リロードは常に初回レンダリング扱いになるか確認
-
+- toastのMUIを調べる

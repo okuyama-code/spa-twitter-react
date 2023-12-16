@@ -40,9 +40,9 @@ const Home = () => {
   return (
     <div >
       {isLogin ? (<div className='homeContainer'>
-        {currentUser.name}
+        {/* {currentUser.name}
         {currentUser.email}
-        {currentUser.email}
+        {currentUser.email} */}
         <Sidebar />
         <TimeLine />
         {isComment && (<CommentModal />)}

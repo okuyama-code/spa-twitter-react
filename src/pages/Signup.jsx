@@ -12,6 +12,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const setIsLogin = useSetRecoilState(isLoginState);
@@ -43,6 +44,8 @@ const Signup = () => {
       navigate("/");
     } catch (e) {
       console.log(e);
+      console.log(e.response.data.errors.fullMessages);
+      setErrorMessage("入力情報に誤りがあります。再度ご確認の上、入力をお願いいします。");
     }
   }
 
@@ -93,6 +96,9 @@ const Signup = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+              </div>
+              <div className='mb-2 text-red-400'>
+                {errorMessage}
               </div>
               <button
                 className='mb-3 text-xl w-4/12 bg-blue-500 text-white rounded hover:opacity-75 p-2 flex items-center justify-center mx-auto'

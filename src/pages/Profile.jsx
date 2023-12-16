@@ -37,7 +37,7 @@ const Profile = () => {
           <div className="profileCover">
             <img src="assets/suisu0.jpg" alt="" className='profileCoverImg'/>
             <img src="assets/person/icon.png" alt="" className='profileUserImg'/>
-            <button className='profileEditButton' onClick={handleClick}>Edit Profile</button>
+            <button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>
             {/* followボタンはここ */}
             {/* <button className='profilefollowButton'>follow</button>
             <button className='profileUnfollowButton'>follow解除</button> */}

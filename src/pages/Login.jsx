@@ -9,6 +9,7 @@ import { useSetRecoilState } from 'recoil';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const setIsLogin = useSetRecoilState(isLoginState);
@@ -40,9 +41,10 @@ const Login = () => {
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"))
       navigate('/login');
-
     } catch (e) {
       console.log(e);
+      console.log(e.response.data.errors[0]);
+      setErrorMessage(e.response.data.errors[0]);
     }
   };
 
@@ -75,6 +77,9 @@ const Login = () => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
+              </div>
+              <div className='mb-2 text-red-400'>
+                {errorMessage}
               </div>
               <button
                 className='mb-3 text-xl w-4/12 bg-blue-500 text-white rounded hover:opacity-75 p-2 flex items-center justify-center mx-auto'
