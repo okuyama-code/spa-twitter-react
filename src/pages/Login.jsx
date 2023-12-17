@@ -5,6 +5,7 @@ import { getUser, signIn } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 import { isLoginState } from '../atoms/isLoginState';
 import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,10 +42,12 @@ const Login = () => {
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"))
       navigate('/login');
+      toast.success("ログインに成功しました");
     } catch (e) {
       console.log(e);
       console.log(e.response.data.errors[0]);
       setErrorMessage(e.response.data.errors[0]);
+      toast.error("ログイン情報が間違っています");
     }
   };
 

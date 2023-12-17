@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { isLoginState } from '../atoms/isLoginState';
 import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -24,7 +25,8 @@ const Sidebar = () => {
     Cookies.remove('_access_token');
     Cookies.remove('_client');
     Cookies.remove('_uid');
-    setIsLogin(Cookies.get("_access_token"))
+    setIsLogin(Cookies.get("_access_token"));
+    toast.success("ログアウトしました");
     navigate('/');
   }
 

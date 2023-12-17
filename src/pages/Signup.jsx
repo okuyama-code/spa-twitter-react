@@ -5,6 +5,7 @@ import { getUser, signUp } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 import { useSetRecoilState } from 'recoil';
 import { isLoginState } from '../atoms/isLoginState';
+import { toast } from 'react-toastify';
 
 
 const Signup = () => {
@@ -41,11 +42,14 @@ const Signup = () => {
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"));
+      toast.success("新規登録に成功しました");
       navigate("/");
     } catch (e) {
       console.log(e);
       console.log(e.response.data.errors.fullMessages);
       setErrorMessage("入力情報に誤りがあります。再度ご確認の上、入力をお願いいします。");
+      toast.error("入力情報が間違っています");
+
     }
   }
 

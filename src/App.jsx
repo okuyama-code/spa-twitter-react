@@ -15,11 +15,19 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Page404 from './pages/Page404';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
 <Home />
   return (
     <RecoilRoot>
+      <ToastContainer
+        position="top-center"
+        // theme="dark"
+      />
+
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
