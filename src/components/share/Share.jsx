@@ -18,15 +18,35 @@ const Share = () => {
 
 
   //buttonをクリックしたら走る関数
+  // API側でcurrent_user使わないパターン
+  // const Tweet = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const params = {
+  //       "tweet_content": tweetContent,
+  //       "user_id": currentUserId
+  //     }
+  //     console.log(tweetContent);
+  //     const res = await createTweet(params);
+  //     console.log(res);
+  //     toast.success("投稿しました");
+  //     navigate("/");
+  //   } catch(e) {
+  //     console.log(e);
+  //     toast.error("投稿に失敗しました。")
+  //   }
+  // }
+
+  // current_userをAPI側で使うパターン
   const Tweet = async (e) => {
     e.preventDefault();
     try {
       const params = {
-        "tweet_content": tweetContent,
-        "user_id": currentUserId
+        "tweet_content": tweetContent
       }
       console.log(tweetContent);
       const res = await createTweet(params);
+      setTweetContent("");
       console.log(res);
       toast.success("投稿しました");
       navigate("/");

@@ -1,9 +1,23 @@
+import Cookies from "js-cookie";
 import client from "./client"
 
 //  base http://localhost:3000/api/v1
 
+
+// Reactからcurrent_user.idを送るパターン
+// export const createTweet = (params) => {
+//   return client.post("/tweets", params);
+// }
+
+// API側でcurrent_userを使えるようにするためにheadersでユーザー情報を送る。
 export const createTweet = (params) => {
-  return client.post("/tweets", params);
+  return client.post("/tweets", params, {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    },
+  });
 }
 
 export const imageUpload = (params) => {

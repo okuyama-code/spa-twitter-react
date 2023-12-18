@@ -34,7 +34,7 @@ const Home = () => {
     fetchUser();
   }, [navigate]);
 
-  console.log(currentUser)
+  console.log(currentUser);
 
 
   return (
