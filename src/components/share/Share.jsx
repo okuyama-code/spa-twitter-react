@@ -5,13 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createTweet } from '../../lib/api/post';
 import { currentUserState } from '../../atoms/currentUserState';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 
 
 const Share = () => {
   const [tweetContent, setTweetContent] = useState("");
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+  const currentUser = useRecoilValue(currentUserState)
   const navigate = useNavigate();
 
   const currentUserId = currentUser.id
@@ -63,7 +63,7 @@ const Share = () => {
           <Link to={{ pathname: "/profile" }}>
             <img src="/assets/person/icon.png" alt="" className='shareProfileImg'/>
             {/* {currentUser.name} */}
-            {currentUserId}
+            {/* {currentUserId} */}
           </Link>
           <input
             type="text"
@@ -83,11 +83,6 @@ const Share = () => {
             className="shareButton"
             onClick={Tweet}
           >投稿</button>
-          {/* <input
-            type='submit'
-            className="shareButton"
-            onClick={Tweet}
-          >投稿</input> */}
         </div>
       </div>
     </div>
