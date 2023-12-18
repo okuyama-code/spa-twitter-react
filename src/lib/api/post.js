@@ -9,7 +9,7 @@ import client from "./client"
 //   return client.post("/tweets", params);
 // }
 
-// API側でcurrent_userを使えるようにするためにheadersでユーザー情報を送る。
+// API側でcurrent_userを使えるようにするためにheadersでユーザー情報を送る。HTTPヘッダーで現在のログインしたUser情報を追加してサーバー側に送らないとコントローラー内でcurrent_userが取得できずnilになるので重要な記述
 export const createTweet = (params) => {
   return client.post("/tweets", params, {
     headers: {

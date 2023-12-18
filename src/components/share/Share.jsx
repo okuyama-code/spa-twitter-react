@@ -16,6 +16,10 @@ const Share = () => {
 
   const currentUserId = currentUser.id
 
+  // console.log(currentUser.id);
+  console.log(currentUserId);
+
+
 
   //buttonをクリックしたら走る関数
   // API側でcurrent_user使わないパターン
