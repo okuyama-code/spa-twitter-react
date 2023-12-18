@@ -65,7 +65,7 @@ const Login = () => {
             <form className='mt-12'>
               <div className='mb-3'>
                 <input
-                  type="email"
+                  type="text"
                   placeholder='you@gmail.com'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={email}
