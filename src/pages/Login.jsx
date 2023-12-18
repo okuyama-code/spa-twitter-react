@@ -33,8 +33,8 @@ const Login = () => {
   }, [navigate]);
 
   const login = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       const res = await signIn({ email, password });
       console.log(res);
       Cookies.set("_access_token", res.headers["access-token"]);

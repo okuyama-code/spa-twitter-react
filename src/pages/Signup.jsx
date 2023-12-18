@@ -67,7 +67,7 @@ const Signup = () => {
             <form className='mt-12'>
               <div className='mb-3'>
                 <input
-                  type="name"
+                  type="text"
                   placeholder='okuyama'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={name}
@@ -76,7 +76,7 @@ const Signup = () => {
               </div>
               <div className='mb-3'>
                 <input
-                  type="username"
+                  type="text"
                   placeholder='okuyama01'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={username}
