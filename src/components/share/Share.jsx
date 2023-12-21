@@ -4,20 +4,21 @@ import { CiImageOn } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createTweet } from '../../lib/api/post';
-import { currentUserState } from '../../atoms/currentUserState';
-import { useRecoilValue } from 'recoil';
+// import { currentUserState } from '../../atoms/currentUserState';
+// import { useRecoilValue } from 'recoil';
 
 
 
 const Share = () => {
   const [tweetContent, setTweetContent] = useState("");
-  const currentUser = useRecoilValue(currentUserState)
+  const [image, setImage] = useState({data: "", name: ""})
+  // const currentUser = useRecoilValue(currentUserState)
   const navigate = useNavigate();
 
-  const currentUserId = currentUser.id
+  // const currentUserId = currentUser.id
 
   // console.log(currentUser.id);
-  console.log(currentUserId);
+  // console.log(currentUserId);
 
 
 
@@ -42,12 +43,12 @@ const Share = () => {
   // }
 
   // current_userをAPI側で使うパターン
-  const Tweet = async (e) => {
+  const TweetSubmit = async (e) => {
     e.preventDefault();
     try {
-      // TODO imageもparamsで送る
       const params = {
-        "tweet_content": tweetContent
+        "tweet_content": tweetContent,
+        "image": image
       }
       console.log(tweetContent);
       const res = await createTweet(params);
@@ -59,7 +60,28 @@ const Share = () => {
       console.log(e);
       toast.error("投稿に失敗しました。")
     }
+    setImage({data: "", name: ""});
   }
+
+  const handleImageSelect = (e) => {
+    const reader = new FileReader();
+    const files = e.target.files;
+    // console.log(reader);
+    // console.log(files);
+    // console.log(files[0]);
+    // console.log(files[0].name);
+    if (files) {
+      console.log("if文動いてる")
+      reader.onload = () => {
+        console.log("onLoad内")
+        setImage({
+          data: reader.result,
+          name: files[0] ? files[0].name : "unknownfile",
+        });
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  };
 
   return (
     <div className='share'>
@@ -83,11 +105,17 @@ const Share = () => {
         <div className="shareButtons">
           <div className="shareOption">
           <label htmlFor="image" ><CiImageOn size={30} className='shareIcon' /></label>
-            <input type="file" name="image" id="image" accept="image/*,.png,.jpg,.jpeg,.gif" className='hidden'/>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*,.png,.jpg,.jpeg,.gif" className='hidden'
+              onChange={handleImageSelect}
+              />
           </div>
           <button
             className="shareButton"
-            onClick={Tweet}
+            onClick={TweetSubmit}
           >投稿</button>
         </div>
       </div>
