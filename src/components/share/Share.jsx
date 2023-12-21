@@ -45,6 +45,7 @@ const Share = () => {
   const Tweet = async (e) => {
     e.preventDefault();
     try {
+      // TODO imageもparamsで送る
       const params = {
         "tweet_content": tweetContent
       }
@@ -81,7 +82,8 @@ const Share = () => {
         <hr className='shareHr'/>
         <div className="shareButtons">
           <div className="shareOption">
-            <CiImageOn size={30} className='shareIcon' />
+          <label htmlFor="image" ><CiImageOn size={30} className='shareIcon' /></label>
+            <input type="file" name="image" id="image" accept="image/*,.png,.jpg,.jpeg,.gif" className='hidden'/>
           </div>
           <button
             className="shareButton"
