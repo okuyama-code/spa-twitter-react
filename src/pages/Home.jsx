@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
 
 import CommentModal from '../components/modal/CommentModal';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { isCommentState } from '../atoms/isCommentState';
 
 import { isLoginState } from '../atoms/isLoginState';
@@ -14,6 +14,7 @@ import { currentUserState } from '../atoms/currentUserState';
 import { toast } from 'react-toastify';
 import { getTweets } from '../lib/api/post';
 import { allTweetsState } from '../atoms/allTweetsState';
+import { allUsersState } from '../atoms/allUsersState';
 
 
 
@@ -23,6 +24,9 @@ const Home = () => {
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const navigate = useNavigate();
   const [twwets, setTweets] = useRecoilState(allTweetsState);
+
+  const setUsers = useSetRecoilState(allUsersState);
+
 
 
 
@@ -42,10 +46,12 @@ const Home = () => {
       try {
         const res = await getTweets();
         const allTweets = res.data.tweets;
+        const allUsers = res.data.users
         setTweets(allTweets);
-        console.log(res.data.tweets)
-        console.log(res.data.tweets[0])
-        console.log(res.data.tweets[0].tweetContent)
+        setUsers(allUsers)
+        // console.log(res.data.tweets)
+        console.log(res.data.users)
+        // toast.success("投稿とユーザーを取得しました")
       } catch (e) {
         console.log(e);
         toast.error("投稿を取得できませんでした")
@@ -54,7 +60,6 @@ const Home = () => {
     fetchTweets()
   }, [navigate]);
 
-  console.log(currentUser);
 
 
   return (

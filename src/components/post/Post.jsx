@@ -7,7 +7,8 @@ import { AiOutlineRetweet } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import { isCommentState } from '../../atoms/isCommentState';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { allUsersState } from '../../atoms/allUsersState';
 
 
 
@@ -16,13 +17,26 @@ const Post = ({ post }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
   // console.log(user[0].username);
-  // console.log(post.image.filename)
-  console.log(post.tweetContent)
-  console.log(post.image)
+  // console.log(post.tweetContent)
+
+  const allUsers = useRecoilValue(allUsersState);
+  // console.log(allUsers);
+
   const [isComment, setIsComment] = useRecoilState(isCommentState);
 
   const handleClickComment = () => {
     setIsComment(!isComment);
+  }
+
+  const handleToDate = (date) =>{
+    date = new Date(date);
+    if(date.getMinutes() < 10){
+        date = date.getFullYear()+"/"+(date.getMonth()%12+1)+"/"+date.getDate()+" "+date.getHours()+":0"+date.getMinutes()
+    } else {
+        date = date.getFullYear()+"/"+(date.getMonth()%12+1)+"/"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()
+    }
+
+    return date;
   }
 
   return (
@@ -33,12 +47,12 @@ const Post = ({ post }) => {
             <div className="postTopLeft">
               <img src={Users.filter((user) => user.id === post.userId)[0].profilePicture} alt="" className='postProfileImg' />
               <span className='postName text-xl font-bold'>
-                {Users.filter((user) => user.id === post.userId)[0].name}
+                {allUsers.filter((user) => user.id === post.userId)[0].name}
               </span>
               <span className="postUsername">
-                  @{Users.filter((user) => user.id === post.userId)[0].username}
+                  @{allUsers.filter((user) => user.id === post.userId)[0].username}
               </span>
-              {/* <span className="postDate">{post.createdAt}</span> */}
+              <span className="postDate">{handleToDate(post.createdAt)}</span>
             </div>
           </div>
         </div>
