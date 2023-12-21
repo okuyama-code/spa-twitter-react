@@ -11,6 +11,9 @@ import Login from './Login';
 import { getUser } from '../lib/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { currentUserState } from '../atoms/currentUserState';
+import { toast } from 'react-toastify';
+import { getTweets } from '../lib/api/post';
+import { allTweetsState } from '../atoms/allTweetsState';
 
 
 
@@ -19,6 +22,8 @@ const Home = () => {
   const isComment = useRecoilValue(isCommentState);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const navigate = useNavigate();
+  const [twwets, setTweets] = useRecoilState(allTweetsState);
+
 
 
   useEffect(() => {
@@ -32,6 +37,21 @@ const Home = () => {
       }
     };
     fetchUser();
+
+    const fetchTweets = async () => {
+      try {
+        const res = await getTweets();
+        const allTweets = res.data.tweets;
+        setTweets(allTweets);
+        console.log(res.data.tweets)
+        console.log(res.data.tweets[0])
+        console.log(res.data.tweets[0].tweetContent)
+      } catch (e) {
+        console.log(e);
+        toast.error("投稿を取得できませんでした")
+      }
+    };
+    fetchTweets()
   }, [navigate]);
 
   console.log(currentUser);

@@ -16,6 +16,9 @@ const Post = ({ post }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
   // console.log(user[0].username);
+  // console.log(post.image.filename)
+  console.log(post.tweetContent)
+  console.log(post.image)
   const [isComment, setIsComment] = useRecoilState(isCommentState);
 
   const handleClickComment = () => {
@@ -35,14 +38,14 @@ const Post = ({ post }) => {
               <span className="postUsername">
                   @{Users.filter((user) => user.id === post.userId)[0].username}
               </span>
-              <span className="postDate">{post.date}</span>
+              {/* <span className="postDate">{post.createdAt}</span> */}
             </div>
           </div>
         </div>
         <Link to="/postShow">
           <div className="postCenter">
-              <p className="postText">{post.desc}</p>
-              <img src={post.photo} alt="" className='postImg'/>
+              <p className="postText">{post.tweetContent}</p>
+              <img src={post.image} alt="" className='postImg'/>
           </div>
         </Link>
         <div className="postIcons">
