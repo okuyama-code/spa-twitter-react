@@ -68,7 +68,7 @@ const Signup = () => {
               <div className='mb-3'>
                 <input
                   type="text"
-                  placeholder='okuyama'
+                  placeholder='okuyama (名前)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -77,7 +77,7 @@ const Signup = () => {
               <div className='mb-3'>
                 <input
                   type="text"
-                  placeholder='okuyama01'
+                  placeholder='okuyama01 (ユーザーネーム)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -86,7 +86,7 @@ const Signup = () => {
               <div className='mb-3'>
                 <input
                   type="email"
-                  placeholder='you@gmail.com'
+                  placeholder='you@gmail.com (メールアドレス)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -95,7 +95,7 @@ const Signup = () => {
               <div className='mb-5'>
                 <input
                   type="password"
-                  placeholder='パスワード'
+                  placeholder='パスワード (6文字以上)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
