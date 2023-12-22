@@ -35,9 +35,9 @@ const Post = ({ post }) => {
     } else {
         date = date.getFullYear()+"/"+(date.getMonth()%12+1)+"/"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()
     }
-
     return date;
   }
+  // console.log(post.imageUrl);
 
   return (
     <>
@@ -59,7 +59,7 @@ const Post = ({ post }) => {
         <Link to="/postShow">
           <div className="postCenter">
               <p className="postText">{post.tweetContent}</p>
-              <img src={post.image} alt="" className='postImg'/>
+              <img src={post.imageUrl}  className='postImg'/>
           </div>
         </Link>
         <div className="postIcons">

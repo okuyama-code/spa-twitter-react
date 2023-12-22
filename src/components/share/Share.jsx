@@ -56,11 +56,11 @@ const Share = () => {
       console.log(res);
       toast.success("投稿しました");
       navigate("/");
+      window.location.reload();
     } catch(e) {
       console.log(e);
       toast.error("投稿に失敗しました。")
     }
-    setImage({data: "", name: ""});
   }
 
   const handleImageSelect = (e) => {

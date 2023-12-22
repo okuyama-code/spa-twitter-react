@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
 
@@ -26,7 +26,7 @@ const Home = () => {
   const [twwets, setTweets] = useRecoilState(allTweetsState);
 
   const setUsers = useSetRecoilState(allUsersState);
-
+  const [image, setImage] = useState("");
 
 
 
@@ -47,9 +47,12 @@ const Home = () => {
         const res = await getTweets();
         const allTweets = res.data.tweets;
         const allUsers = res.data.users
+        const activeImage = res.data.image;
+        setImage(activeImage);
         setTweets(allTweets);
         setUsers(allUsers)
         // console.log(res.data.tweets)
+        console.log(res.data.image)
         console.log(res.data.users)
         // toast.success("投稿とユーザーを取得しました")
       } catch (e) {
@@ -64,6 +67,7 @@ const Home = () => {
 
   return (
     <div >
+      <img src={image} alt="" />
       {isLogin ? (<div className='homeContainer'>
         {/* {currentUser.name}
         {currentUser.email}
