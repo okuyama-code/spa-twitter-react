@@ -34,6 +34,8 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="Login" element={<Login />} />
           <Route path="profile" element={<Profile />} />
+          {/* users/showページに飛ぶように */}
+          {/* <Route path="profile" element={<Profile />} /> */}
           <Route path="followings" element={<Follow />} />
           <Route path="messages" element={<Messages />} />
           <Route path="messagebox" element={<MessageBox />} />
@@ -41,6 +43,9 @@ function App() {
           />} />
           <Route path="postShow" element={<PostShow
           />} />
+          {/* tweet詳細ページにとぶように修正 */}
+          {/* <Route path="postShow" element={<PostShow
+          />} /> */}
           <Route path="*" element={<Page404
           />} />
         </Routes>

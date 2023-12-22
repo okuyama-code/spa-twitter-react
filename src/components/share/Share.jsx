@@ -52,6 +52,7 @@ const Share = () => {
       }
       console.log(tweetContent);
       const res = await createTweet(params);
+      // もし画像のstateのdataが空文字じゃないならawait attachImageでエンドポイントを叩く。
       setTweetContent("");
       console.log(res);
       toast.success("投稿しました");
@@ -71,9 +72,7 @@ const Share = () => {
     // console.log(files[0]);
     // console.log(files[0].name);
     if (files) {
-      console.log("if文動いてる")
       reader.onload = () => {
-        console.log("onLoad内")
         setImage({
           data: reader.result,
           name: files[0] ? files[0].name : "unknownfile",
@@ -101,6 +100,8 @@ const Share = () => {
             onChange={(e) => setTweetContent(e.target.value)}
             />
         </div>
+
+        {/* <img src={image.data} alt="" /> */}
         <hr className='shareHr'/>
         <div className="shareButtons">
           <div className="shareOption">

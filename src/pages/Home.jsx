@@ -67,7 +67,7 @@ const Home = () => {
 
   return (
     <div >
-      <img src={image} alt="" />
+      {/* <img src={image} alt="" /> */}
       {isLogin ? (<div className='homeContainer'>
         {/* {currentUser.name}
         {currentUser.email}
