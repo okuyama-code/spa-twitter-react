@@ -33,12 +33,12 @@ const Sidebar = () => {
   return (
     <div className='sidebar'>
       <ul className='mt-3 ml-5'>
-        <Link to={{ pathname: "/" }}>
+        <Link to={{ pathname: "/home" }}>
           <li className='x'>
             <BsTwitterX size={40} className='mx-2 mb-9 mt-4 sidebar_item' />
           </li>
         </Link>
-        <Link to={{ pathname: "/" }}>
+        <Link to={{ pathname: "/home" }}>
           <li className='flex items-center mb-3 sidebar_items'>
             <IoHomeSharp size={40} className='mx-2 mb-3' />
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3 '>ホーム</span>

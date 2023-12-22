@@ -30,9 +30,9 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="Login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="profile" element={<Profile />} />
           {/* users/showページに飛ぶように */}
           {/* <Route path="profile" element={<Profile />} /> */}

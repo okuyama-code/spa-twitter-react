@@ -20,7 +20,7 @@ export const createTweet = (params) => {
   });
 }
 
-export const imageUpload = (params) => {
+export const imageAttach = (params) => {
   return client.post("/images", params);
 }
 

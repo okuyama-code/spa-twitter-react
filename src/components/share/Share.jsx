@@ -3,7 +3,7 @@ import "./Share.scss";
 import { CiImageOn } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createTweet } from '../../lib/api/post';
+import { createTweet, imageAttach } from '../../lib/api/post';
 // import { currentUserState } from '../../atoms/currentUserState';
 // import { useRecoilValue } from 'recoil';
 
@@ -46,18 +46,24 @@ const Share = () => {
   const TweetSubmit = async (e) => {
     e.preventDefault();
     try {
-      const params = {
-        "tweet_content": tweetContent,
-        "image": image
+      const paramsTweet = {
+        "tweet_content": tweetContent
       }
       console.log(tweetContent);
-      const res = await createTweet(params);
+      const res = await createTweet(paramsTweet);
       // もし画像のstateのdataが空文字じゃないならawait attachImageでエンドポイントを叩く。
+      if (image.data !== "") {
+        const paramsImage = {
+          "image": image
+        }
+        const resImage = await imageAttach(paramsImage)
+        console.log(resImage);
+      }
       setTweetContent("");
       console.log(res);
       toast.success("投稿しました");
       navigate("/");
-      window.location.reload();
+      // window.location.reload();
     } catch(e) {
       console.log(e);
       toast.error("投稿に失敗しました。")

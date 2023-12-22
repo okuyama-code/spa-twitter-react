@@ -51,9 +51,6 @@ const Home = () => {
         setImage(activeImage);
         setTweets(allTweets);
         setUsers(allUsers)
-        // console.log(res.data.tweets)
-        console.log(res.data.image)
-        console.log(res.data.users)
         // toast.success("投稿とユーザーを取得しました")
       } catch (e) {
         console.log(e);

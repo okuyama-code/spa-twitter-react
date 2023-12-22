@@ -23,7 +23,7 @@ const Login = () => {
       try {
         const res = await getUser();
         if (res.data.isLogin) {
-          navigate("/");
+          navigate("/home");
         }
       } catch (e) {
         console.log(e);
@@ -41,7 +41,7 @@ const Login = () => {
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"))
-      navigate('/login');
+      navigate('/home');
       toast.success("ログインに成功しました");
     } catch (e) {
       console.log(e);

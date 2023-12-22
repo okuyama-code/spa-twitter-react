@@ -25,7 +25,7 @@ const Signup = () => {
         const res = await getUser();
         console.log(res);
         if (res.data.isLogin) {
-          navigate("/");
+          navigate("/home");
         }
       } catch (e) {
         console.log(e);
@@ -43,7 +43,7 @@ const Signup = () => {
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"));
       toast.success("新規登録に成功しました");
-      navigate("/");
+      navigate('/home');
     } catch (e) {
       console.log(e);
       console.log(e.response.data.errors.fullMessages);
