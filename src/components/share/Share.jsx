@@ -57,10 +57,8 @@ const Share = () => {
           "image": image
         }
         const resImage = await imageAttach(paramsImage)
-        console.log(resImage);
       }
       setTweetContent("");
-      console.log(res);
       toast.success("投稿しました");
       navigate("/");
       // window.location.reload();
@@ -107,7 +105,8 @@ const Share = () => {
             />
         </div>
 
-        {/* <img src={image.data} alt="" /> */}
+        {image.data !== "" ?  <img className='previewImg' src={image.data} alt="" /> : ""}
+
         <hr className='shareHr'/>
         <div className="shareButtons">
           <div className="shareOption">
