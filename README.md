@@ -1,7 +1,12 @@
 ## ブランチ
-### 現在のブランチ：signup
-signup → login → post → post-index → post-show → profile → post-delete → comment → comment-index → repost → likes → follow → unfollow → notification → message → bookmark → withdrawal(退会)
+### post
+signup  → post → profile → post-delete → comment → comment-index → repost → likes → follow → unfollow → notification → message → bookmark → withdrawal(退会)
 
-# TODO
-- usersテーブルのレコードすべてを格納するグローバルステートを作成する。users = User.allをjsonで持ってくる。
-- attach先からimageを取ってくる。rails側も修正
+## TODO React
+- ツイート一覧画面からツイートをクリックするとツイート詳細画面に遷移するようにする
+ツイート詳細画面を実装する
+
+## TODO Rails
+- ページネーションできるようにすること
+limit,offsetのquery parameterでページネーションできるようにする
+
