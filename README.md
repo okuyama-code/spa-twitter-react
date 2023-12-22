@@ -1,5 +1,5 @@
 ## ブランチ
-### post
+### tweetSub 画像投稿とエンドポイントを分ける
 signup  → post → profile → post-delete → comment → comment-index → repost → likes → follow → unfollow → notification → message → bookmark → withdrawal(退会)
 
 ## TODO React
