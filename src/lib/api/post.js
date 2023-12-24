@@ -27,6 +27,9 @@ export const imageAttach = (params) => {
 export const getTweets = () => {
   return client.get("/tweets");
 }
+// export const getTweets = () => {
+//   return client.get("/tweets?page=2");
+// }
 
 // TODO ここのparamsであっているのか疑問
 export const getTweet = (params) => {

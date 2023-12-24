@@ -12,7 +12,7 @@ import { allUsersState } from '../../atoms/allUsersState';
 
 
 
-// { post } は親であるtimeLineからpropsとして受け取っている。ちゃんと受け取れているのかconsole.logで確認できる。
+
 const Post = ({ post }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
@@ -37,7 +37,6 @@ const Post = ({ post }) => {
     }
     return date;
   }
-  // console.log(post.imageUrl);
 
   return (
     <>
@@ -83,6 +82,7 @@ const Post = ({ post }) => {
           </div>
         </div>
       </div>
+      {/* <Pagination count={10} color="primary" /> */}
     </>
   )
 }
