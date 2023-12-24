@@ -48,6 +48,8 @@ const Home = () => {
         const allTweets = res.data.tweets;
         const allUsers = res.data.users
         const activeImage = res.data.image;
+        console.log(res);
+        console.log(res.data.totalCount);
         setImage(activeImage);
         setTweets(allTweets);
         setUsers(allUsers)
