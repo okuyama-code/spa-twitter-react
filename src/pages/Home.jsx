@@ -9,7 +9,7 @@ import { isCommentState } from '../atoms/isCommentState';
 import { isLoginState } from '../atoms/isLoginState';
 import Login from './Login';
 import { getUser } from '../lib/api/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { currentUserState } from '../atoms/currentUserState';
 import { toast } from 'react-toastify';
 import { getTweets } from '../lib/api/post';
@@ -29,7 +29,14 @@ const Home = () => {
   const [image, setImage] = useState("");
 
 
+  // ここからペアプロで追加
+  // let { id } = useParams();
+  // console.log(id);
+  const [page,setPage] = useState(1);
+  // const params = useParams();
+  // console.log(params)
 
+  // ここまで
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -49,6 +56,7 @@ const Home = () => {
         const allUsers = res.data.users
         const activeImage = res.data.image;
         console.log(res);
+        console.log(res.request.responseURL);
         console.log(res.data.totalCount);
         setImage(activeImage);
         setTweets(allTweets);

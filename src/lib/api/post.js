@@ -24,12 +24,12 @@ export const imageAttach = (params) => {
   return client.post("/images", params);
 }
 
-export const getTweets = () => {
-  return client.get("/tweets");
-}
 // export const getTweets = () => {
-//   return client.get("/tweets?page=2");
+//   return client.get("/tweets?page=3&per=2");
 // }
+export const getTweets = (page = 1) => {
+  return client.get(`/tweets?page=${page}&per=3`);
+}
 
 // TODO ここのparamsであっているのか疑問
 export const getTweet = (params) => {

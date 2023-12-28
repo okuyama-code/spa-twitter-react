@@ -15,7 +15,14 @@ const TimeLine = () => {
     <div className='timeLine'>
       <Share />
       <div className='pagination'>
-        <Pagination count={10} color="primary" />
+        <Pagination
+        count={20} //ページ数
+        page={1} //現在のページ
+        // defaultPage={1}
+        // siblingCount={0}
+        // boundaryCount={3}
+        color="primary"
+        />
       </div>
       {twwets.map((tweet) => (
         <Post post={tweet} key={tweet.id}   />
