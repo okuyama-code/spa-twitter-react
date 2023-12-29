@@ -37,3 +37,4 @@ export const getPosts = () => {
 export const getPost = (params) => {
   return client.get("/posts/:id", params);
 }
+
