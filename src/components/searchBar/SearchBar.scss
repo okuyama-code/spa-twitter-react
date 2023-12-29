@@ -1,0 +1,17 @@
+.search_input {
+  border: none;
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgb(65, 62, 62);
+  color: white;
+  margin-top: 10px;
+
+  &::placeholder {
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

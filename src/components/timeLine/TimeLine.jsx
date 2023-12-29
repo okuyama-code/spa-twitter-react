@@ -5,6 +5,7 @@ import Post from '../post/Post'
 import { allPostsState } from '../../atoms/allPostsState';
 import { useRecoilState } from 'recoil';
 import "./TimeLine.scss"
+import SearchBar from '../searchBar/SearchBar';
 
 
 const TimeLine = () => {
@@ -14,8 +15,7 @@ const TimeLine = () => {
   return (
     <div className='timeLine'>
       <Share />
-      <div className='pagination'>
-      </div>
+      <SearchBar />
       {posts.map((post) => (
         <Post post={post} key={post.id} />
       ))}

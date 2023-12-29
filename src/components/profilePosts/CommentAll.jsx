@@ -1,5 +1,4 @@
 import React from 'react'
-import "./profilePosts.scss";
 import Post from '../post/Post';
 import { Posts } from "../../dummyData";
 
