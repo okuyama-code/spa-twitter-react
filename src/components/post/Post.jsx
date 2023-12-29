@@ -57,7 +57,7 @@ const Post = ({ post }) => {
         </div>
         <Link to="/postShow">
           <div className="postCenter">
-              <p className="postText">{post.tweetContent}</p>
+              <p className="postText">{post.postContent}</p>
               <img src={post.imageUrl}  className='postImg'/>
           </div>
         </Link>

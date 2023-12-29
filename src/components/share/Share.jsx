@@ -3,62 +3,35 @@ import "./Share.scss";
 import { CiImageOn } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createTweet, imageAttach } from '../../lib/api/post';
+import { createPost, imageAttach } from '../../lib/api/post';
 // import { currentUserState } from '../../atoms/currentUserState';
 // import { useRecoilValue } from 'recoil';
 
 
 
 const Share = () => {
-  const [tweetContent, setTweetContent] = useState("");
+  const [postContent, setPostContent] = useState("");
   const [image, setImage] = useState({data: "", name: ""})
   // const currentUser = useRecoilValue(currentUserState)
   const navigate = useNavigate();
 
-  // const currentUserId = currentUser.id
 
-  // console.log(currentUser.id);
-  // console.log(currentUserId);
-
-
-
-  //buttonをクリックしたら走る関数
-  // API側でcurrent_user使わないパターン
-  // const Tweet = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const params = {
-  //       "tweet_content": tweetContent,
-  //       "user_id": currentUserId
-  //     }
-  //     console.log(tweetContent);
-  //     const res = await createTweet(params);
-  //     console.log(res);
-  //     toast.success("投稿しました");
-  //     navigate("/");
-  //   } catch(e) {
-  //     console.log(e);
-  //     toast.error("投稿に失敗しました。")
-  //   }
-  // }
-
-  // current_userをAPI側で使うパターン
-  const TweetSubmit = async (e) => {
+  const PostSubmit = async (e) => {
     e.preventDefault();
     try {
-      const paramsTweet = {
-        "tweet_content": tweetContent
+      const paramsPost = {
+        "post_content": postContent
       }
-      console.log(tweetContent);
-      const res = await createTweet(paramsTweet);
+      console.log(postContent);
+      await createPost(paramsPost);
       // もし画像のstateのdataが空文字じゃないならawait attachImageでエンドポイントを叩く。
       if (image.data !== "") {
         const paramsImage = {
           "image": image
         }
-        const resImage = await imageAttach(paramsImage)
+        await imageAttach(paramsImage)
       }
-      setTweetContent("");
+      setPostContent("");
       toast.success("投稿しました");
       navigate("/");
       // window.location.reload();
@@ -100,8 +73,8 @@ const Share = () => {
             name="tweet_content"
             className='shareInput'
             placeholder='今何してるの？'
-            value={tweetContent}
-            onChange={(e) => setTweetContent(e.target.value)}
+            value={postContent}
+            onChange={(e) => setPostContent(e.target.value)}
             />
         </div>
 
@@ -121,7 +94,7 @@ const Share = () => {
           </div>
           <button
             className="shareButton"
-            onClick={TweetSubmit}
+            onClick={PostSubmit}
           >投稿</button>
         </div>
       </div>

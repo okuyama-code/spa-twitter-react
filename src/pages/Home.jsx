@@ -12,8 +12,8 @@ import { getUser } from '../lib/api/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { currentUserState } from '../atoms/currentUserState';
 import { toast } from 'react-toastify';
-import { getTweets } from '../lib/api/post';
-import { allTweetsState } from '../atoms/allTweetsState';
+import { getPosts } from '../lib/api/post';
+import { allPostsState } from '../atoms/allPostsState';
 import { allUsersState } from '../atoms/allUsersState';
 
 
@@ -23,18 +23,12 @@ const Home = () => {
   const isComment = useRecoilValue(isCommentState);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const navigate = useNavigate();
-  const [twwets, setTweets] = useRecoilState(allTweetsState);
+  const [posts, setPosts] = useRecoilState(allPostsState);
+
 
   const setUsers = useSetRecoilState(allUsersState);
   const [image, setImage] = useState("");
 
-
-  // ここからペアプロで追加
-  // let { id } = useParams();
-  // console.log(id);
-  const [page,setPage] = useState(1);
-  // const params = useParams();
-  // console.log(params)
 
   // ここまで
   useEffect(() => {
@@ -51,15 +45,15 @@ const Home = () => {
 
     const fetchTweets = async () => {
       try {
-        const res = await getTweets();
-        const allTweets = res.data.tweets;
+        const res = await getPosts();
+        const allTweets = res.data.posts;
         const allUsers = res.data.users
         const activeImage = res.data.image;
         console.log(res);
         console.log(res.request.responseURL);
         console.log(res.data.totalCount);
         setImage(activeImage);
-        setTweets(allTweets);
+        setPosts(allTweets);
         setUsers(allUsers)
         // toast.success("投稿とユーザーを取得しました")
       } catch (e) {
@@ -82,7 +76,7 @@ const Home = () => {
         <Sidebar />
         <TimeLine />
         {isComment && (<CommentModal />)}
-      </div>) : <Login /> }
+      </div>) : <Login />}
 
 
     </div>
