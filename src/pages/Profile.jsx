@@ -68,7 +68,7 @@ const Profile = () => {
               <p><Link to={{ pathname: "/followings" }}><span>110</span></Link> Following</p>
               <p><Link to={{ pathname: "/followings" }}><span>100</span></Link> Follower</p>
             </div>
-            {/* <div className='profile_tabs'>
+            <div className='profile_tabs'>
               <Tabs>
                 <TabList className="tablist">
                   <Tab><h2>投稿一覧</h2></Tab>
@@ -83,8 +83,7 @@ const Profile = () => {
                 </TabPanel>
 
               </Tabs>
-            </div> */}
-
+            </div>
 
           </div>
         </div>
