@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
-import { fetchAllPosts, searchPosts } from "../services/postService";
+import { getPosts } from "../lib/api/post";
+import { searchPosts } from "../lib/api/fetch";
+import { allPostsState } from "../atoms/allPostsState";
+import { useRecoilState } from "recoil";
+
 
 function usePostsData(searchTerm) {
   const [posts, setPosts] = useState([]);
+
+  // const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -12,8 +18,12 @@ function usePostsData(searchTerm) {
         let data;
         if (searchTerm) {
           data = await searchPosts(searchTerm);
+          // console.log(data);
         } else {
-          data = await fetchAllPosts();
+          const res = await getPosts();
+          data = res.data.posts;
+          // const activeImage = res.data.image;
+          // setImage(activeImage);
         }
         setPosts(data);
         setLoading(false);

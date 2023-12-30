@@ -28,6 +28,8 @@ const Post = ({ post }) => {
     setIsComment(!isComment);
   }
 
+  console.log(post)
+
   const handleToDate = (date) =>{
     date = new Date(date);
     if(date.getMinutes() < 10){
@@ -44,12 +46,14 @@ const Post = ({ post }) => {
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
-              <img src={Users.filter((user) => user.id === post.userId)[0].profilePicture} alt="" className='postProfileImg' />
+              <img src="/assets/person/icon.png" alt="" className='postProfileImg' />
               <span className='postName text-xl font-bold'>
-                {allUsers.filter((user) => user.id === post.userId)[0].name}
+                {/* {allUsers.filter((user) => user.id === post.userId)[0].name} */}
+                okuyama
               </span>
               <span className="postUsername">
-                  @{allUsers.filter((user) => user.id === post.userId)[0].username}
+                  {/* @{allUsers.filter((user) => user.id === post.userId)[0].username} */}
+                  @okuyama0121
               </span>
               <span className="postDate">{handleToDate(post.createdAt)}</span>
             </div>
@@ -57,7 +61,7 @@ const Post = ({ post }) => {
         </div>
         <Link to="/postShow">
           <div className="postCenter">
-              <p className="postText">{post.postContent}</p>
+              <p className="postText">{post.post_content}</p>
               <img src={post.imageUrl}  className='postImg'/>
           </div>
         </Link>

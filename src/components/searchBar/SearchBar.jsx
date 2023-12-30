@@ -31,8 +31,8 @@ const SearchBar = (
         type="text"
         placeholder="Search..."
         className='search_input'
-        // value={value}
-        // onChange={handleSearchChange}
+        value={value}
+        onChange={handleSearchChange}
       />
     </div>
   );
