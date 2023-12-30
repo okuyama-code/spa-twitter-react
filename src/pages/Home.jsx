@@ -12,7 +12,7 @@ import { getUser } from '../lib/api/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { currentUserState } from '../atoms/currentUserState';
 import { toast } from 'react-toastify';
-import { getPosts } from '../lib/api/post';
+import { getPosts, getUsers } from '../lib/api/post';
 import { allPostsState } from '../atoms/allPostsState';
 import { allUsersState } from '../atoms/allUsersState';
 
@@ -46,12 +46,13 @@ const Home = () => {
     const fetchTweets = async () => {
       try {
         const res = await getPosts();
+        const res2 = await getUsers();
         const allTweets = res.data.posts;
-        const allUsers = res.data.users
+        const allUsers = res2.data.users;
         const activeImage = res.data.image;
-        console.log(res);
-        console.log(res.request.responseURL);
-        console.log(res.data.totalCount);
+        // console.log(res);
+        console.log(res2);
+
         setImage(activeImage);
         setPosts(allTweets);
         setUsers(allUsers)
@@ -68,15 +69,14 @@ const Home = () => {
 
   return (
     <div >
-      {/* <img src={image} alt="" /> */}
-      {isLogin ? (<div className='homeContainer'>
+      <div className='homeContainer'>
         {/* {currentUser.name}
         {currentUser.email}
         {currentUser.email} */}
         <Sidebar />
         <TimeLine />
         {isComment && (<CommentModal />)}
-      </div>) : <Login />}
+      </div>
 
 
     </div>
