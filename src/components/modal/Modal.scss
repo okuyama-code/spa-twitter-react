@@ -1,0 +1,208 @@
+:root {
+--bg-black:rgb(56, 54, 54);
+--border-black: rgb(146, 146, 146);
+}
+
+// =========== EditModal ========
+.edit_modal {
+  // modalを重ねる関係
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  margin: 30px auto;
+  width: 600px;
+  height: 80vh;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: var(--bg-black);
+  color: white;
+
+  // 常にスクロールバーを表示
+  overflow-y: scroll;
+
+}
+
+
+
+
+.close_icon {
+  margin: 10px;
+  font-size: 30px;
+  border-radius: 50%;
+  background: var(--bg-black);
+
+
+  &:hover {
+    transition: 0.3s ease;
+    background: var(--border-black);
+  }
+}
+
+.edit_h2 {
+  margin: 7px 0 0 40px;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.editButton {
+  margin: 10px 30px 5px 0;
+  border: 1px solid white;
+  padding: 0 20px;
+  font-size: 15px;
+  border-radius: 10px;
+
+  &:hover {
+    transition: 0.3s ease;
+    opacity: 0.7;
+  }
+
+}
+
+.edit_profile_img {
+  position: relative;
+  height: 290px;
+
+  .header_img {
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .icon_img {
+    height: 110px;
+    width: 110px;
+    border: 2px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 150px;
+    left: 30px;
+  }
+}
+
+.edit_form {
+  text-align: center;
+
+  input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background: var(--bg-black);
+    border: 1px solid var(--border-black);
+  }
+
+  textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background: var(--bg-black);
+    border: 1px solid var(--border-black);
+  }
+
+  .input_last {
+    margin-bottom: 50px;
+  }
+}
+
+
+
+// =========== commentModal ====================
+.comment_modal {
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  border: 1px solid black;
+  margin: 30px auto;
+  width: 600px;
+  height: 65vh;
+  border-radius: 5px;
+  background: rgb(98, 92, 92);
+  color: white;
+
+  .comment_modal_header {
+    margin: 10px 0 0 20px;
+  }
+
+  .comment_modal_post {
+    margin: 10px 15px 0 15px;
+    display: flex;
+    border: 1px solid white;
+    padding: 10px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .comment_modal_post_username {
+      margin-left: 10px;
+      font-size: 0.9rem;
+      padding-top: 2px;
+      color: rgb(196, 193, 193);
+    }
+
+    .replying_to {
+      margin-top: 10px;
+      color: rgb(196, 193, 193);
+      span {
+        color: rgb(26, 26, 223);
+      }
+    }
+  }
+
+  .comment_form {
+    margin: 0 15px 0 15px;
+    display: flex;
+    border: 1px solid white;
+    border-top: none;
+    padding: 20px 10px 20px 10px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    form {
+      textarea {
+        margin-left: 15px;
+        background: var(--bg-black);
+        padding: 10px;
+        border-radius: 5px;
+        &::placeholder {
+          font-size: 1.1rem;
+        }
+      }
+
+      .img_icon {
+        font-size: 1.7rem;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+
+      button {
+        border: 3px solid white;
+        background: blue;
+        border-radius: 10px;
+        padding: 2px 10px 6px 10px;
+        font-weight: bold;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+
+
+  }
+}

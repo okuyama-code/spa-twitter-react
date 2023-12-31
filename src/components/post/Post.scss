@@ -1,0 +1,84 @@
+.post {
+  width: 100%;
+  box-shadow: 3px 7px 13px -10px #402e60;
+  border-radius: 10px;
+  margin: 30px 0;
+  padding: 10px;
+  // background-color: white;
+}
+
+.postWrapper {
+  padding: 10px;
+}
+
+.postProfileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.postTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postTopLeft {
+  display: flex;
+  align-items: center;
+}
+
+.postName {
+  margin-left: 10px;
+}
+
+.postUsername {
+  font-size: 15px;
+  margin: 0 10px;
+  color: rgb(114, 116, 118);
+}
+.postDate {
+  font-size: 12px;
+}
+
+.postCenter {
+  margin: 20px 0;
+}
+
+.postImg {
+  width: 80%;
+  margin: 10px auto;
+  max-height: 500px;
+  object-fit: cover;
+  // object-fit: contain;
+  border-radius: 10px;
+}
+
+.postIcons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .PostIcon {
+    display: flex;
+    align-items: center;
+
+    .postIconIcon {
+      font-size: 1.4rem;
+    }
+
+    span {
+      margin-left: 7px;
+    }
+  }
+}
+
+
+.postText {
+  color: black;
+}
+
+
+
+
