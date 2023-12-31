@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Post.scss";
 import { Users } from "../../dummyData";
 import { CiHeart } from "react-icons/ci";
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { isCommentState } from '../../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { allUsersState } from '../../atoms/allUsersState';
+import { getUsers } from '../../lib/api/post';
 
 
 
@@ -16,19 +17,15 @@ import { allUsersState } from '../../atoms/allUsersState';
 const Post = ({ post }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
-  // console.log(user[0].username);
-  // console.log(post.tweetContent)
-
-  const allUsers = useRecoilValue(allUsersState);
-  // console.log(allUsers);
 
   const [isComment, setIsComment] = useRecoilState(isCommentState);
+  const [users, setUsers] = useRecoilState(allUsersState);
+
 
   const handleClickComment = () => {
     setIsComment(!isComment);
   }
 
-  console.log(post)
 
   const handleToDate = (date) =>{
     date = new Date(date);
@@ -46,23 +43,22 @@ const Post = ({ post }) => {
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
+              {/* TODO ここをあとで変数に変える */}
               <img src="/assets/person/icon.png" alt="" className='postProfileImg' />
               <span className='postName text-xl font-bold'>
-                {/* {allUsers.filter((user) => user.id === post.userId)[0].name} */}
-                okuyama
+                {users.filter((user) => user.id === post.user_id)[0].name}
               </span>
               <span className="postUsername">
-                  {/* @{allUsers.filter((user) => user.id === post.userId)[0].username} */}
-                  @okuyama0121
+                  @{users.filter((user) => user.id === post.user_id)[0].username}
               </span>
-              <span className="postDate">{handleToDate(post.createdAt)}</span>
+              <span className="postDate">{handleToDate(post.created_at)}</span>
             </div>
           </div>
         </div>
         <Link to="/postShow">
           <div className="postCenter">
               <p className="postText">{post.post_content}</p>
-              <img src={post.imageUrl}  className='postImg'/>
+              <img src={post.image_url}  className='postImg'/>
           </div>
         </Link>
         <div className="postIcons">
@@ -86,7 +82,6 @@ const Post = ({ post }) => {
           </div>
         </div>
       </div>
-      {/* <Pagination count={10} color="primary" /> */}
     </>
   )
 }

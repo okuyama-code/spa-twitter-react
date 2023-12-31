@@ -18,9 +18,11 @@ import usePostsData from '../../hooks/usePostData';
 
 
 const TimeLine = () => {
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+  // const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  // const setUsers = useSetRecoilState(allUsersState);
+  const [users, setUsers] = useState([]);
 
   // 検索機能の担当  searchTerm 検索語
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,52 +34,19 @@ const TimeLine = () => {
     posts: fetchedPosts,
     loading,
     error,
+    currentUser,
+    users: fetchedUsers,
     // image,
   } = usePostsData(debouncedSearchTerm);
 
 
-  // const setUsers = useSetRecoilState(allUsersState);
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const res = await getUser();
-  //       const currentUser = res.data.currentUserData;
-  //       setCurrentUser(currentUser);
-
-  //       const res2 = await getUsers();
-  //       const allUsers = res2.data.users;
-  //       setUsers(allUsers)
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-  //   fetchUser();
-
-  //   // const fetchPosts = async () => {
-  //   //   try {
-  //   //     const res = await getPosts();
-  //   //     const allPosts = res.data.posts;
-  //   //     const activeImage = res.data.image;
-  //   //     // console.log(res);
-
-  //   //     setImage(activeImage);
-  //   //     setPosts(allPosts);
-  //   //     // toast.success("投稿とユーザーを取得しました")
-  //   //   } catch (e) {
-  //   //     console.log(e);
-  //   //     toast.error("投稿を取得できませんでした")
-  //   //   }
-  //   // };
-  //   // fetchPosts()
-
-  // }, [navigate]);
 
   useEffect(() => {
     if (fetchedPosts) {
       setPosts(fetchedPosts); // Update the posts state once fetchedPosts is available
+      setUsers(fetchedUsers);
     }
-    console.log(posts)
+    // console.log(posts)
   }, [fetchedPosts]);
 
   const handleImmediateSearchChange = (searchValue) => {

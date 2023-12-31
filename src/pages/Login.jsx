@@ -19,17 +19,12 @@ const Login = () => {
 
 
   useEffect(() => {
-    const f = async () => {
-      try {
-        const res = await getUser();
-        if (res.data.isLogin) {
-          navigate("/home");
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    f();
+
+    if (Cookies.get("_access_token")) {
+      navigate("/home");
+    }
+
+
   }, [navigate]);
 
   const login = async (e) => {
@@ -57,7 +52,7 @@ const Login = () => {
         <div className='flex justify-center mt-20'>
           <div className='w-9/12 border border-gray-200 rounded-xl login_bg_opacity'>
           <div class="my-16 text-center">
-          <Link to="/" className='signup_link'>
+          <Link to="/home" className='signup_link'>
             <p className='mb-2'>ホーム画面に戻る</p>
           </Link>
 

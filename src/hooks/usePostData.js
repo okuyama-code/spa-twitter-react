@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { getPosts } from "../lib/api/post";
+import { getPosts, getUsers } from "../lib/api/post";
 import { searchPosts } from "../lib/api/fetch";
 import { allPostsState } from "../atoms/allPostsState";
 import { useRecoilState } from "recoil";
+import { getUser } from "../lib/api/auth";
+import { allUsersState } from "../atoms/allUsersState";
+import { currentUserState } from "../atoms/currentUserState";
 
 
 function usePostsData(searchTerm) {
@@ -12,9 +15,21 @@ function usePostsData(searchTerm) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+  const [users, setUsers] = useRecoilState(allUsersState);
+
+
   useEffect(() => {
     async function loadPosts() {
       try {
+        const res = await getUser();
+        const currentUser = res.data.currentUserData;
+        setCurrentUser(currentUser);
+        
+        const res2 = await getUsers();
+        const allUsers = res2.data.users;
+        setUsers(allUsers)
+
         let data;
         if (searchTerm) {
           data = await searchPosts(searchTerm);
@@ -27,6 +42,11 @@ function usePostsData(searchTerm) {
         }
         setPosts(data);
         setLoading(false);
+
+
+
+
+
       } catch (e) {
         setError(e);
         setLoading(false);
@@ -36,7 +56,7 @@ function usePostsData(searchTerm) {
     loadPosts();
   }, [searchTerm]);
 
-  return { posts, loading, error };
+  return { posts, loading, error, currentUser, users };
 }
 
 export default usePostsData;

@@ -33,7 +33,7 @@ const Share = () => {
       }
       setPostContent("");
       toast.success("投稿しました");
-      window.location.reload();
+      navigate("/")
     } catch(e) {
       console.log(e);
       toast.error("投稿に失敗しました。")
@@ -63,6 +63,7 @@ const Share = () => {
       <div className="shareWrapper">
         <div className="shareTop">
           <Link to={{ pathname: "/profile" }}>
+            {/* TODO current_userのiconを表示 */}
             <img src="/assets/person/icon.png" alt="" className='shareProfileImg'/>
             {/* {currentUser.name} */}
             {/* {currentUserId} */}
