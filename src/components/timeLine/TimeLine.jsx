@@ -7,13 +7,15 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import "./TimeLine.scss"
 import SearchBar from '../searchBar/SearchBar';
 import { currentUserState } from '../../atoms/currentUserState';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { allUsersState } from '../../atoms/allUsersState';
 import { getUser } from '../../lib/api/auth';
 import { getPosts, getUsers } from '../../lib/api/post';
 import { toast } from 'react-toastify';
 import useURLSearchParam from "../../hooks/useURLSearchParams"
 import usePostsData from '../../hooks/usePostData';
+import Pagination from '../pagination/Pagination';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -26,9 +28,16 @@ const TimeLine = () => {
 
   // 検索機能の担当  searchTerm 検索語
   const [searchTerm, setSearchTerm] = useState("");
-  // 、Reactのカスタムフック useURLSearchParams を使用して、URLのクエリパラメータを取得し、デバウンス（遅延実行）された検索キーワードを状態として管理するコード
+  // デバウンス（遅延実行)
   const [debouncedSearchTerm, setDebouncedSearchTerm] =
     useURLSearchParam("search");
+
+  // pagination追記
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialPageFromURL = Number(searchParams.get("page") || "1");
+  const [currentPage, setCurrentPage] = useState(initialPageFromURL);
+  // part29追記
 
   const {
     posts: fetchedPosts,
@@ -36,6 +45,8 @@ const TimeLine = () => {
     error,
     currentUser,
     users: fetchedUsers,
+    totalPosts,
+    perPage,
     // image,
   } = usePostsData(debouncedSearchTerm);
 
@@ -49,6 +60,17 @@ const TimeLine = () => {
     // console.log(posts)
   }, [fetchedPosts]);
 
+   // part29追記
+   useEffect(() => {
+    const initialSearchTerm = searchParams.get("search") || "";
+    setSearchTerm(initialSearchTerm);
+
+    const pageFromURL = searchParams.get("page") || "1";
+    setCurrentPage(Number(pageFromURL));
+
+  }, [searchParams])
+  // part29追記
+
   const handleImmediateSearchChange = (searchValue) => {
     setSearchTerm(searchValue);
   };
@@ -59,6 +81,17 @@ const TimeLine = () => {
     setDebouncedSearchTerm(searchValue);
   };
 
+   // part29追記
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+
+    // Update the URL to include the page number
+    // ページ番号を含めるように URL を更新します
+    setSearchParams({ search: debouncedSearchTerm, page: page});
+  }
+
+  // part29追記
+
   return (
     <div className='timeLine'>
       <Share />
@@ -67,6 +100,16 @@ const TimeLine = () => {
         onSearchChange={handleDebouncedSearchChange}
         onImmediateChange={handleImmediateSearchChange}
       />
+      <Pagination
+        currentPage={currentPage}
+        totalPosts={totalPosts}
+        postsPerPage={perPage}
+        onPageChange={handlePageChange}
+      />
+
+      {loading && (<div className='loading'><CircularProgress color="inherit" /></div>)}
+      {error && (<p>Error loading posts.(投稿の読み込み中にエラーが発生しました。)</p>)}
+
       {posts.map((post) => (
         <Post post={post} key={post.id} />
       ))}
