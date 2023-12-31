@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getPosts, getUsers } from "../lib/api/post";
-import { searchPosts } from "../lib/api/fetch";
+import { fetchAllPosts, searchPosts } from "../lib/api/fetch";
 import { allPostsState } from "../atoms/allPostsState";
 import { useRecoilState } from "recoil";
 import { getUser } from "../lib/api/auth";
@@ -8,16 +8,16 @@ import { allUsersState } from "../atoms/allUsersState";
 import { currentUserState } from "../atoms/currentUserState";
 
 
-function usePostsData(searchTerm) {
+function usePostsData(searchTerm, page = 1) {
   const [posts, setPosts] = useState([]);
-
-  // const [image, setImage] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const [users, setUsers] = useRecoilState(allUsersState);
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [perPage, setPerPage] = useState(10);
 
   useEffect(() => {
     async function loadPosts() {
@@ -25,28 +25,24 @@ function usePostsData(searchTerm) {
         const res = await getUser();
         const currentUser = res.data.currentUserData;
         setCurrentUser(currentUser);
-        
+
         const res2 = await getUsers();
         const allUsers = res2.data.users;
         setUsers(allUsers)
 
         let data;
         if (searchTerm) {
-          data = await searchPosts(searchTerm);
-          // console.log(data);
+          data = await searchPosts(searchTerm, page);
         } else {
-          const res = await getPosts();
-          data = res.data.posts;
-          // const activeImage = res.data.image;
-          // setImage(activeImage);
+          data = await fetchAllPosts(page);
         }
-        setPosts(data);
+
+        if (data.posts) {
+          setPosts(data.posts);
+          setTotalPosts(data.total_count)
+          setPerPage(data.per_page)
+        }
         setLoading(false);
-
-
-
-
-
       } catch (e) {
         setError(e);
         setLoading(false);
@@ -54,9 +50,9 @@ function usePostsData(searchTerm) {
       }
     }
     loadPosts();
-  }, [searchTerm]);
+  }, [searchTerm, page]);
 
-  return { posts, loading, error, currentUser, users };
+  return { posts, loading, error, currentUser, users, totalPosts, perPage };
 }
 
 export default usePostsData;

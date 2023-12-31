@@ -48,7 +48,7 @@ const TimeLine = () => {
     totalPosts,
     perPage,
     // image,
-  } = usePostsData(debouncedSearchTerm);
+  } = usePostsData(debouncedSearchTerm, currentPage);
 
 
 
