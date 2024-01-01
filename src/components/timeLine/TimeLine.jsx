@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Share from '../share/Share'
 import Post from '../post/Post'
-// import { Posts } from "../../dummyData";
-import { allPostsState } from '../../atoms/allPostsState';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+
 import "./TimeLine.scss"
 import SearchBar from '../searchBar/SearchBar';
-import { currentUserState } from '../../atoms/currentUserState';
+
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { allUsersState } from '../../atoms/allUsersState';
-import { getUser } from '../../lib/api/auth';
-import { getPosts, getUsers } from '../../lib/api/post';
-import { toast } from 'react-toastify';
+
 import useURLSearchParam from "../../hooks/useURLSearchParams"
 import usePostsData from '../../hooks/usePostData';
 import Pagination from '../pagination/Pagination';
@@ -24,7 +19,7 @@ const TimeLine = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   // const setUsers = useSetRecoilState(allUsersState);
-  const [users, setUsers] = useState([]);
+  const [, setUsers] = useState([]);
 
   // 検索機能の担当  searchTerm 検索語
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,35 +27,30 @@ const TimeLine = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] =
     useURLSearchParam("search");
 
-  // pagination追記
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialPageFromURL = Number(searchParams.get("page") || "1");
   const [currentPage, setCurrentPage] = useState(initialPageFromURL);
-  // part29追記
 
   const {
     posts: fetchedPosts,
     loading,
     error,
-    currentUser,
+    // currentUser,
     users: fetchedUsers,
     totalPosts,
     perPage,
-    // image,
   } = usePostsData(debouncedSearchTerm, currentPage);
 
 
 
   useEffect(() => {
     if (fetchedPosts) {
-      setPosts(fetchedPosts); // Update the posts state once fetchedPosts is available
+      setPosts(fetchedPosts);
       setUsers(fetchedUsers);
     }
-    // console.log(posts)
   }, [fetchedPosts]);
 
-   // part29追記
    useEffect(() => {
     const initialSearchTerm = searchParams.get("search") || "";
     setSearchTerm(initialSearchTerm);
@@ -69,7 +59,6 @@ const TimeLine = () => {
     setCurrentPage(Number(pageFromURL));
 
   }, [searchParams])
-  // part29追記
 
   const handleImmediateSearchChange = (searchValue) => {
     setSearchTerm(searchValue);
@@ -81,16 +70,12 @@ const TimeLine = () => {
     setDebouncedSearchTerm(searchValue);
   };
 
-   // part29追記
   const handlePageChange = (page) => {
     setCurrentPage(page);
 
-    // Update the URL to include the page number
-    // ページ番号を含めるように URL を更新します
+
     setSearchParams({ search: debouncedSearchTerm, page: page});
   }
-
-  // part29追記
 
   return (
     <div className='timeLine'>

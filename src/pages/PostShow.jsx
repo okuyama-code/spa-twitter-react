@@ -8,14 +8,16 @@ import { CiHeart } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 
 import { CiImageOn } from "react-icons/ci";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
 import { useRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
+
 import { fetchPost } from '../lib/api/fetch';
 import { getUsers } from '../lib/api/post';
 import { allUsersState } from '../atoms/allUsersState';
+import { CircularProgress } from '@mui/material';
+
 
 
 
@@ -28,7 +30,6 @@ const PostShow = () => {
 
   const [post, setPost] = useState(null);
   const { id } = useParams();
-  // const navigate = useNavigate();
 
   const [users, setUsers] = useRecoilState(allUsersState);
 
@@ -47,7 +48,7 @@ const PostShow = () => {
     fetchCurrentPost();
   }, [id])
 
-  if (!post) return <h2>Lording...</h2>
+  if (!post) return <div className='loading'><CircularProgress color="inherit" /></div>
 
 
   return (
