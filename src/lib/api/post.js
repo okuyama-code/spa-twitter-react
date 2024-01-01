@@ -32,8 +32,3 @@ export const getUsers = () => {
   return client.get("/user_all")
 }
 
-// TODO ここのparamsであっているのか疑問
-export const getPost = (params) => {
-  return client.get("/posts/:id", params);
-}
-

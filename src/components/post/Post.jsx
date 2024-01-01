@@ -55,7 +55,7 @@ const Post = ({ post }) => {
             </div>
           </div>
         </div>
-        <Link to="/postShow">
+        <Link to={`/posts/${post.id}`}>
           <div className="postCenter">
               <p className="postText">{post.post_content}</p>
               <img src={post.image_url}  className='postImg'/>

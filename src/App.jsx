@@ -41,7 +41,7 @@ function App() {
           <Route path="messagebox" element={<MessageBox />} />
           <Route path="notifications" element={<Notification
           />} />
-          <Route path="postShow" element={<PostShow
+          <Route path="/posts/:id" element={<PostShow
           />} />
           {/* tweet詳細ページにとぶように修正 */}
           {/* <Route path="postShow" element={<PostShow

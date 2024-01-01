@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import { IoIosArrowRoundBack } from "react-icons/io";
 
@@ -8,10 +8,14 @@ import { CiHeart } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 
 import { CiImageOn } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
 import { useRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
+import { fetchPost } from '../lib/api/fetch';
+import { getUsers } from '../lib/api/post';
+import { allUsersState } from '../atoms/allUsersState';
 
 
 
@@ -22,6 +26,30 @@ const PostShow = () => {
     setIsComment(!isComment);
   }
 
+  const [post, setPost] = useState(null);
+  const { id } = useParams();
+  // const navigate = useNavigate();
+
+  const [users, setUsers] = useRecoilState(allUsersState);
+
+  useEffect(() => {
+    const fetchCurrentPost = async () => {
+      try {
+        const res2 = await getUsers();
+        const allUsers = res2.data.users;
+        setUsers(allUsers)
+        const json = await fetchPost(id);
+        setPost(json);
+      } catch (e) {
+        console.log("エラーが発生しました" ,e)
+      }
+    }
+    fetchCurrentPost();
+  }, [id])
+
+  if (!post) return <h2>Lording...</h2>
+
+
   return (
     <div className='followPage'>
       <Sidebar />
@@ -29,20 +57,20 @@ const PostShow = () => {
       <div className='followContainer'>
         <div className='postShowWrapper'>
           <div className='postShowHeader'>
-            <Link to="/">
+            <Link to="/home">
               <IoIosArrowRoundBack size={40} />
             </Link>
             <h2>Post</h2>
           </div>
           <div className="postShowName">
-            <img src="assets/person/icon.png" alt="" />
+            <img src="/assets/person/icon.png" alt="" />
             <div>
-              <h2>okuyama</h2>
-              <p>@okuyama0121</p>
+              <h2>{users.filter((user) => user.id === post.user_id)[0].name}</h2>
+              <p>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
             </div>
           </div>
-          <h3 className='postShowBody'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h3>
-          <img src="assets/post/cotucotu.jpeg" alt="" className='postShowImg' />
+          <h3 className='postShowBody'>{post.post_content}</h3>
+          <img src={post.image_url}  className='postImg'/>
           <div className="postShowIcons mt-4">
             <div className="PostIcon ">
               <button onClick={handleClickComment} disabled={isComment}>
@@ -66,7 +94,7 @@ const PostShow = () => {
 
           <form className='postShowCommentForm'>
             <div className='flex items-center'>
-              <img src="assets/person/icon.png" alt="" className='postShowCommentFormImg' />
+              <img src="/assets/person/icon.png" alt="" className='postShowCommentFormImg' />
               <input type="text" className='postShowCommentFormInput' />
             </div>
             <div className='flex items-center justify-between ml-15 mr-5'>
@@ -78,7 +106,7 @@ const PostShow = () => {
         </div> {/* postShowWrapperの終わり  */}
         <div className="commentPostWrapper">
           <div className='commentPostInfo'>
-            <img src="assets/person/minyon.jpeg" alt="" />
+            <img src="/assets/person/minyon.jpeg" alt="" />
             <div>
               <div className='flex items-center'>
                 <h3>パクミニョン</h3>
@@ -94,7 +122,7 @@ const PostShow = () => {
         </div>
         <div className="commentPostWrapper">
           <div className='commentPostInfo'>
-            <img src="assets/person/minyon.jpeg" alt="" />
+            <img src="/assets/person/minyon.jpeg" alt="" />
             <div>
               <div className='flex items-center'>
                 <h3>パクミニョン</h3>
