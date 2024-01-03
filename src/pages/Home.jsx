@@ -15,9 +15,6 @@ const Home = () => {
   const isComment = useRecoilValue(isCommentState);
   // const currentUser = useRecoilValue(currentUserState);
   useUserList();
-  const { currentUser } = useCurrentUser();
-  console.log(currentUser)
-
 
   return (
     <div>

@@ -11,7 +11,6 @@ function useCurrentUser() {
     async function loadCurrentUser () {
       try {
         const res = await getUser();
-        console.log(res.data.current_user_data)
         setCurrentUser(res.data.current_user_data)
       } catch (e) {
         console.log(e)

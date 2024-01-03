@@ -16,12 +16,13 @@ import { isLoginState } from '../atoms/isLoginState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { currentUserState } from '../atoms/currentUserState';
+import useCurrentUser from '../hooks/useCurrentUser';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const setIsLogin = useSetRecoilState(isLoginState);
 
-  const currentUser = useRecoilValue(currentUserState)
+  const { currentUser } = useCurrentUser();
 
   const logout = (e) => {
     e.preventDefault()
