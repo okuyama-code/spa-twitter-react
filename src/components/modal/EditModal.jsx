@@ -1,17 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Modal.scss";
 import { IoMdClose } from "react-icons/io";
 import { useSetRecoilState } from 'recoil';
 import { isEditState } from '../../atoms/isEditState';
+import { objectToFormData } from '../../utils/formDataHelper';
+import { updatePost } from '../../lib/api/user';
+import { useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 
 
-const EditModal = ( { user } ) => {
+const EditModal = ( { user, id } ) => {
   const setIsEdit = useSetRecoilState(isEditState);
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState(
+    user || {
+      name: "", date_of_birth: "", self_introduction: "", location: "",
+      website: "", icon: "", header: "",
+    }
+  );
+  // console.log(id)
 
   const modalClose = () => {
     setIsEdit(false);
   }
+
+  const handleUpdateSubmit = async (rawData) => {
+    // "sanitizedData" は「無害化されたデータ」や「安全なデータ」
+    const sanitizedData = {
+      name: rawData.name,
+      date_of_birth: rawData.date_of_birth,
+      self_introduction: rawData.self_introduction,
+      location: rawData.location,
+      website: rawData.website,
+      icon: rawData.icon, header: rawData.header
+    }
+
+    const formData = objectToFormData({ post: sanitizedData })
+
+    try {
+      const response = await updatePost(id, formData)
+      navigate(`/users/${response.id}`)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  if(!user) return <div className='loading'><CircularProgress color="inherit" /></div>
 
   return (
     <>

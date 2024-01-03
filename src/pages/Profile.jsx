@@ -35,7 +35,7 @@ const Profile = () => {
     const loadUser = async () => {
       try {
         const res = await fetchUser(id);
-        console.log(res.data.user)
+        // console.log(res.data.user)
         setUser(res.data.user);
       } catch (e) {
         console.log("エラーが発生しました", e)
@@ -54,7 +54,7 @@ const Profile = () => {
     <>
       {user ? (<div className="profile">
         <Sidebar />
-        {isEdit && (<EditModal user={user} handleClick={handleClick} />)}
+        {isEdit && (<EditModal user={user} id={id} handleClick={handleClick} />)}
         <div className='profileRight'>
           <div className="profileCover">
             <img src={user.header_url} alt="" className='profileCoverImg'/>
