@@ -65,7 +65,7 @@ const Share = () => {
     <div className='share'>
       <div className="shareWrapper">
         <div className="shareTop">
-          <Link to={{ pathname: "/profile" }}>
+          <Link to={{ pathname: `/users/${currentUser.id}` }}>
             <img src={currentUser.icon_url} alt="" className='shareProfileImg'/>
           </Link>
           <input

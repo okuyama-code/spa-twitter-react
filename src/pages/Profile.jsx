@@ -11,7 +11,7 @@ import 'react-tabs/style/react-tabs.css';
 import PostAll from '../components/profilePosts/PostAll';
 import CommentAll from '../components/profilePosts/CommentAll';
 import Page404 from './Page404';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditState } from '../atoms/isEditState';
@@ -23,6 +23,9 @@ const Profile = () => {
   const isLogin = useRecoilValue(isLoginState);
   const [isEdit, setIsEdit] = useRecoilState(isEditState);
 
+  const { id } = useParams();
+
+  // ここでfetchUserをする。
 
   const handleClick = () => {
     setIsEdit(!isEdit);
