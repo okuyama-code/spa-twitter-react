@@ -8,7 +8,7 @@ import { CiBookmark } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import { isCommentState } from '../../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { allUsersState } from '../../atoms/allUsersState';
+import { userListState } from '../../atoms/userListState';
 import { getUsers } from '../../lib/api/post';
 
 
@@ -19,7 +19,7 @@ const Post = ({ post }) => {
   // const user = Users.filter((user) => user.id === 1 );
 
   const [isComment, setIsComment] = useRecoilState(isCommentState);
-  const [users, setUsers] = useRecoilState(allUsersState);
+  const [users, setUsers] = useRecoilState(userListState);
 
 
   const handleClickComment = () => {
@@ -27,12 +27,12 @@ const Post = ({ post }) => {
   }
 
 
-  const handleToDate = (date) =>{
+  const handleToDate = (date) => {
     date = new Date(date);
-    if(date.getMinutes() < 10){
-        date = date.getFullYear()+"/"+(date.getMonth()%12+1)+"/"+date.getDate()+" "+date.getHours()+":0"+date.getMinutes()
+    if (date.getMinutes() < 10) {
+      date = date.getFullYear() + "/" + (date.getMonth() % 12 + 1) + "/" + date.getDate() + " " + date.getHours() + ":0" + date.getMinutes()
     } else {
-        date = date.getFullYear()+"/"+(date.getMonth()%12+1)+"/"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()
+      date = date.getFullYear() + "/" + (date.getMonth() % 12 + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()
     }
     return date;
   }
@@ -48,7 +48,7 @@ const Post = ({ post }) => {
                 {users.filter((user) => user.id === post.user_id)[0].name}
               </span>
               <span className="postUsername">
-                  @{users.filter((user) => user.id === post.user_id)[0].username}
+                @{users.filter((user) => user.id === post.user_id)[0].username}
               </span>
               <span className="postDate">{handleToDate(post.created_at)}</span>
             </div>
@@ -56,8 +56,8 @@ const Post = ({ post }) => {
         </div>
         <Link to={`/posts/${post.id}`}>
           <div className="postCenter">
-              <p className="postText">{post.post_content}</p>
-              <img src={post.image_url}  className='postImg'/>
+            <p className="postText">{post.post_content}</p>
+            <img src={post.image_url} className='postImg' />
           </div>
         </Link>
         <div className="postIcons">
@@ -72,8 +72,8 @@ const Post = ({ post }) => {
             <span className="IconCount">{post.comment}</span>
           </div>
           <div className="PostIcon">
-              <CiHeart className='postIconIcon' />
-              <span className='IconCount'>{post.like}</span>
+            <CiHeart className='postIconIcon' />
+            <span className='IconCount'>{post.like}</span>
           </div>
           <div className="PostIcon">
             <CiBookmark className='postIconIcon' />

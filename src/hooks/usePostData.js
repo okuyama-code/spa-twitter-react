@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
-import { fetchAllPosts, getUsers, searchPosts } from "../lib/api/post";
-// import { fetchAllPosts, searchPosts } from "../lib/api/fetch";
-import { allPostsState } from "../atoms/allPostsState";
+import { fetchAllPosts, searchPosts } from "../lib/api/post";
+import { userListState } from "../atoms/userListState";
 import { useRecoilState } from "recoil";
 import { getUser } from "../lib/api/auth";
-import { allUsersState } from "../atoms/allUsersState";
 import { currentUserState } from "../atoms/currentUserState";
+import { getUsers } from "../lib/api/user";
 
 
 function usePostsData(searchTerm, page = 1) {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
-  const [users, setUsers] = useRecoilState(allUsersState);
+  const [users, setUsers] = useRecoilState(userListState);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

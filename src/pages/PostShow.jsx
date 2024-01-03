@@ -13,10 +13,10 @@ import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
 import { useRecoilState } from 'recoil';
 
-// import { fetchPost } from '../lib/api/fetch';
-import { getUsers, fetchPost } from '../lib/api/post';
-import { allUsersState } from '../atoms/allUsersState';
+import { fetchPost } from '../lib/api/post';
+import { userListState } from '../atoms/userListState';
 import { CircularProgress } from '@mui/material';
+import { getUsers } from '../lib/api/user';
 
 
 
@@ -31,7 +31,7 @@ const PostShow = () => {
   const [post, setPost] = useState(null);
   const { id } = useParams();
 
-  const [users, setUsers] = useRecoilState(allUsersState);
+  const [users, setUsers] = useRecoilState(userListState);
 
   useEffect(() => {
     const fetchCurrentPost = async () => {
@@ -42,7 +42,7 @@ const PostShow = () => {
         const res = await fetchPost(id);
         setPost(res.data);
       } catch (e) {
-        console.log("エラーが発生しました" ,e)
+        console.log("エラーが発生しました", e)
       }
     }
     fetchCurrentPost();
@@ -71,7 +71,7 @@ const PostShow = () => {
             </div>
           </div>
           <h3 className='postShowBody'>{post.post_content}</h3>
-          <img src={post.image_url}  className='postImg'/>
+          <img src={post.image_url} className='postImg' />
           <div className="postShowIcons mt-4">
             <div className="PostIcon ">
               <button onClick={handleClickComment} disabled={isComment}>
@@ -84,8 +84,8 @@ const PostShow = () => {
               <span className="IconCount">2</span>
             </div>
             <div className="PostIcon">
-                <CiHeart className='postIconIcon' />
-                <span className='IconCount'>2</span>
+              <CiHeart className='postIconIcon' />
+              <span className='IconCount'>2</span>
             </div>
             <div className="PostIcon">
               <CiBookmark className='postIconIcon' />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { SiGnuprivacyguard } from "react-icons/si";
 import { Link, useNavigate } from 'react-router-dom';
-import { getUser, signUp } from '../lib/api/auth';
+import { signUp } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 import { useSetRecoilState } from 'recoil';
 import { isLoginState } from '../atoms/isLoginState';
@@ -20,18 +20,9 @@ const Signup = () => {
 
 
   useEffect(() => {
-    const f = async () => {
-      try {
-        const res = await getUser();
-        console.log(res);
-        if (res.data.isLogin) {
-          navigate("/home");
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    f();
+    if (Cookies.get("_access_token")) {
+      navigate("/home");
+    }
   }, [navigate]);
 
   const register = async (e) => {

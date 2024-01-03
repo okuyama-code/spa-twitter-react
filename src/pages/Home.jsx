@@ -5,13 +5,13 @@ import TimeLine from '../components/timeLine/TimeLine';
 import CommentModal from '../components/modal/CommentModal';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isCommentState } from '../atoms/isCommentState';
-import { allUsersState } from '../atoms/allUsersState';
-import { getUsers } from '../lib/api/post';
+import { userListState } from '../atoms/userListState';
+import { getUsers } from '../lib/api/user';
 
 const Home = () => {
   const isComment = useRecoilValue(isCommentState);
 
-  const [users, setUsers] = useRecoilState(allUsersState);
+  const [users, setUsers] = useRecoilState(userListState);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -37,11 +37,7 @@ const Home = () => {
         <TimeLine />
         {isComment && (<CommentModal />)}
       </div>
-
-
     </div>
-
-
   )
 }
 
