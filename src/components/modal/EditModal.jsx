@@ -6,7 +6,7 @@ import { isEditState } from '../../atoms/isEditState';
 
 
 
-const EditModal = () => {
+const EditModal = ( { user } ) => {
   const setIsEdit = useSetRecoilState(isEditState);
 
   const modalClose = () => {
@@ -29,8 +29,8 @@ const EditModal = () => {
         </div>
 
         <div className='edit_profile_img'>
-          <img src="/assets/suisu0.jpg" alt="" className='header_img' />
-          <img src="/assets/person/icon.png" alt="" className='icon_img' />
+          <img src={user.header_url} alt="" className='header_img' />
+          <img src={user.icon_url} alt="" className='icon_img' />
         </div>
 
         <form className='edit_form'>

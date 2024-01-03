@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Sidebar from '../components/Sidebar';
 import { FaLink } from "react-icons/fa6";
@@ -16,6 +16,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditState } from '../atoms/isEditState';
 import { isLoginState } from '../atoms/isLoginState';
+import { fetchUser } from '../lib/api/user';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -23,23 +25,40 @@ const Profile = () => {
   const isLogin = useRecoilValue(isLoginState);
   const [isEdit, setIsEdit] = useRecoilState(isEditState);
 
+  const [user, setUser] = useState(null);
+
   const { id } = useParams();
 
+
   // ここでfetchUserをする。
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await fetchUser(id);
+        console.log(res.data.user)
+        setUser(res.data.user);
+      } catch (e) {
+        console.log("エラーが発生しました", e)
+      }
+    }
+    loadUser();
+  }, [id])
 
   const handleClick = () => {
     setIsEdit(!isEdit);
   }
 
+  if (!isLogin) return <Page404 />
+
   return (
     <>
-      {isLogin ? (<div className="profile">
+      {user ? (<div className="profile">
         <Sidebar />
-        {isEdit && (<EditModal handleClick={handleClick} />)}
+        {isEdit && (<EditModal user={user} handleClick={handleClick} />)}
         <div className='profileRight'>
           <div className="profileCover">
-            <img src="/assets/person/suisu0.jpg" alt="" className='profileCoverImg'/>
-            <img src="/assets/person/icon.png" alt="" className='profileUserImg'/>
+            <img src={user.header_url} alt="" className='profileCoverImg'/>
+            <img src={user.icon_url} alt="" className='profileUserImg'/>
             <button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>
             {/* followボタンはここ */}
             {/* <button className='profilefollowButton'>follow</button>
@@ -48,8 +67,8 @@ const Profile = () => {
           </div>
 
           <div className="profileInfo">
-              <h4 className='profileInfoName'>Okuyama</h4>
-              <p className='profileInfoUsername'>@okuyama0121</p>
+              <h4 className='profileInfoName'>{user.name}</h4>
+              <p className='profileInfoUsername'>@{user.username}</p>
               <span className='profileInfoDesc'>千葉県在住。25歳。フッ軽です🏃23/3~8/8まで独学(500h)。23/8/9~HC。英語も学習中。ゴルフ、筋トレ、ランニング、ママさんバレー、将棋、カラオケ、登山、BBQ、フットサル。</span>
 
             <div className='profile_icons'>
@@ -91,7 +110,7 @@ const Profile = () => {
           </div>
         </div>
       </div>)
-      : <Page404 />}
+      : (<div className='loading'><CircularProgress color="inherit" /></div>)}
     </>
   )
 }
