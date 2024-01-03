@@ -35,8 +35,8 @@ const Profile = () => {
         {isEdit && (<EditModal handleClick={handleClick} />)}
         <div className='profileRight'>
           <div className="profileCover">
-            <img src="assets/suisu0.jpg" alt="" className='profileCoverImg'/>
-            <img src="assets/person/icon.png" alt="" className='profileUserImg'/>
+            <img src="/assets/person/suisu0.jpg" alt="" className='profileCoverImg'/>
+            <img src="/assets/person/icon.png" alt="" className='profileUserImg'/>
             <button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>
             {/* followボタンはここ */}
             {/* <button className='profilefollowButton'>follow</button>

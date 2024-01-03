@@ -33,7 +33,7 @@ function App() {
           <Route index element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="home" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="/users/:id" element={<Profile />} />
           {/* users/showページに飛ぶように */}
           {/* <Route path="profile" element={<Profile />} /> */}
           <Route path="followings" element={<Follow />} />

@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { getUsers } from "../lib/api/user";
 
 
-function usePostsData(searchTerm, page = 1) {
+function useTimeLineData(searchTerm, page = 1) {
   const [posts, setPosts] = useState([]);
 
   const [users, setUsers] = useRecoilState(userListState);
@@ -48,4 +48,4 @@ function usePostsData(searchTerm, page = 1) {
   return { posts, loading, error, users, totalPosts, perPage };
 }
 
-export default usePostsData;
+export default useTimeLineData;

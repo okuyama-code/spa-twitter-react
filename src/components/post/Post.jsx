@@ -43,7 +43,9 @@ const Post = ({ post }) => {
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
-              <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" className='postProfileImg' />
+              <Link to={`/users/${users.filter((user) => user.id === post.user_id)[0].id}`}>
+                <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" className='postProfileImg' />
+              </Link>
               <span className='postName text-xl font-bold'>
                 {users.filter((user) => user.id === post.user_id)[0].name}
               </span>

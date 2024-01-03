@@ -8,9 +8,9 @@ import SearchBar from '../searchBar/SearchBar';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import useURLSearchParam from "../../hooks/useURLSearchParams"
-import usePostsData from '../../hooks/usePostData';
 import Pagination from '../pagination/Pagination';
 import { CircularProgress } from '@mui/material';
+import useTimeLineData from '../../hooks/useTimeLineData';
 
 
 
@@ -40,7 +40,7 @@ const TimeLine = () => {
     users: fetchedUsers,
     totalPosts,
     perPage,
-  } = usePostsData(debouncedSearchTerm, currentPage);
+  } = useTimeLineData(debouncedSearchTerm, currentPage);
 
 
 
