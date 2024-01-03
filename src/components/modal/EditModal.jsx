@@ -52,16 +52,11 @@ const EditModal = ( { user, id } ) => {
   return (
     <>
       <div className='edit_modal'>
-        <div className='flex justify-between mt-1'>
-          <div className='flex'>
-            <button onClick={modalClose}>
-              <IoMdClose className='close_icon' />
-            </button>
-            <h2 className='edit_h2'>Edit Profile</h2>
-          </div>
-
-          <input type="submit" value="保存する"  className='editButton'></input>
-          {/* <button  className='editButton'>保存する</button> */}
+        <div className='flex m-1'>
+          <button onClick={modalClose}>
+            <IoMdClose className='close_icon' />
+          </button>
+          <h2 className='edit_h2'>Edit Profile</h2>
         </div>
 
         <div className='edit_profile_img'>
@@ -70,6 +65,7 @@ const EditModal = ( { user, id } ) => {
         </div>
 
         <form className='edit_form'>
+          <button type='submit'     className='modalSaveButton'>更新する</button>
           <input type="text" placeholder='お名前' />
           <textarea name="" id="" cols="70" rows="4" placeholder='自己紹介文'></textarea>
           <input type="text" placeholder='住んでいる場所' />
