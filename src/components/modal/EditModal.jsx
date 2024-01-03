@@ -37,11 +37,12 @@ const EditModal = ( { user, id } ) => {
       icon: rawData.icon, header: rawData.header
     }
 
-    const formData = objectToFormData({ post: sanitizedData })
+    const formData = objectToFormData({ user: sanitizedData })
 
     try {
-      const response = await updatePost(id, formData)
-      navigate(`/users/${response.id}`)
+      await updatePost(id, formData)
+      window.location.reload();
+
     } catch (e) {
       console.log(e);
     }
@@ -64,20 +65,96 @@ const EditModal = ( { user, id } ) => {
           <img src={user.icon_url} alt="" className='icon_img' />
         </div>
 
-        <form className='edit_form'>
+        <form
+          className='edit_form'
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleUpdateSubmit(formData);
+          }}
+        >
           <button type='submit'     className='modalSaveButton'>更新する</button>
-          <input type="text" placeholder='お名前' />
-          <textarea name="" id="" cols="70" rows="4" placeholder='自己紹介文'></textarea>
-          <input type="text" placeholder='住んでいる場所' />
-          <input type="text" placeholder='ウェブサイトURL'  />
-          <input type="text" placeholder='1998/01/21 (生年月日)'  />
+          <input
+            type="text"
+            placeholder='お名前'
+            value={formData.name}
+            onChange={(e) => {
+              setFormData({
+                ...formData, name: e.target.value
+              })
+            }}
+          />
+          <textarea
+            cols="70" rows="4"
+            placeholder='自己紹介文'
+            value={formData.self_introduction}
+            onChange={(e) => {
+              // console.log(e.target.value)
+              setFormData({
+                ...formData, self_introduction: e.target.value
+              })
+            }}
+          />
+          <input
+            type="text"
+            placeholder='住んでいる場所'
+            value={formData.location}
+            onChange={(e) => {
+              // console.log(e.target.value)
+              setFormData({
+                ...formData, location: e.target.value
+              })
+            }}
+          />
+          <input
+            type="text"
+            placeholder='ウェブサイトURL'
+            value={formData.website}
+            onChange={(e) => {
+              // console.log(e.target.value)
+              setFormData({
+                ...formData, website: e.target.value
+              })
+            }}
+          />
+          <input
+            type="text"
+            placeholder='1998/01/21 (生年月日)'
+            value={formData.date_of_birth}
+            onChange={(e) => {
+              // console.log(e.target.value)
+              setFormData({
+                ...formData, date_of_birth: e.target.value
+              })
+            }}
+          />
           <div>
             <label htmlFor="icon" className=' block mb-2'>アイコン画像</label>
-            <input type="file" name="icon" id="avatar" accept="image/*,.png,.jpg,.jpeg,.gif" />
+            <input
+              type="file"
+              name="icon"
+              id="avatar"
+              accept="image/*,.png,.jpg,.jpeg,.gif"
+              onChange={(e) => {
+                console.log(e.target.files[0]);
+                setFormData({
+                  ...formData,
+                  icon: e.target.files[0],
+                })
+              }}
+              />
           </div>
           <div>
             <label htmlFor="header" className=' block mb-2'>ヘッダー画像</label>
-            <input type="file" name="header" id="header" accept="image/*,.png,.jpg,.jpeg,.gif" className='input_last'/>
+            <input
+              type="file" name="header" id="header" accept="image/*,.png,.jpg,.jpeg,.gif" className='input_last'
+              onChange={(e) => {
+                console.log(e.target.files[0]);
+                setFormData({
+                  ...formData,
+                  header: e.target.files[0],
+                })
+              }}
+            />
           </div>
         </form>
       </div>
