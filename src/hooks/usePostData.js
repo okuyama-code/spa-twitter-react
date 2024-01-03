@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getPosts, getUsers } from "../lib/api/post";
-import { fetchAllPosts, searchPosts } from "../lib/api/fetch";
+import { fetchAllPosts, getUsers, searchPosts } from "../lib/api/post";
+// import { fetchAllPosts, searchPosts } from "../lib/api/fetch";
 import { allPostsState } from "../atoms/allPostsState";
 import { useRecoilState } from "recoil";
 import { getUser } from "../lib/api/auth";
@@ -37,10 +37,10 @@ function usePostsData(searchTerm, page = 1) {
           data = await fetchAllPosts(page);
         }
 
-        if (data.posts) {
-          setPosts(data.posts);
-          setTotalPosts(data.total_count)
-          setPerPage(data.per_page)
+        if (data.data.posts) {
+          setPosts(data.data.posts);
+          setTotalPosts(data.data.total_count)
+          setPerPage(data.data.per_page)
         }
         setLoading(false);
       } catch (e) {

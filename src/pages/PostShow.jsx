@@ -13,8 +13,8 @@ import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
 import { useRecoilState } from 'recoil';
 
-import { fetchPost } from '../lib/api/fetch';
-import { getUsers } from '../lib/api/post';
+// import { fetchPost } from '../lib/api/fetch';
+import { getUsers, fetchPost } from '../lib/api/post';
 import { allUsersState } from '../atoms/allUsersState';
 import { CircularProgress } from '@mui/material';
 
@@ -39,8 +39,8 @@ const PostShow = () => {
         const res2 = await getUsers();
         const allUsers = res2.data.users;
         setUsers(allUsers)
-        const json = await fetchPost(id);
-        setPost(json);
+        const res = await fetchPost(id);
+        setPost(res.data);
       } catch (e) {
         console.log("エラーが発生しました" ,e)
       }
