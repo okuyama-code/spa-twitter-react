@@ -43,8 +43,7 @@ const Post = ({ post }) => {
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
-              {/* TODO ここをあとで変数に変える */}
-              <img src="/assets/person/icon.png" alt="" className='postProfileImg' />
+              <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" className='postProfileImg' />
               <span className='postName text-xl font-bold'>
                 {users.filter((user) => user.id === post.user_id)[0].name}
               </span>

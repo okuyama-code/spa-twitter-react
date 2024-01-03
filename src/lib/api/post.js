@@ -29,6 +29,6 @@ export const getPosts = () => {
 }
 
 export const getUsers = () => {
-  return client.get("/user_all")
+  return client.get("/users")
 }
 

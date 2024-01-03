@@ -23,11 +23,14 @@ const Share = () => {
         "post_content": postContent
       }
       console.log(postContent);
-      await createPost(paramsPost);
+       // ここでpost.idが生まれる。それをイメージの添付処理に使う。
+       const res = await createPost(paramsPost);
       // もし画像のstateのdataが空文字じゃないならawait attachImageでエンドポイントを叩く。
       if (image.data !== "") {
         const paramsImage = {
-          "image": image
+          "image": image,
+          // ここで直前にpostの中にparams[:id]を込めることができる。POSTのときのparamsはURL上(これはGETのみ)ではなくformのinputタグから送られた奴になる。
+          "id": res.data.post.id
         }
         await imageAttach(paramsImage)
       }
