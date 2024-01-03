@@ -4,17 +4,17 @@ import { CiImageOn } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createPost, imageAttach } from '../../lib/api/post';
-// import { currentUserState } from '../../atoms/currentUserState';
-// import { useRecoilValue } from 'recoil';
-
-
+import { currentUserState } from '../../atoms/currentUserState';
+import { useRecoilValue } from 'recoil';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const Share = () => {
   const [postContent, setPostContent] = useState("");
   const [image, setImage] = useState({data: "", name: ""})
-  // const currentUser = useRecoilValue(currentUserState)
+  const currentUser = useRecoilValue(currentUserState);
   const navigate = useNavigate();
 
+  useCurrentUser();
 
   const PostSubmit = async (e) => {
     e.preventDefault();
@@ -66,10 +66,7 @@ const Share = () => {
       <div className="shareWrapper">
         <div className="shareTop">
           <Link to={{ pathname: "/profile" }}>
-            {/* TODO current_userのiconを表示 */}
-            <img src="/assets/person/icon.png" alt="" className='shareProfileImg'/>
-            {/* {currentUser.name} */}
-            {/* {currentUserId} */}
+            <img src={currentUser.icon_url} alt="" className='shareProfileImg'/>
           </Link>
           <input
             type="text"

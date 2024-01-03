@@ -8,10 +8,13 @@ import { isCommentState } from '../atoms/isCommentState';
 import { userListState } from '../atoms/userListState';
 import { getUsers } from '../lib/api/user';
 
+
+
 const Home = () => {
   const isComment = useRecoilValue(isCommentState);
 
   const [users, setUsers] = useRecoilState(userListState);
+
 
   useEffect(() => {
     const fetchUser = async () => {

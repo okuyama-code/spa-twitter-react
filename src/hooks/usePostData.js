@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { fetchAllPosts, searchPosts } from "../lib/api/post";
 import { userListState } from "../atoms/userListState";
 import { useRecoilState } from "recoil";
-import { getUser } from "../lib/api/auth";
-import { currentUserState } from "../atoms/currentUserState";
 import { getUsers } from "../lib/api/user";
 
 
 function usePostsData(searchTerm, page = 1) {
   const [posts, setPosts] = useState([]);
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+
   const [users, setUsers] = useRecoilState(userListState);
 
   const [loading, setLoading] = useState(true);
@@ -21,12 +19,8 @@ function usePostsData(searchTerm, page = 1) {
   useEffect(() => {
     async function loadPosts() {
       try {
-        const res = await getUser();
-        const currentUser = res.data.currentUserData;
-        setCurrentUser(currentUser);
-
-        const res2 = await getUsers();
-        const allUsers = res2.data.users;
+        const res = await getUsers();
+        const allUsers = res.data.users;
         setUsers(allUsers)
 
         let data;
@@ -51,7 +45,7 @@ function usePostsData(searchTerm, page = 1) {
     loadPosts();
   }, [searchTerm, page]);
 
-  return { posts, loading, error, currentUser, users, totalPosts, perPage };
+  return { posts, loading, error, users, totalPosts, perPage };
 }
 
 export default usePostsData;

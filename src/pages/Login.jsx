@@ -31,7 +31,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await signIn({ email, password });
-      console.log(res);
       Cookies.set("_access_token", res.headers["access-token"]);
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
