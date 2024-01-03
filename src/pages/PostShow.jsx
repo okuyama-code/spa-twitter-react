@@ -11,12 +11,15 @@ import { CiImageOn } from "react-icons/ci";
 import { Link, useParams } from 'react-router-dom';
 import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { fetchPost } from '../lib/api/post';
 import { userListState } from '../atoms/userListState';
 import { CircularProgress } from '@mui/material';
 import { getUsers } from '../lib/api/user';
+import { currentUserState } from '../atoms/currentUserState';
+import useCurrentUser from '../hooks/useCurrentUser';
+
 
 
 
@@ -32,6 +35,10 @@ const PostShow = () => {
   const { id } = useParams();
 
   const [users, setUsers] = useRecoilState(userListState);
+
+  const { currentUser } = useCurrentUser();
+
+  // const currentUser = useRecoilValue(currentUserState)
 
   useEffect(() => {
     const fetchCurrentPost = async () => {
@@ -64,7 +71,7 @@ const PostShow = () => {
             <h2>Post</h2>
           </div>
           <div className="postShowName">
-            <img src="/assets/person/icon.png" alt="" />
+            <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} />
             <div>
               <h2>{users.filter((user) => user.id === post.user_id)[0].name}</h2>
               <p>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
@@ -95,7 +102,7 @@ const PostShow = () => {
 
           <form className='postShowCommentForm'>
             <div className='flex items-center'>
-              <img src="/assets/person/icon.png" alt="" className='postShowCommentFormImg' />
+              <img src={currentUser.icon_url} alt="" className='postShowCommentFormImg' />
               <input type="text" className='postShowCommentFormInput' />
             </div>
             <div className='flex items-center justify-between ml-15 mr-5'>
@@ -107,7 +114,7 @@ const PostShow = () => {
         </div> {/* postShowWrapperの終わり  */}
         <div className="commentPostWrapper">
           <div className='commentPostInfo'>
-            <img src="/assets/person/minyon.jpeg" alt="" />
+            <img src={currentUser.icon_url} alt="" />
             <div>
               <div className='flex items-center'>
                 <h3>パクミニョン</h3>

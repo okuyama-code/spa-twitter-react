@@ -36,7 +36,6 @@ const TimeLine = () => {
     posts: fetchedPosts,
     loading,
     error,
-    // currentUser,
     users: fetchedUsers,
     totalPosts,
     perPage,

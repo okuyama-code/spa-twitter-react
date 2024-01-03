@@ -11,10 +11,11 @@ import useCurrentUser from '../../hooks/useCurrentUser';
 const Share = () => {
   const [postContent, setPostContent] = useState("");
   const [image, setImage] = useState({data: "", name: ""})
-  const currentUser = useRecoilValue(currentUserState);
+  // const currentUser = useRecoilValue(currentUserState);
   const navigate = useNavigate();
 
-  useCurrentUser();
+  const { currentUser } = useCurrentUser();
+
 
   const PostSubmit = async (e) => {
     e.preventDefault();

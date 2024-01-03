@@ -18,8 +18,9 @@ function useCurrentUser() {
       }
     }
     loadCurrentUser();
-    console.log(currentUser)
+    // console.log(currentUser)
   }, [])
+  return { currentUser }
 }
 
 export default useCurrentUser;

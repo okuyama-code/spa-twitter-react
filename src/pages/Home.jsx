@@ -13,9 +13,9 @@ import { currentUserState } from '../atoms/currentUserState';
 
 const Home = () => {
   const isComment = useRecoilValue(isCommentState);
-  const currentUser = useRecoilValue(currentUserState);
+  // const currentUser = useRecoilValue(currentUserState);
   useUserList();
-  useCurrentUser();
+  const { currentUser } = useCurrentUser();
   console.log(currentUser)
 
 
