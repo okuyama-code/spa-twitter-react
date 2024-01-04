@@ -33,4 +33,8 @@ export const fetchPost = (id) => {
   return client.get(`/posts/${id}`);
 }
 
+export const deletePost = (id) => {
+  return client.delete(`/posts/${id}`)
+}
+
 

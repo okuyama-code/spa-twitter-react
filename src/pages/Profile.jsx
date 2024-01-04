@@ -10,7 +10,6 @@ import EditModal from '../components/modal/EditModal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import 'react-tabs/style/react-tabs.css';
-import PostAll from '../components/profilePosts/PostAll';
 import CommentAll from '../components/profilePosts/CommentAll';
 import Page404 from './Page404';
 import { Link, useParams } from 'react-router-dom';
@@ -21,7 +20,7 @@ import { isLoginState } from '../atoms/isLoginState';
 import { fetchUser } from '../lib/api/user';
 import { CircularProgress } from '@mui/material';
 import useCurrentUser from '../hooks/useCurrentUser';
-import Post from '../components/post/Post';
+import ProfilePost from '../components/post/ProfilePost';
 
 
 
@@ -57,6 +56,8 @@ const Profile = () => {
   const handleClick = () => {
     setIsEdit(!isEdit);
   }
+
+
 
   if (!isLogin) return <Page404 />
 
@@ -110,7 +111,7 @@ const Profile = () => {
 
                 <TabPanel className="tabPanel">
                   {userPosts.map((post) => (
-                    <Post post={post} key={post. id} />))
+                    <ProfilePost post={post} key={post. id} currentUser={currentUser} />))
                   }
                 </TabPanel>
                 <TabPanel>
