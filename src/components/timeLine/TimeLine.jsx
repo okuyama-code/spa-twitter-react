@@ -15,6 +15,7 @@ import useTimeLineData from '../../hooks/useTimeLineData';
 
 
 const TimeLine = () => {
+
   // const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
@@ -41,6 +42,7 @@ const TimeLine = () => {
     perPage,
   } = useTimeLineData(debouncedSearchTerm, currentPage);
 
+  console.log(posts);
 
 
   useEffect(() => {

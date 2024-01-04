@@ -15,6 +15,13 @@ export const createPost = (params) => {
   });
 }
 
+export const createComment = (params) => {
+  return client.post("/comments", params, {
+    headers: authHeaders,
+  })
+}
+
+
 export const imageAttach = (params) => {
   return client.post("/images", params);
 }
@@ -36,5 +43,6 @@ export const fetchPost = (id) => {
 export const deletePost = (id) => {
   return client.delete(`/posts/${id}`)
 }
+
 
 

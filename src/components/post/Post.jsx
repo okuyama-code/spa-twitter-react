@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Post.scss";
 import { CiHeart } from "react-icons/ci";
 import { FaRegComment } from "react-icons/fa";
@@ -8,13 +8,17 @@ import { Link } from 'react-router-dom';
 import { isCommentState } from '../../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userListState } from '../../atoms/userListState';
+import CommentModal from '../modal/CommentModal';
 
 
 
 
 const Post = ({ post }) => {
+
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
+
+  console.log(post);
 
   const [isComment, setIsComment] = useRecoilState(isCommentState);
   const users = useRecoilValue(userListState);
@@ -38,6 +42,44 @@ const Post = ({ post }) => {
   return (
     <>
       <div className='post'>
+        {/* TODO 最後にわたってきたpostが渡ってしまう */}
+      {/* {isComment && (<CommentModal post={post}  />)} */}
+
+      {/* TODO コンポーネントに分けないで試してみる */}
+      {/* {isComment && (
+        <div className='comment_modal'>
+          <div className='comment_modal_header'>
+            <button onClick={modalClose}>
+              <IoMdClose className='close_icon' />
+            </button>
+          </div>
+
+          <div className='comment_modal_post'>
+            <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" />
+            <div className='ml-3'>
+              <div className='flex'>
+                <h3>{users.filter((user) => user.id === post.user_id)[0].name}</h3>
+                <p className='comment_modal_post_username'>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
+              </div>
+              <h3>{post.post_content}</h3>
+              <p className='replying_to'>Replying to <span>@{users.filter((user) => user.id === post.user_id)[0].username}</span></p>
+            </div>
+          </div>
+          <div className='comment_form'>
+            <img src={currentUser.icon_url} alt="" />
+            <form>
+              <textarea name="" id="" cols="60" rows="5" placeholder='Post your reply'></textarea>
+              <div className='flex items-center justify-between mx-4'>
+                <CiImageOn className='img_icon'/>
+                <button>返信</button>
+              </div>
+            </form>
+
+          </div>
+        </div>)
+        } */}
+
+
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
