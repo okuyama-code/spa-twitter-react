@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import "./Post.scss";
-import { CiHeart } from "react-icons/ci";
+import { CiHeart, CiImageOn } from "react-icons/ci";
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isCommentState } from '../../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userListState } from '../../atoms/userListState';
 import CommentModal from '../modal/CommentModal';
-
+import { toast } from 'react-toastify';
+import { createComment } from '../../lib/api/post';
+import { currentUserState } from '../../atoms/currentUserState';
+import { IoMdClose } from 'react-icons/io';
 
 
 
@@ -24,7 +27,10 @@ const Post = ({ post }) => {
   const users = useRecoilValue(userListState);
 
 
+
+
   const handleClickComment = () => {
+    navigate(`/posts/${post.id}`)
     setIsComment(!isComment);
   }
 
@@ -39,45 +45,38 @@ const Post = ({ post }) => {
     return date;
   }
 
+  // commentModal関係はここから
+  const navigate = useNavigate();
+  const [commentContent, setCommentContent] = useState("");
+  const currentUser = useRecoilValue(currentUserState);
+
+
+  const modalClose = () => {
+    setIsComment(false);
+  }
+
+  const CommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const paramsComment = {
+        "comment_content": commentContent,
+        "post_id": post.id
+      }
+      const res = await createComment(paramsComment);
+      setCommentContent("");
+      toast.success("コメントしました");
+      navigate("/")
+    } catch (e) {
+      console.log(e)
+      toast.error("コメントに失敗しました。")
+    }
+  }
+
   return (
     <>
       <div className='post'>
-        {/* TODO 最後にわたってきたpostが渡ってしまう */}
-      {/* {isComment && (<CommentModal post={post}  />)} */}
-
-      {/* TODO コンポーネントに分けないで試してみる */}
-      {/* {isComment && (
-        <div className='comment_modal'>
-          <div className='comment_modal_header'>
-            <button onClick={modalClose}>
-              <IoMdClose className='close_icon' />
-            </button>
-          </div>
-
-          <div className='comment_modal_post'>
-            <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" />
-            <div className='ml-3'>
-              <div className='flex'>
-                <h3>{users.filter((user) => user.id === post.user_id)[0].name}</h3>
-                <p className='comment_modal_post_username'>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
-              </div>
-              <h3>{post.post_content}</h3>
-              <p className='replying_to'>Replying to <span>@{users.filter((user) => user.id === post.user_id)[0].username}</span></p>
-            </div>
-          </div>
-          <div className='comment_form'>
-            <img src={currentUser.icon_url} alt="" />
-            <form>
-              <textarea name="" id="" cols="60" rows="5" placeholder='Post your reply'></textarea>
-              <div className='flex items-center justify-between mx-4'>
-                <CiImageOn className='img_icon'/>
-                <button>返信</button>
-              </div>
-            </form>
-
-          </div>
-        </div>)
-        } */}
+      {/* {isComment && (<CommentModal post={post} />)
+      } */}
 
 
         <div className="postWrapper">

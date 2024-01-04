@@ -61,7 +61,7 @@ const PostShow = () => {
   return (
     <div className='followPage'>
       <Sidebar />
-      {isComment && (<CommentModal />)}
+      {isComment && (<CommentModal post={post} id={id} />)}
       <div className='followContainer'>
         <div className='postShowWrapper'>
           <div className='postShowHeader'>

@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 
-const CommentModal = ( { post } ) => {
+const CommentModal = ( { post, id } ) => {
   const [commentContent, setCommentContent] = useState("");
 
   const setIsComment = useSetRecoilState(isCommentState);
@@ -28,12 +28,13 @@ const CommentModal = ( { post } ) => {
     try {
       const paramsComment = {
         "comment_content": commentContent,
-        "post_id": post.id
+        "post_id": id
       }
       const res = await createComment(paramsComment);
+      console.log(res)
       setCommentContent("");
       toast.success("コメントしました");
-      navigate("/")
+      // navigate("/")
     } catch (e) {
       console.log(e)
       toast.error("コメントに失敗しました。")
@@ -66,12 +67,18 @@ const CommentModal = ( { post } ) => {
       </div>
       <div className='comment_form'>
         <img src={currentUser.icon_url} alt="" />
+        {/* Form */}
         <form>
-          <textarea name="" id="" cols="60" rows="5" placeholder='Post your reply'></textarea>
+          <textarea cols="60" rows="5"
+            placeholder='Post your reply'
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
+          />
           <div className='flex items-center justify-between mx-4'>
             <CiImageOn className='img_icon'/>
-            {/* 返信ボタン */}
-            <button>返信</button>
+            <button
+              onClick={CommentSubmit}
+            >返信</button>
           </div>
         </form>
 
