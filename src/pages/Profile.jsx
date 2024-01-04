@@ -21,6 +21,7 @@ import { isLoginState } from '../atoms/isLoginState';
 import { fetchUser } from '../lib/api/user';
 import { CircularProgress } from '@mui/material';
 import useCurrentUser from '../hooks/useCurrentUser';
+import Post from '../components/post/Post';
 
 
 
@@ -28,9 +29,11 @@ const Profile = () => {
   const isLogin = useRecoilValue(isLoginState);
   const [isEdit, setIsEdit] = useRecoilState(isEditState);
 
-  const { currentUser} = useCurrentUser();
+  const { currentUser } = useCurrentUser();
 
   const [user, setUser] = useState(null);
+
+  const [userPosts, setUserPosts] = useState(null);
 
   const { id } = useParams();
 
@@ -40,8 +43,10 @@ const Profile = () => {
     const loadUser = async () => {
       try {
         const res = await fetchUser(id);
-        // console.log(res.data.user)
+        console.log(res.data)
+
         setUser(res.data.user);
+        setUserPosts(res.data.posts)
       } catch (e) {
         console.log("エラーが発生しました", e)
       }
@@ -104,7 +109,9 @@ const Profile = () => {
                 </TabList>
 
                 <TabPanel className="tabPanel">
-                  <PostAll />
+                  {userPosts.map((post) => (
+                    <Post post={post} key={post. id} />))
+                  }
                 </TabPanel>
                 <TabPanel>
                   <CommentAll />

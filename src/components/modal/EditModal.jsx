@@ -4,9 +4,10 @@ import { IoMdClose } from "react-icons/io";
 import { useSetRecoilState } from 'recoil';
 import { isEditState } from '../../atoms/isEditState';
 import { objectToFormData } from '../../utils/formDataHelper';
-import { updatePost } from '../../lib/api/user';
+import { updateUser } from '../../lib/api/user';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
+import { toast } from 'react-toastify';
 
 
 
@@ -40,9 +41,11 @@ const EditModal = ( { user, id } ) => {
     const formData = objectToFormData({ user: sanitizedData })
 
     try {
-      await updatePost(id, formData)
-      window.location.reload();
-
+      await updateUser(id, formData)
+      modalClose();
+      toast.success("ユーザー情報を編集しました")
+      navigate("/home");
+      // navigate(`/users/${id}`);
     } catch (e) {
       console.log(e);
     }
@@ -118,7 +121,7 @@ const EditModal = ( { user, id } ) => {
           />
           <input
             type="text"
-            placeholder='1998/01/21 (生年月日)'
+            placeholder='1990-05-09 (生年月日)'
             value={formData.date_of_birth}
             onChange={(e) => {
               // console.log(e.target.value)

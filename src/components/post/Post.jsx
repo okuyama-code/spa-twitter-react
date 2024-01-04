@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "./Post.scss";
-import { Users } from "../../dummyData";
 import { CiHeart } from "react-icons/ci";
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
@@ -9,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { isCommentState } from '../../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userListState } from '../../atoms/userListState';
-import { getUsers } from '../../lib/api/post';
 
 
 
@@ -19,7 +17,7 @@ const Post = ({ post }) => {
   // const user = Users.filter((user) => user.id === 1 );
 
   const [isComment, setIsComment] = useRecoilState(isCommentState);
-  const [users, setUsers] = useRecoilState(userListState);
+  const users = useRecoilValue(userListState);
 
 
   const handleClickComment = () => {
