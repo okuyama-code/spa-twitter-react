@@ -106,15 +106,13 @@ const Post = ({ post }) => {
             <button onClick={handleClickComment} disabled={isComment}>
               <FaRegComment className='postIconIcon' />
             </button>
-            <span className="IconCount">{post.comment}</span>
+            {/* <span className="IconCount">2</span> */}
           </div>
           <div className="PostIcon">
             <AiOutlineRetweet className='postIconIcon' />
-            <span className="IconCount">{post.comment}</span>
           </div>
           <div className="PostIcon">
             <CiHeart className='postIconIcon' />
-            <span className='IconCount'>{post.like}</span>
           </div>
           <div className="PostIcon">
             <CiBookmark className='postIconIcon' />

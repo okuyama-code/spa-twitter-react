@@ -13,7 +13,7 @@ import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { fetchPost } from '../lib/api/post';
+import { fetchComment, fetchPost } from '../lib/api/post';
 import { userListState } from '../atoms/userListState';
 import { CircularProgress } from '@mui/material';
 import { getUsers } from '../lib/api/user';
@@ -32,6 +32,7 @@ const PostShow = () => {
   }
 
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
   const { id } = useParams();
 
   const [users, setUsers] = useRecoilState(userListState);
@@ -48,6 +49,10 @@ const PostShow = () => {
         setUsers(allUsers)
         const res = await fetchPost(id);
         setPost(res.data);
+
+        const res3 = await fetchComment(id)
+        console.log(res3.data.post_comments)
+        setComments(res3.data.post_comments)
       } catch (e) {
         console.log("エラーが発生しました", e)
       }
@@ -84,7 +89,7 @@ const PostShow = () => {
               <button onClick={handleClickComment} disabled={isComment}>
                 <FaRegComment className='postIconIcon' />
               </button>
-              <span className="IconCount">2</span>
+              <span className="IconCount">{comments.length}</span>
             </div>
             <div className="PostIcon">
               <AiOutlineRetweet className='postIconIcon' />
@@ -112,39 +117,20 @@ const PostShow = () => {
           </form>
 
         </div> {/* postShowWrapperの終わり  */}
-        <div className="commentPostWrapper">
-          <div className='commentPostInfo'>
-            <img src={currentUser.icon_url} alt="" />
-            <div>
-              <div className='flex items-center'>
-                <h3>パクミニョン</h3>
-                <p>@minyon01</p>
+        {comments.map((comment) => (
+          <div className="commentPostWrapper">
+            <div className='commentPostInfo'>
+              <img src={users.filter((user) => user.id === comment.user_id)[0].icon_url} alt="" />
+              <div>
+                <div className='flex items-center'>
+                  <h3>{users.filter((user) => user.id === comment.user_id)[0].name}</h3>
+                  <p>@{users.filter((user) => user.id === comment.user_id)[0].username}</p>
+                </div>
+                <p>{comment.comment_content}</p>
               </div>
-              <p>ありがとうございます。</p>
             </div>
           </div>
-          <div className='flex'>
-            <FaRegComment className='commentToCommentIcon' />
-            <span className='commentToCommentIconNumber'>2</span>
-          </div>
-        </div>
-        <div className="commentPostWrapper">
-          <div className='commentPostInfo'>
-            <img src="/assets/person/minyon.jpeg" alt="" />
-            <div>
-              <div className='flex items-center'>
-                <h3>パクミニョン</h3>
-                <p>@minyon01</p>
-              </div>
-              <p>ありがとうございます。</p>
-            </div>
-          </div>
-          <div className='flex'>
-            <FaRegComment className='commentToCommentIcon' />
-            <span className='commentToCommentIconNumber'>2</span>
-          </div>
-        </div>
-
+        ))}
       </div>
     </div>
   )

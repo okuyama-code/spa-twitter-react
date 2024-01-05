@@ -40,9 +40,14 @@ export const fetchPost = (id) => {
   return client.get(`/posts/${id}`);
 }
 
+export const fetchComment = (post_id) => {
+  return client.get(`/posts/${post_id}/comments`)
+}
+
 export const deletePost = (id) => {
   return client.delete(`/posts/${id}`)
 }
+
 
 
 
