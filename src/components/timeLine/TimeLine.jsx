@@ -36,6 +36,7 @@ const TimeLine = () => {
   const initialPageFromURL = Number(searchParams.get("page") || "1");
   const [currentPage, setCurrentPage] = useState(initialPageFromURL);
 
+
   const {
     posts: fetchedPosts,
     loading,

@@ -47,11 +47,21 @@ export const fetchComment = (post_id) => {
 export const deletePost = (id) => {
   return client.delete(`/posts/${id}`)
 }
+
 export const deleteComment = (id) => {
   return client.delete(`/comments/${id}`)
 }
 
 
+export const createRepost = (post_id, params) => {
+  return client.post(`/posts/${post_id}/repost`, params
+  )
+}
+
+export const deleteRepost = (post_id, params) => {
+  return client.delete(`/posts/${post_id}/repost`, { data: params }
+  )
+}
 
 
 

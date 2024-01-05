@@ -31,6 +31,7 @@ function useTimeLineData(searchTerm, page = 1) {
         }
 
         if (data.data.posts) {
+          console.log(data.data)
           setPosts(data.data.posts);
           setTotalPosts(data.data.total_count)
           setPerPage(data.data.per_page)
@@ -45,7 +46,8 @@ function useTimeLineData(searchTerm, page = 1) {
     loadPosts();
   }, [searchTerm, page]);
 
-  return { posts, loading, error, users, totalPosts, perPage };
+  return { posts, loading, error, users, totalPosts, perPage,
+  };
 }
 
 export default useTimeLineData;

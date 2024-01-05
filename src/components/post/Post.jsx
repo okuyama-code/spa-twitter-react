@@ -10,9 +10,10 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { userListState } from '../../atoms/userListState';
 import CommentModal from '../modal/CommentModal';
 import { toast } from 'react-toastify';
-import { createComment } from '../../lib/api/post';
+import { createComment, createRepost, deleteRepost } from '../../lib/api/post';
 import { currentUserState } from '../../atoms/currentUserState';
 import { IoMdClose } from 'react-icons/io';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 
 
@@ -20,11 +21,12 @@ const Post = ({ post }) => {
 
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
+  const navigate = useNavigate();
 
   const [isComment, setIsComment] = useRecoilState(isCommentState);
   const users = useRecoilValue(userListState);
 
-
+  const [isRepost, setIsRepost] = useState(true)
 
 
   const handleClickComment = () => {
@@ -43,32 +45,38 @@ const Post = ({ post }) => {
     return date;
   }
 
-  // commentModal関係はここから
-  const navigate = useNavigate();
-  const [commentContent, setCommentContent] = useState("");
-  const currentUser = useRecoilValue(currentUserState);
+  const { currentUser } = useCurrentUser();
 
-
-  const modalClose = () => {
-    setIsComment(false);
-  }
-
-  const CommentSubmit = async (e) => {
-    e.preventDefault();
+  const handleClickRepostDelete = async (post_id) => {
     try {
-      const paramsComment = {
-        "comment_content": commentContent,
-        "post_id": post.id
+      // もしrepostがされてなかったら(false)
+      const params = {
+        "id": currentUser.id
       }
-      const res = await createComment(paramsComment);
-      setCommentContent("");
-      toast.success("コメントしました");
-      navigate("/")
+      const res = await deleteRepost(post_id, params)
+      setIsRepost(!isRepost)
+      // window.location.reload();
+      toast.error("リポストを外しました")
+
     } catch (e) {
-      console.log(e)
-      toast.error("コメントに失敗しました。")
+      console.log(e);
     }
   }
+  const handleClickRepostCreate = async (post_id) => {
+    try {
+      // もしrepostがされてなかったら(false)
+      const params = {
+        "id": currentUser.id
+      }
+      const res = await createRepost(post_id, params)
+      setIsRepost(!isRepost)
+      // window.location.reload();
+      toast.success("リポストしました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 
   return (
     <>
@@ -106,9 +114,20 @@ const Post = ({ post }) => {
             </button>
             {/* <span className="IconCount">2</span> */}
           </div>
-          <div className="PostIcon">
-            <AiOutlineRetweet className='postIconIcon' />
-          </div>
+          {/* TODOここ */}
+
+            {isRepost ? (<div className="PostIcon">
+            <button onClick={() => handleClickRepostDelete(post.id)}>
+              <AiOutlineRetweet className='postIconIcon icon_repost' />
+            </button>
+            <span className="IconCount">{post.post_repost_count}</span>
+            </div>)
+          : (<div className="PostIcon">
+              <button onClick={() => handleClickRepostCreate(post.id)}>
+                <AiOutlineRetweet className='postIconIcon' />
+              </button>
+              <span className="IconCount">{post.post_repost_count}</span>
+            </div>)}
           <div className="PostIcon">
             <CiHeart className='postIconIcon' />
           </div>
