@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { SiGnuprivacyguard } from "react-icons/si";
 import { Link, useNavigate } from 'react-router-dom';
-import { getUser, signUp } from '../lib/api/auth';
+import { signUp } from '../lib/api/auth';
 import Cookies from 'js-cookie';
 import { useSetRecoilState } from 'recoil';
 import { isLoginState } from '../atoms/isLoginState';
@@ -20,18 +20,9 @@ const Signup = () => {
 
 
   useEffect(() => {
-    const f = async () => {
-      try {
-        const res = await getUser();
-        console.log(res);
-        if (res.data.isLogin) {
-          navigate("/");
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    f();
+    if (Cookies.get("_access_token")) {
+      navigate("/home");
+    }
   }, [navigate]);
 
   const register = async (e) => {
@@ -43,7 +34,7 @@ const Signup = () => {
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"));
       toast.success("新規登録に成功しました");
-      navigate("/");
+      navigate('/home');
     } catch (e) {
       console.log(e);
       console.log(e.response.data.errors.fullMessages);
@@ -67,8 +58,8 @@ const Signup = () => {
             <form className='mt-12'>
               <div className='mb-3'>
                 <input
-                  type="name"
-                  placeholder='okuyama'
+                  type="text"
+                  placeholder='okuyama (名前)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -76,8 +67,8 @@ const Signup = () => {
               </div>
               <div className='mb-3'>
                 <input
-                  type="username"
-                  placeholder='okuyama01'
+                  type="text"
+                  placeholder='okuyama01 (ユーザーネーム)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -86,7 +77,7 @@ const Signup = () => {
               <div className='mb-3'>
                 <input
                   type="email"
-                  placeholder='you@gmail.com'
+                  placeholder='you@gmail.com (メールアドレス)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -95,7 +86,7 @@ const Signup = () => {
               <div className='mb-5'>
                 <input
                   type="password"
-                  placeholder='パスワード'
+                  placeholder='パスワード (6文字以上)'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

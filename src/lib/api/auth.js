@@ -1,6 +1,12 @@
 import Cookies from "js-cookie";
 import client from "./client";
 
+const authHeaders = {
+  "access-token": Cookies.get("_access_token"),
+  client: Cookies.get("_client"),
+  uid: Cookies.get("_uid"),
+};
+
 export const signUp = (params) => {
   return client.post("/users", params);
 };
@@ -17,10 +23,6 @@ export const getUser = () => {
   )
     return;
   return client.get("/sign_in", {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    },
+    headers: authHeaders,
   });
 };

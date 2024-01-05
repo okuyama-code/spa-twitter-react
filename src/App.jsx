@@ -30,17 +30,22 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="Login" element={<Login />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="home" element={<Home />} />
+          <Route path="/users/:id" element={<Profile />} />
+          {/* users/showページに飛ぶように */}
+          {/* <Route path="profile" element={<Profile />} /> */}
           <Route path="followings" element={<Follow />} />
           <Route path="messages" element={<Messages />} />
           <Route path="messagebox" element={<MessageBox />} />
           <Route path="notifications" element={<Notification
           />} />
-          <Route path="postShow" element={<PostShow
+          <Route path="/posts/:id" element={<PostShow
           />} />
+          {/* tweet詳細ページにとぶように修正 */}
+          {/* <Route path="postShow" element={<PostShow
+          />} /> */}
           <Route path="*" element={<Page404
           />} />
         </Routes>

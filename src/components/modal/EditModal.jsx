@@ -37,8 +37,16 @@ const EditModal = () => {
           <input type="text" placeholder='お名前' />
           <textarea name="" id="" cols="70" rows="4" placeholder='自己紹介文'></textarea>
           <input type="text" placeholder='住んでいる場所' />
-          <input type="text" placeholder='ウェブサイト'  />
-          <input type="text" placeholder='1998/01/21' className='input_last' />
+          <input type="text" placeholder='ウェブサイトURL'  />
+          <input type="text" placeholder='1998/01/21 (生年月日)'  />
+          <div>
+            <label htmlFor="icon" className=' block mb-2'>アイコン画像</label>
+            <input type="file" name="icon" id="avatar" accept="image/*,.png,.jpg,.jpeg,.gif" />
+          </div>
+          <div>
+            <label htmlFor="header" className=' block mb-2'>ヘッダー画像</label>
+            <input type="file" name="header" id="header" accept="image/*,.png,.jpg,.jpeg,.gif" className='input_last'/>
+          </div>
         </form>
       </div>
     </>

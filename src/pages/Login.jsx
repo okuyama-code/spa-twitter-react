@@ -19,29 +19,23 @@ const Login = () => {
 
 
   useEffect(() => {
-    const f = async () => {
-      try {
-        const res = await getUser();
-        if (res.data.isLogin) {
-          navigate("/");
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    f();
+
+    if (Cookies.get("_access_token")) {
+      navigate("/home");
+    }
+
+
   }, [navigate]);
 
   const login = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       const res = await signIn({ email, password });
-      console.log(res);
       Cookies.set("_access_token", res.headers["access-token"]);
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"))
-      navigate('/login');
+      navigate('/home');
       toast.success("ログインに成功しました");
     } catch (e) {
       console.log(e);
@@ -57,7 +51,7 @@ const Login = () => {
         <div className='flex justify-center mt-20'>
           <div className='w-9/12 border border-gray-200 rounded-xl login_bg_opacity'>
           <div class="my-16 text-center">
-          <Link to="/" className='signup_link'>
+          <Link to="/home" className='signup_link'>
             <p className='mb-2'>ホーム画面に戻る</p>
           </Link>
 
@@ -65,7 +59,7 @@ const Login = () => {
             <form className='mt-12'>
               <div className='mb-3'>
                 <input
-                  type="email"
+                  type="text"
                   placeholder='you@gmail.com'
                   className='text-xl w-7/12 p-3 border rounded'
                   value={email}
