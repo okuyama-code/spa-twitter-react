@@ -21,8 +21,6 @@ const Post = ({ post }) => {
   // Usersは配列なので一つ一つfilterで取り出す必要がある。
   // const user = Users.filter((user) => user.id === 1 );
 
-  console.log(post);
-
   const [isComment, setIsComment] = useRecoilState(isCommentState);
   const users = useRecoilValue(userListState);
 

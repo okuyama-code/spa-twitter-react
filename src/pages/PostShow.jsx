@@ -8,12 +8,12 @@ import { CiHeart } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 
 import { CiImageOn } from "react-icons/ci";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { fetchComment, fetchPost } from '../lib/api/post';
+import { deleteComment, fetchComment, fetchPost } from '../lib/api/post';
 import { userListState } from '../atoms/userListState';
 import { CircularProgress } from '@mui/material';
 import { getUsers } from '../lib/api/user';
@@ -39,7 +39,8 @@ const PostShow = () => {
 
   const { currentUser } = useCurrentUser();
 
-  // const currentUser = useRecoilValue(currentUserState)
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCurrentPost = async () => {
@@ -59,6 +60,17 @@ const PostShow = () => {
     }
     fetchCurrentPost();
   }, [id])
+
+  const deleteCommentHandler = async (comment) => {
+    try {
+      await deleteComment(comment.id);
+      // 特定のidに一致しない投稿のみを残す
+      // 関数内でtrueが返ってきたもののみを抽出
+      navigate("/home")
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   if (!post) return <div className='loading'><CircularProgress color="inherit" /></div>
 
@@ -125,6 +137,14 @@ const PostShow = () => {
                 <div className='flex items-center'>
                   <h3>{users.filter((user) => user.id === comment.user_id)[0].name}</h3>
                   <p>@{users.filter((user) => user.id === comment.user_id)[0].username}</p>
+                  {currentUser.id == users.filter((user) => user.id === comment.user_id)[0].id && (
+                    <button
+                    className='commentDelete'
+                    onClick={() => deleteCommentHandler(comment)}
+                  >
+                    削除
+                  </button>
+                  )}
                 </div>
                 <p>{comment.comment_content}</p>
               </div>

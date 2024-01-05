@@ -30,11 +30,10 @@ const CommentModal = ( { post, id } ) => {
         "comment_content": commentContent,
         "post_id": id
       }
-      const res = await createComment(paramsComment);
-      console.log(res)
+      await createComment(paramsComment);
       setCommentContent("");
       toast.success("コメントしました");
-      // navigate("/")
+      navigate("/")
     } catch (e) {
       console.log(e)
       toast.error("コメントに失敗しました。")

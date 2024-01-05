@@ -21,6 +21,7 @@ import { fetchUser } from '../lib/api/user';
 import { CircularProgress } from '@mui/material';
 import useCurrentUser from '../hooks/useCurrentUser';
 import ProfilePost from '../components/post/ProfilePost';
+import ProfileComments from '../components/post/ProfileComments';
 
 
 
@@ -31,8 +32,8 @@ const Profile = () => {
   const { currentUser } = useCurrentUser();
 
   const [user, setUser] = useState(null);
-
   const [userPosts, setUserPosts] = useState(null);
+  const [userComments, setUserComments] = useState(null);
 
   const { id } = useParams();
 
@@ -46,6 +47,7 @@ const Profile = () => {
 
         setUser(res.data.user);
         setUserPosts(res.data.posts)
+        setUserComments(res.data.user_comments)
       } catch (e) {
         console.log("エラーが発生しました", e)
       }
@@ -115,7 +117,9 @@ const Profile = () => {
                   }
                 </TabPanel>
                 <TabPanel>
-                  <CommentAll />
+                {userComments.map((post) => (
+                    <ProfileComments post={post} key={post. id} currentUser={currentUser} />))
+                  }
                 </TabPanel>
 
               </Tabs>

@@ -47,6 +47,11 @@ export const fetchComment = (post_id) => {
 export const deletePost = (id) => {
   return client.delete(`/posts/${id}`)
 }
+export const deleteComment = (id) => {
+  return client.delete(`/comments/${id}`)
+}
+
+
 
 
 

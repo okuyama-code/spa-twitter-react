@@ -45,7 +45,6 @@ const TimeLine = () => {
     perPage,
   } = useTimeLineData(debouncedSearchTerm, currentPage);
 
-  console.log(posts);
 
 
   useEffect(() => {

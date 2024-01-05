@@ -583,6 +583,22 @@ html {
   }
 }
 
+.commentDelete {
+  margin-left: 30px;
+  border: 1px solid black;
+  padding: 2px 5px;
+  border-radius: 5px;
+  background-color: rgb(214, 98, 98);
+
+  &:hover {
+    transition: 0.2s;
+    opacity: 0.7;
+  }
+}
+
+
+// =========== NotFound page ================
+
 .NotfoundWrapper {
   text-align: center;
   height: 100vh;
