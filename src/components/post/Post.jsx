@@ -116,8 +116,6 @@ const Post = ({ post }) => {
       <div className='post'>
       {/* {isComment && (<CommentModal post={post} />)
       } */}
-
-
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">

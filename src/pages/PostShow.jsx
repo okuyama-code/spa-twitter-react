@@ -90,7 +90,9 @@ const PostShow = () => {
           <div className="postShowName">
             <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} />
             <div>
-              <h2>{users.filter((user) => user.id === post.user_id)[0].name}</h2>
+              <Link to={{ pathname: `/users/${users.filter((user) => user.id === post.user_id)[0].id} `}}>
+                <h2>{users.filter((user) => user.id === post.user_id)[0].name}</h2>
+              </Link>
               <p>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
             </div>
           </div>

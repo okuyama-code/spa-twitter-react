@@ -17,11 +17,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditState } from '../atoms/isEditState';
 import { isLoginState } from '../atoms/isLoginState';
-import { fetchUser } from '../lib/api/user';
+import { fetchUser, followUser, unfollowUser } from '../lib/api/user';
 import { CircularProgress } from '@mui/material';
 import useCurrentUser from '../hooks/useCurrentUser';
 import ProfilePost from '../components/post/ProfilePost';
 import ProfileComments from '../components/post/ProfileComments';
+import { toast } from 'react-toastify';
 
 
 
@@ -59,6 +60,36 @@ const Profile = () => {
     setIsEdit(!isEdit);
   }
 
+  const [isfollowed, setIsfollowed] = useState(false)
+
+
+  const handleClickUnfollow = async (user_id) => {
+    try {
+      const params = {
+        "id": currentUser.id
+      }
+      await unfollowUser(user_id, params)
+      setIsfollowed(!isfollowed)
+      toast.error("フォローを外しました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleClickFollow = async (user_id) => {
+    try {
+      const params = {
+        "id": currentUser.id
+      }
+      await followUser(user_id, params)
+      setIsfollowed(true)
+      toast.success("フォローしました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
 
 
   if (!isLogin) return <Page404 />
@@ -75,9 +106,17 @@ const Profile = () => {
             {currentUser.id == id && (<button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>)}
 
             {/* followボタンはここ */}
-            {/* <button className='profilefollowButton'>follow</button>
-            <button className='profileUnfollowButton'>follow解除</button> */}
-            {/* ここまで */}
+            {currentUser.id != id && (<div>
+             { isfollowed ? ( <button
+                onClick={() => handleClickUnfollow(user.id)}
+                className='profileUnfollowButton'>follow解除</button>)
+                : (<button
+                  onClick={() => handleClickFollow(user.id)}
+                  className='profilefollowButton'>follow</button>)
+            }
+            </div>) }
+
+
           </div>
 
           <div className="profileInfo">
