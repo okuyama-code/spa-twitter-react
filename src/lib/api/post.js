@@ -63,6 +63,14 @@ export const deleteRepost = (post_id, params) => {
   )
 }
 
+export const createLike = (post_id, params) => {
+  return client.post(`/posts/${post_id}/likes`, params
+  )
+}
 
+export const deleteLike = (post_id, params) => {
+  return client.delete(`/posts/${post_id}/likes`, { data: params }
+  )
+}
 
 

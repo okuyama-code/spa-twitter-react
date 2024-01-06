@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Post.scss";
 import { CiHeart, CiImageOn } from "react-icons/ci";
-import { FaRegComment } from "react-icons/fa";
+import { FaRegComment, FaHeart } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { userListState } from '../../atoms/userListState';
 import CommentModal from '../modal/CommentModal';
 import { toast } from 'react-toastify';
-import { createComment, createRepost, deleteRepost } from '../../lib/api/post';
+import { createComment, createLike, createRepost, deleteLike, deleteRepost } from '../../lib/api/post';
 import { currentUserState } from '../../atoms/currentUserState';
 import { IoMdClose } from 'react-icons/io';
 import useCurrentUser from '../../hooks/useCurrentUser';
@@ -26,7 +26,8 @@ const Post = ({ post }) => {
   const [isComment, setIsComment] = useRecoilState(isCommentState);
   const users = useRecoilValue(userListState);
 
-  const [isRepost, setIsRepost] = useState(true)
+  const [isRepost, setIsRepost] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
 
 
   const handleClickComment = () => {
@@ -62,6 +63,7 @@ const Post = ({ post }) => {
       console.log(e);
     }
   }
+
   const handleClickRepostCreate = async (post_id) => {
     try {
       // もしrepostがされてなかったら(false)
@@ -72,6 +74,37 @@ const Post = ({ post }) => {
       setIsRepost(!isRepost)
       // window.location.reload();
       toast.success("リポストしました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleClickLikeDelete = async (post_id) => {
+    try {
+      // もしrepostがされてなかったら(false)
+      const params = {
+        "id": currentUser.id
+      }
+      await deleteLike(post_id, params)
+      setIsLiked(!isLiked)
+      // window.location.reload();
+      toast.error("いいねを外しました")
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleClickLikeCreate = async (post_id) => {
+    try {
+      // もしrepostがされてなかったら(false)
+      const params = {
+        "id": currentUser.id
+      }
+      await createLike(post_id, params)
+      setIsLiked(!isLiked)
+      // window.location.reload();
+      toast.success("いいねしました")
     } catch (e) {
       console.log(e);
     }
@@ -114,8 +147,7 @@ const Post = ({ post }) => {
             </button>
             {/* <span className="IconCount">2</span> */}
           </div>
-          {/* TODOここ */}
-
+          {/* repostボタン */}
             {isRepost ? (<div className="PostIcon">
             <button onClick={() => handleClickRepostDelete(post.id)}>
               <AiOutlineRetweet className='postIconIcon icon_repost' />
@@ -128,9 +160,24 @@ const Post = ({ post }) => {
               </button>
               <span className="IconCount">{post.post_repost_count}</span>
             </div>)}
-          <div className="PostIcon">
-            <CiHeart className='postIconIcon' />
-          </div>
+
+          {/* Likeボタン */}
+          {isLiked
+          ? (<div className="PostIcon">
+              <button onClick={() => handleClickLikeDelete(post.id)}>
+                <FaHeart className='postIconIcon icon_repost' />
+              </button>
+              <span className="IconCount">{post.post_like_count}</span>
+            </div>)
+          : (<div className="PostIcon">
+              <button onClick={() => handleClickLikeCreate(post.id)}>
+                <CiHeart className='postIconIcon' />
+              </button>
+              <span className="IconCount">{post.post_like_count}</span>
+            </div>)
+          }
+
+
           <div className="PostIcon">
             <CiBookmark className='postIconIcon' />
             <span className="IconCount">{post.comment}</span>
