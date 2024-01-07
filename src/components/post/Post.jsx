@@ -129,6 +129,9 @@ const Post = ({ post }) => {
                 @{users.filter((user) => user.id === post.user_id)[0].username}
               </span>
               <span className="postDate">{handleToDate(post.created_at)}</span>
+              <span className="postDate">
+                ID: {users.filter((user) => user.id === post.user_id)[0].id}
+              </span>
             </div>
           </div>
         </div>
