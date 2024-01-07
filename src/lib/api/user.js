@@ -1,11 +1,20 @@
+import Cookies from "js-cookie";
 import client from "./client"
+
 
 export const getUsers = () => {
   return client.get("/users")
 }
 
+// ログアウトしてログインしなおしたらcurrent_userが取れた。不思議な挙動をするときがあるので注意
 export const fetchUser = (id) => {
-  return client.get(`/users/${id}`)
+  return client.get(`/users/${id}`, {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    }
+  })
 }
 
 export const updateUser = (id, postData) => {
