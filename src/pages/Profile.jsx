@@ -23,6 +23,7 @@ import useCurrentUser from '../hooks/useCurrentUser';
 import ProfilePost from '../components/post/ProfilePost';
 import ProfileComments from '../components/post/ProfileComments';
 import { toast } from 'react-toastify';
+import { createGroupe } from '../lib/api/others';
 
 
 
@@ -89,6 +90,19 @@ const Profile = () => {
     }
   }
 
+  const handleClickMessage = async () => {
+    try {
+      const params = {
+        // "id": currentUser.id
+        "user_id": id
+      }
+      await createGroupe(params);
+      toast.success("DMのグループをしました")
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
 
 
 
@@ -115,6 +129,13 @@ const Profile = () => {
                   className='profilefollowButton'>follow</button>)
             }
             </div>) }
+
+            <button
+              onClick={() => handleClickMessage()}
+              className='profileMessageButton'
+            >
+              メッセージを送る
+            </button>
 
 
           </div>
