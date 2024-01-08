@@ -15,8 +15,6 @@ const Groups = () => {
     async function loadGroups() {
       try {
         const res = await fetchGroups();
-        console.log(res.data);
-        console.log(res.data.another_entries);
         setAnother_entries(res.data.another_entries)
       } catch (e) {
         console.log(e);
@@ -44,7 +42,7 @@ const Groups = () => {
                   <Link to={{ pathname: `/users/${another_entriy.user_id}` }}>
                   <img src="assets/person/iu01.jpeg" alt="" className='messages_icon' />
                   </Link>
-                  <Link to={{ pathname: `/groups/1` }}>
+                  <Link to={{ pathname: `/groups/${another_entriy.group_id}` }}>
                   <div>
                     <div className='messages_name'>
                       <h2>{users.filter((user) => user.id == another_entriy.user_id)[0].name}</h2>

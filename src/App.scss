@@ -323,7 +323,7 @@ html {
   }
 }
 
-// ============== message ====================
+// ============== group ====================
 .message_header {
   h2 {
     padding: 10px;
@@ -379,7 +379,7 @@ html {
   border-radius: 50%;
 }
 
-//============= messageBox ===================
+//============= GroupDetail ===================
 
 .message-box-header {
   display: flex;
@@ -436,6 +436,28 @@ html {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+}
+
+.messageForm {
+  input {
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 3px;
+    background-color: rgb(138, 229, 138);
+
+  }
+
+  button {
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(139, 221, 139);
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 
