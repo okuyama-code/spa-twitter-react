@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { FaArrowLeft } from "react-icons/fa6";
 
 
-const MessageBox = () => {
+const GroupDetail = () => {
   return (
     <div className='followPage'>
       <Sidebar />
       <div className='followContainer'>
         {/* ============= DMの文章部分 ==================  */}
         <div class="message-box-header">
-        <Link to={{ pathname: "/messages" }}><p className='following_header'><FaArrowLeft /></p></Link>
+        <Link to={{ pathname: "/groups" }}><p className='following_header'><FaArrowLeft /></p></Link>
           <h3>山田 花子</h3>
 
         </div>
@@ -57,4 +57,4 @@ const MessageBox = () => {
   )
 }
 
-export default MessageBox
+export default GroupDetail

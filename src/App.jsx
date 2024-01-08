@@ -7,8 +7,7 @@ import { RecoilRoot } from 'recoil';
 import Login from './pages/Login';
 import Follow from './pages/Follow';
 import Home from './pages/Home';
-import MessageBox from './pages/MessageBox';
-import Messages from './pages/Messages';
+
 import Notification from './pages/Notification';
 import PostShow from './pages/PostShow';
 import Signup from './pages/Signup';
@@ -17,6 +16,8 @@ import Page404 from './pages/Page404';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GroupDetail from './pages/GroupDetail';
+import Groups from './pages/Groups';
 
 function App() {
 
@@ -34,18 +35,13 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="home" element={<Home />} />
           <Route path="/users/:id" element={<Profile />} />
-          {/* users/showページに飛ぶように */}
-          {/* <Route path="profile" element={<Profile />} /> */}
           <Route path="followings" element={<Follow />} />
-          <Route path="messages" element={<Messages />} />
-          <Route path="messagebox" element={<MessageBox />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/groups/:id" element={<GroupDetail />} />
           <Route path="notifications" element={<Notification
           />} />
           <Route path="/posts/:id" element={<PostShow
           />} />
-          {/* tweet詳細ページにとぶように修正 */}
-          {/* <Route path="postShow" element={<PostShow
-          />} /> */}
           <Route path="*" element={<Page404
           />} />
         </Routes>
