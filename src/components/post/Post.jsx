@@ -10,7 +10,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { userListState } from '../../atoms/userListState';
 import CommentModal from '../modal/CommentModal';
 import { toast } from 'react-toastify';
-import { createComment, createLike, createRepost, deleteLike, deleteRepost } from '../../lib/api/post';
+import { createBookmark, createComment, createLike, createRepost, deleteBookmark, deleteLike, deleteRepost } from '../../lib/api/post';
 import { currentUserState } from '../../atoms/currentUserState';
 import { IoMdClose } from 'react-icons/io';
 import useCurrentUser from '../../hooks/useCurrentUser';
@@ -28,6 +28,7 @@ const Post = ({ post }) => {
 
   const [isRepost, setIsRepost] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
+  const [isBookmark, setIsBookmark] = useState(false)
 
 
   const handleClickComment = () => {
@@ -110,6 +111,36 @@ const Post = ({ post }) => {
     }
   }
 
+  const handleClickBookmarkDelete = async (post_id) => {
+    try {
+      // もしrepostがされてなかったら(false)
+      const params = {
+        "id": currentUser.id
+      }
+      await deleteBookmark(post_id, params)
+      setIsBookmark(!isBookmark)
+      // window.location.reload();
+      toast.error("ブックマークを外しました")
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleClickBookmarkCreate = async (post_id) => {
+    try {
+      const params = {
+        "id": currentUser.id
+      }
+      await createBookmark(post_id, params)
+      setIsBookmark(!isBookmark)
+      // window.location.reload();
+      toast.success("ブックマークしました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 
   return (
     <>
@@ -178,11 +209,21 @@ const Post = ({ post }) => {
             </div>)
           }
 
+          {isBookmark
+            ? (<div className="PostIcon">
+                <button onClick={() => handleClickBookmarkDelete(post.id)}>
+                  <CiBookmark className='postIconIcon icon_repost' />
+                </button>
+                <span className="IconCount">{post.post_like_count}</span>
+              </div>)
+            : (<div className="PostIcon">
+                <button onClick={() => handleClickBookmarkCreate(post.id)}>
+                  <CiBookmark className='postIconIcon' />
+                </button>
+                <span className="IconCount">{post.post_like_count}</span>
+              </div>)
+          }
 
-          <div className="PostIcon">
-            <CiBookmark className='postIconIcon' />
-            <span className="IconCount">{post.comment}</span>
-          </div>
         </div>
       </div>
     </>
