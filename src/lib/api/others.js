@@ -35,12 +35,16 @@ export const createGroupe = (params) => {
   })
 }
 
-export const createMessage = (group_id) => {
-  return client.post(`/groups/${group_id}/messages`, {
+export const createMessage = (group_id, params) => {
+  return client.post(`/groups/${group_id}/messages`, params, {
     headers: {
       "access-token": Cookies.get("_access_token"),
       client: Cookies.get("_client"),
       uid: Cookies.get("_uid"),
     }
   })
+}
+
+export const fetchMessages = (group_id) => {
+  return client.get(`/groups/${group_id}/messages`)
 }

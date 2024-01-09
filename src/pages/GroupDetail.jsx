@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeft } from "react-icons/fa6";
-import { fetchGroup } from '../lib/api/others';
+import { createMessage, fetchGroup, fetchMessages } from '../lib/api/others';
 import useUserList from '../hooks/useUserList';
 import useCurrentUser from '../hooks/useCurrentUser';
+import { toast } from 'react-toastify';
 
 
 const GroupDetail = () => {
@@ -22,14 +23,37 @@ const GroupDetail = () => {
       try {
         const res = await fetchGroup(id)
         setAnother_entry(res.data.another_entry)
-        setMessages(res.data.messages)
-        console.log(res.data)
+        // console.log(res.data)
+
+        const res2 = await fetchMessages(id)
+        setMessages(res2.data.messages)
+        console.log(res2.data.messages)
+
       } catch (e) {
         console.log(e)
       }
     }
     loadFetchGroup();
   }, [id])
+
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const MessageSubmit = async (id) => {
+    try {
+      const paramsMessage = {
+        "body": message
+      }
+      await createMessage(id, paramsMessage);
+      setMessage("");
+      toast.success("メッセージを送信しました");
+      navigate("/groups")
+    } catch (e) {
+      console.log(e);
+      toast.error(" メッセージの送信に失敗しました。")
+
+    }
+  }
 
   return (
     <div className='followPage'>
@@ -46,51 +70,44 @@ const GroupDetail = () => {
             <form className='messageForm'>
               <input
                 type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
-              <button>送信</button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  MessageSubmit(id);
+                }}
+              >送信</button>
             </form>
           </div>
 
           {/* メッセージ本文 */}
-          {another_entry.user_id == messages.user_id && (<div>相手の投稿</div>)
-          }
-          <div class="message-box-body">
-            {/* if文で投稿が自分なら */}
-            <div class="message-box-body-info">
-              <div class="blank-div"></div>
-              <p>(自分)<br />お疲れ様です！今度イルミネーション行きませんか？？？</p>
+          {messages.map((message) => (
+            <div>
+              <div>
+                {/* if文で投稿が自分なら */}
+                {currentUser.id == message.user_id && (
+                  <div class="message-box-body-info">
+                    <div class="blank-div"></div>
+                      <p>{message.body}</p>
+                  </div>
+                )}
+
+                {/* else文 投稿が自分以外なら */}
+                {another_entry.user_id == message.user_id && (
+                  <div class="message-box-body-info">
+                  <p>{message.body}</p>
+                    <div class="blank-div"></div>
+                </div>
+                )
+                }
+
+              </div>
+
             </div>
-            {/* else文 投稿が自分以外なら */}
-            {another_entry.user_id == messages.user_id && (<div>相手の投稿</div>)
-          }
-            <div class="message-box-body-info-other">
-              <p>(相手)<br />結構です！普通ご飯から誘うと思うんだけど。</p>
-              <div class="blank-div"></div>
-            </div>
-            {/* end  */}
-            {/* if文で投稿が自分なら  */}
-            <div class="message-box-body-info">
-              <div class="blank-div"></div>
-              <p>(自分)<br />じゃあご飯行きましょうよ！！</p>
-            </div>
-            {/* else文 投稿が自分以外なら */}
-            <div class="message-box-body-info-other">
-              <p>(相手)<br />考えておきます！(お前みたいなチャラい奴と行くわけないだろ。早くどっかいけ！)</p>
-              <div class="blank-div"></div>
-            </div>
-            {/* end */}
-            {/* if文で投稿が自分なら  */}
-            <div class="message-box-body-info">
-              <div class="blank-div"></div>
-              <p>(自分)<br />来月とか空いてる日ありますか？</p>
-            </div>
-            {/* else文 投稿が自分以外なら */}
-            <div class="message-box-body-info-other">
-              <p>(相手)<br />既読</p>
-              <div class="blank-div"></div>
-            </div>
-            {/* end */}
-          </div>
+          ))}
+
         </div>
       )}
     </div>

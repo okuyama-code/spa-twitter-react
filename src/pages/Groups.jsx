@@ -40,7 +40,7 @@ const Groups = () => {
               <div className='messages_list'>
                 <div className='flex items-center'>
                   <Link to={{ pathname: `/users/${another_entriy.user_id}` }}>
-                  <img src="assets/person/iu01.jpeg" alt="" className='messages_icon' />
+                  <img src={users.filter((user) => user.id == another_entriy.user_id)[0].icon_url} alt="" className='messages_icon' />
                   </Link>
                   <Link to={{ pathname: `/groups/${another_entriy.group_id}` }}>
                   <div>
@@ -48,8 +48,7 @@ const Groups = () => {
                       <h2>{users.filter((user) => user.id == another_entriy.user_id)[0].name}</h2>
                       <p>@{users.filter((user) => user.id == another_entriy.user_id)[0].username}</p>
                     </div>
-                    {/* TODO showページに移動　メッセージのMessage.lastを表示させる */}
-                    <p className='messages_page_body'>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                   
                   </div>
                   </Link>
                 </div>

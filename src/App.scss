@@ -369,7 +369,9 @@ html {
 }
 
 .messages_lists {
-  margin: 10px;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .messages_icon {
@@ -418,11 +420,12 @@ html {
 }
 
 .message-box-body-info p {
-  background-color: rgb(56, 55, 55);
+  background-color: rgb(122, 118, 118);
   border: 1px solid beige;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 10px 40px 10px;
+  color: #ececec;
 }
 
 .message-box-body-info-other {
