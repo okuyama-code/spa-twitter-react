@@ -15,6 +15,13 @@ export const createPost = (params) => {
   });
 }
 
+export const createComment = (params) => {
+  return client.post("/comments", params, {
+    headers: authHeaders,
+  })
+}
+
+
 export const imageAttach = (params) => {
   return client.post("/images", params);
 }
@@ -31,6 +38,39 @@ export const searchPosts = (query, page=1) => {
 
 export const fetchPost = (id) => {
   return client.get(`/posts/${id}`);
+}
+
+export const fetchComment = (post_id) => {
+  return client.get(`/posts/${post_id}/comments`)
+}
+
+export const deletePost = (id) => {
+  return client.delete(`/posts/${id}`)
+}
+
+export const deleteComment = (id) => {
+  return client.delete(`/comments/${id}`)
+}
+
+
+export const createRepost = (post_id, params) => {
+  return client.post(`/posts/${post_id}/repost`, params
+  )
+}
+
+export const deleteRepost = (post_id, params) => {
+  return client.delete(`/posts/${post_id}/repost`, { data: params }
+  )
+}
+
+export const createLike = (post_id, params) => {
+  return client.post(`/posts/${post_id}/likes`, params
+  )
+}
+
+export const deleteLike = (post_id, params) => {
+  return client.delete(`/posts/${post_id}/likes`, { data: params }
+  )
 }
 
 

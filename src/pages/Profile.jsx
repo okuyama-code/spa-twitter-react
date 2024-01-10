@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Sidebar from '../components/Sidebar';
 import { FaLink } from "react-icons/fa6";
 import { FaBirthdayCake } from "react-icons/fa";
+import { CiLocationOn } from "react-icons/ci";
+
 import EditModal from '../components/modal/EditModal';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import 'react-tabs/style/react-tabs.css';
-import PostAll from '../components/profilePosts/PostAll';
 import CommentAll from '../components/profilePosts/CommentAll';
 import Page404 from './Page404';
 import { Link, useParams } from 'react-router-dom';
@@ -16,6 +17,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isEditState } from '../atoms/isEditState';
 import { isLoginState } from '../atoms/isLoginState';
+import { fetchUser, followUser, unfollowUser } from '../lib/api/user';
+import { CircularProgress } from '@mui/material';
+import useCurrentUser from '../hooks/useCurrentUser';
+import ProfilePost from '../components/post/ProfilePost';
+import ProfileComments from '../components/post/ProfileComments';
+import { toast } from 'react-toastify';
 
 
 
@@ -23,48 +30,113 @@ const Profile = () => {
   const isLogin = useRecoilValue(isLoginState);
   const [isEdit, setIsEdit] = useRecoilState(isEditState);
 
+  const { currentUser } = useCurrentUser();
+
+  const [user, setUser] = useState(null);
+  const [userPosts, setUserPosts] = useState(null);
+  const [userComments, setUserComments] = useState(null);
+
   const { id } = useParams();
 
+
   // ここでfetchUserをする。
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await fetchUser(id);
+        console.log(res.data)
+
+        setUser(res.data.user);
+        setUserPosts(res.data.posts)
+        setUserComments(res.data.user_comments)
+      } catch (e) {
+        console.log("エラーが発生しました", e)
+      }
+    }
+    loadUser();
+  }, [id])
 
   const handleClick = () => {
     setIsEdit(!isEdit);
   }
 
+  const [isfollowed, setIsfollowed] = useState(false)
+
+
+  const handleClickUnfollow = async (user_id) => {
+    try {
+      const params = {
+        "id": currentUser.id
+      }
+      await unfollowUser(user_id, params)
+      setIsfollowed(!isfollowed)
+      toast.error("フォローを外しました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleClickFollow = async (user_id) => {
+    try {
+      const params = {
+        "id": currentUser.id
+      }
+      await followUser(user_id, params)
+      setIsfollowed(true)
+      toast.success("フォローしました")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+
+
+  if (!isLogin) return <Page404 />
+
   return (
     <>
-      {isLogin ? (<div className="profile">
+      {user ? (<div className="profile">
         <Sidebar />
-        {isEdit && (<EditModal handleClick={handleClick} />)}
+        {isEdit && (<EditModal user={user} id={id} handleClick={handleClick} />)}
         <div className='profileRight'>
           <div className="profileCover">
-            <img src="/assets/person/suisu0.jpg" alt="" className='profileCoverImg'/>
-            <img src="/assets/person/icon.png" alt="" className='profileUserImg'/>
-            <button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>
+            <img src={user.header_url} alt="" className='profileCoverImg'/>
+            <img src={user.icon_url} alt="" className='profileUserImg'/>
+            {currentUser.id == id && (<button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>)}
+
             {/* followボタンはここ */}
-            {/* <button className='profilefollowButton'>follow</button>
-            <button className='profileUnfollowButton'>follow解除</button> */}
-            {/* ここまで */}
+            {currentUser.id != id && (<div>
+             { isfollowed ? ( <button
+                onClick={() => handleClickUnfollow(user.id)}
+                className='profileUnfollowButton'>follow解除</button>)
+                : (<button
+                  onClick={() => handleClickFollow(user.id)}
+                  className='profilefollowButton'>follow</button>)
+            }
+            </div>) }
+
+
           </div>
 
           <div className="profileInfo">
-              <h4 className='profileInfoName'>Okuyama</h4>
-              <p className='profileInfoUsername'>@okuyama0121</p>
-              <span className='profileInfoDesc'>千葉県在住。25歳。フッ軽です🏃23/3~8/8まで独学(500h)。23/8/9~HC。英語も学習中。ゴルフ、筋トレ、ランニング、ママさんバレー、将棋、カラオケ、登山、BBQ、フットサル。</span>
+              <h4 className='profileInfoName'>{user.name}</h4>
+              <p className='profileInfoUsername'>@{user.username}</p>
+              <span className='profileInfoDesc'>{user.self_introduction}</span>
 
             <div className='profile_icons'>
               <div className='profile_icon'>
                 <FaLink />
-                <span className='profile_icon_link'><a  href='https://okucode-portfolio-site.vercel.app/' rel="noopener noreferrer" target="_blank" >https://okucode-portfolio-site.vercel.app/</a></span>
+                <span className='profile_icon_link'><a  href={user.website} rel="noopener noreferrer" target="_blank" >{user.website}</a></span>
               </div>
               <div className='profile_icon2'>
                 <FaBirthdayCake />
-                <span>Born January 21, 1998</span>
+                <span>{user.date_of_birth}</span>
               </div>
             </div>
               <div className='profile_icon3'>
-              <FaBirthdayCake />
-              <span>Born January 21, 1998</span>
+              <CiLocationOn />
+              <span>{user.location}</span>
             </div>
 
             <div className='follow_profile'>
@@ -79,10 +151,14 @@ const Profile = () => {
                 </TabList>
 
                 <TabPanel className="tabPanel">
-                  <PostAll />
+                  {userPosts.map((post) => (
+                    <ProfilePost post={post} key={post. id} currentUser={currentUser} />))
+                  }
                 </TabPanel>
                 <TabPanel>
-                  <CommentAll />
+                {userComments.map((post) => (
+                    <ProfileComments post={post} key={post. id} currentUser={currentUser} />))
+                  }
                 </TabPanel>
 
               </Tabs>
@@ -91,7 +167,7 @@ const Profile = () => {
           </div>
         </div>
       </div>)
-      : <Page404 />}
+      : (<div className='loading'><CircularProgress color="inherit" /></div>)}
     </>
   )
 }

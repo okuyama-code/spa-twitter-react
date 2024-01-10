@@ -111,6 +111,7 @@
 
 
 
+
 // =========== commentModal ====================
 .comment_modal {
   position: fixed;
@@ -153,7 +154,7 @@
       margin-top: 10px;
       color: rgb(196, 193, 193);
       span {
-        color: rgb(26, 26, 223);
+        color: rgb(9, 17, 152);
       }
     }
   }
@@ -194,7 +195,7 @@
         border: 3px solid white;
         background: blue;
         border-radius: 10px;
-        padding: 2px 10px 6px 10px;
+        padding: 4px 15px 6px 15px;
         font-weight: bold;
 
         &:hover {

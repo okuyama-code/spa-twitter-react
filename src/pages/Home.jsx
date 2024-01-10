@@ -2,28 +2,19 @@ import React from 'react'
 import Sidebar from '../components/Sidebar';
 import TimeLine from '../components/timeLine/TimeLine';
 
-import CommentModal from '../components/modal/CommentModal';
-import { useRecoilValue } from 'recoil';
-import { isCommentState } from '../atoms/isCommentState';
 import useUserList from '../hooks/useUserList';
 
 
 
+
 const Home = () => {
-  const isComment = useRecoilValue(isCommentState);
-
-
   useUserList();
 
   return (
     <div>
       <div className='homeContainer'>
-        {/* {currentUser.name}
-        {currentUser.email}
-        {currentUser.email} */}
         <Sidebar />
         <TimeLine />
-        {isComment && (<CommentModal />)}
       </div>
     </div>
   )

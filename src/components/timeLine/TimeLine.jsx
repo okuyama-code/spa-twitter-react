@@ -11,10 +11,14 @@ import useURLSearchParam from "../../hooks/useURLSearchParams"
 import Pagination from '../pagination/Pagination';
 import { CircularProgress } from '@mui/material';
 import useTimeLineData from '../../hooks/useTimeLineData';
+import CommentModal from '../modal/CommentModal';
+import { isCommentState } from '../../atoms/isCommentState';
+import { useRecoilState } from 'recoil';
 
 
 
 const TimeLine = () => {
+
   // const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
@@ -32,11 +36,11 @@ const TimeLine = () => {
   const initialPageFromURL = Number(searchParams.get("page") || "1");
   const [currentPage, setCurrentPage] = useState(initialPageFromURL);
 
+
   const {
     posts: fetchedPosts,
     loading,
     error,
-    // currentUser,
     users: fetchedUsers,
     totalPosts,
     perPage,
@@ -77,6 +81,8 @@ const TimeLine = () => {
     setSearchParams({ search: debouncedSearchTerm, page: page});
   }
 
+  const [isComment, setIsComment] = useRecoilState(isCommentState);
+
   return (
     <div className='timeLine'>
       <Share />
@@ -96,8 +102,15 @@ const TimeLine = () => {
       {error && (<p>Error loading posts.(投稿の読み込み中にエラーが発生しました。)</p>)}
 
       {posts.map((post) => (
-        <Post post={post} key={post.id} />
+        <div>
+          <Post post={post} key={post.id} />
+        </div>
+
       ))}
+
+
+
+
 
     </div>
   )

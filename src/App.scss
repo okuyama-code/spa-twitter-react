@@ -149,6 +149,20 @@ html {
   top: 170px;
 }
 
+.modalSaveButton {
+  position: absolute;
+  right: 40px;
+  top: 10px;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  &:hover {
+    transition: 0.2s;
+    background: rgb(115, 115, 211);
+  }
+}
+
 .profileEditButton {
   position: absolute;
   right: 40px;
@@ -156,11 +170,28 @@ html {
   border: 1px solid black;
   padding: 5px;
   border-radius: 5px;
+  &:hover {
+    transition: 0.2s;
+    background: rgb(170, 170, 225);
+  }
+}
+
+.deleteBtn {
+  margin-left: 30px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgb(214, 98, 98);
+
+  &:hover {
+    transition: 0.2s;
+    opacity: 0.7;
+  }
 }
 
 .profilefollowButton {
   position: absolute;
-  right: 150px;
+  right: 220px;
   top: 270px;
   border: 1px solid black;
   padding: 5px;
@@ -242,11 +273,6 @@ html {
   .tablist {
     background: rgb(107, 103, 103, 0.8);
     text-align: center;
-
-    h2 {
-      padding: 2px 5px;
-      // margin-right: 10px;
-    }
   }
 
   .tabPanel {
@@ -556,6 +582,22 @@ html {
     margin-right: 15px;
   }
 }
+
+.commentDelete {
+  margin-left: 30px;
+  border: 1px solid black;
+  padding: 2px 5px;
+  border-radius: 5px;
+  background-color: rgb(214, 98, 98);
+
+  &:hover {
+    transition: 0.2s;
+    opacity: 0.7;
+  }
+}
+
+
+// =========== NotFound page ================
 
 .NotfoundWrapper {
   text-align: center;

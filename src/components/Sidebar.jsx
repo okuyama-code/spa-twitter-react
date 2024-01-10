@@ -16,12 +16,13 @@ import { isLoginState } from '../atoms/isLoginState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { currentUserState } from '../atoms/currentUserState';
+import useCurrentUser from '../hooks/useCurrentUser';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const setIsLogin = useSetRecoilState(isLoginState);
 
-  const currentUser = useRecoilValue(currentUserState)
+  const { currentUser } = useCurrentUser();
 
   const logout = (e) => {
     e.preventDefault()
@@ -59,13 +60,12 @@ const Sidebar = () => {
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>DM</span>
           </li>
         </Link>
-        <Link to={{ pathname: `/users/${currentUser.id} `}}>
+        {currentUser && (<Link to={{ pathname: `/users/${currentUser.id} `}}>
           <li className='flex items-center mb-3 sidebar_items'>
             <IoPersonSharp size={40} className='mx-2 mb-3' />
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>プロフィール</span>
           </li>
-        </Link>
-        {/* onClickでセッションを消す処理をできるように */}
+        </Link>)}
         <li className='sidebar_items'>
           <button onClick={logout}>
             <div className='flex items-center mb-3'>

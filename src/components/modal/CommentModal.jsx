@@ -1,16 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { CiImageOn } from "react-icons/ci";
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isCommentState } from '../../atoms/isCommentState';
+import { userListState } from '../../atoms/userListState';
+import { currentUserState } from '../../atoms/currentUserState';
+import { createComment } from '../../lib/api/post';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
-const CommentModal = () => {
+const CommentModal = ( { post, id } ) => {
+  const [commentContent, setCommentContent] = useState("");
+
   const setIsComment = useSetRecoilState(isCommentState);
+
+  const users = useRecoilValue(userListState);
+  const currentUser = useRecoilValue(currentUserState);
+  const navigate = useNavigate();
 
   const modalClose = () => {
     setIsComment(false);
   }
+
+  const CommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const paramsComment = {
+        "comment_content": commentContent,
+        "post_id": id
+      }
+      await createComment(paramsComment);
+      setCommentContent("");
+      toast.success("コメントしました");
+      navigate("/")
+    } catch (e) {
+      console.log(e)
+      toast.error("コメントに失敗しました。")
+    }
+  }
+
+  // console.log(post)
+  // console.log(currentUser)
+  // console.log(post.id)
+  // console.log(users)
 
   return (
     <div className='comment_modal'>
@@ -21,25 +54,30 @@ const CommentModal = () => {
       </div>
 
       <div className='comment_modal_post'>
-        <img src="/assets/person/minyon.jpeg" alt="" />
+        <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" />
         <div className='ml-3'>
           <div className='flex'>
-            <h3>パク・ミニョン</h3>
-            <p className='comment_modal_post_username'>@minyon01</p>
+            <h3>{users.filter((user) => user.id === post.user_id)[0].name}</h3>
+            <p className='comment_modal_post_username'>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
           </div>
-          <h3>返信したい投稿の内容です。難しいかもしれないが頑張ろう。<br />
-          返信したい投稿の内容です。難しいかもしれないが頑張ろう。
-          </h3>
-          <p className='replying_to'>Replying to <span>@minyon01</span></p>
+          <h3>{post.post_content}</h3>
+          <p className='replying_to'>Replying to <span>@{users.filter((user) => user.id === post.user_id)[0].username}</span></p>
         </div>
       </div>
       <div className='comment_form'>
-        <img src="/assets/person/icon.png" alt="" />
+        <img src={currentUser.icon_url} alt="" />
+        {/* Form */}
         <form>
-          <textarea name="" id="" cols="60" rows="5" placeholder='Post your reply'></textarea>
+          <textarea cols="60" rows="5"
+            placeholder='Post your reply'
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
+          />
           <div className='flex items-center justify-between mx-4'>
             <CiImageOn className='img_icon'/>
-            <button >Reply</button>
+            <button
+              onClick={CommentSubmit}
+            >返信</button>
           </div>
         </form>
 

@@ -8,15 +8,18 @@ import { CiHeart } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 
 import { CiImageOn } from "react-icons/ci";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import CommentModal from '../components/modal/CommentModal';
 import { isCommentState } from '../atoms/isCommentState';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { fetchPost } from '../lib/api/post';
+import { deleteComment, fetchComment, fetchPost } from '../lib/api/post';
 import { userListState } from '../atoms/userListState';
 import { CircularProgress } from '@mui/material';
 import { getUsers } from '../lib/api/user';
+import { currentUserState } from '../atoms/currentUserState';
+import useCurrentUser from '../hooks/useCurrentUser';
+
 
 
 
@@ -29,9 +32,15 @@ const PostShow = () => {
   }
 
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
   const { id } = useParams();
 
   const [users, setUsers] = useRecoilState(userListState);
+
+  const { currentUser } = useCurrentUser();
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCurrentPost = async () => {
@@ -41,6 +50,10 @@ const PostShow = () => {
         setUsers(allUsers)
         const res = await fetchPost(id);
         setPost(res.data);
+
+        const res3 = await fetchComment(id)
+        console.log(res3.data.post_comments)
+        setComments(res3.data.post_comments)
       } catch (e) {
         console.log("エラーが発生しました", e)
       }
@@ -48,13 +61,24 @@ const PostShow = () => {
     fetchCurrentPost();
   }, [id])
 
+  const deleteCommentHandler = async (comment) => {
+    try {
+      await deleteComment(comment.id);
+      // 特定のidに一致しない投稿のみを残す
+      // 関数内でtrueが返ってきたもののみを抽出
+      navigate("/home")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   if (!post) return <div className='loading'><CircularProgress color="inherit" /></div>
 
 
   return (
     <div className='followPage'>
       <Sidebar />
-      {isComment && (<CommentModal />)}
+      {isComment && (<CommentModal post={post} id={id} />)}
       <div className='followContainer'>
         <div className='postShowWrapper'>
           <div className='postShowHeader'>
@@ -64,9 +88,11 @@ const PostShow = () => {
             <h2>Post</h2>
           </div>
           <div className="postShowName">
-            <img src="/assets/person/icon.png" alt="" />
+            <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} />
             <div>
-              <h2>{users.filter((user) => user.id === post.user_id)[0].name}</h2>
+              <Link to={{ pathname: `/users/${users.filter((user) => user.id === post.user_id)[0].id} `}}>
+                <h2>{users.filter((user) => user.id === post.user_id)[0].name}</h2>
+              </Link>
               <p>@{users.filter((user) => user.id === post.user_id)[0].username}</p>
             </div>
           </div>
@@ -77,7 +103,7 @@ const PostShow = () => {
               <button onClick={handleClickComment} disabled={isComment}>
                 <FaRegComment className='postIconIcon' />
               </button>
-              <span className="IconCount">2</span>
+              <span className="IconCount">{comments.length}</span>
             </div>
             <div className="PostIcon">
               <AiOutlineRetweet className='postIconIcon' />
@@ -95,7 +121,7 @@ const PostShow = () => {
 
           <form className='postShowCommentForm'>
             <div className='flex items-center'>
-              <img src="/assets/person/icon.png" alt="" className='postShowCommentFormImg' />
+              <img src={currentUser.icon_url} alt="" className='postShowCommentFormImg' />
               <input type="text" className='postShowCommentFormInput' />
             </div>
             <div className='flex items-center justify-between ml-15 mr-5'>
@@ -105,39 +131,28 @@ const PostShow = () => {
           </form>
 
         </div> {/* postShowWrapperの終わり  */}
-        <div className="commentPostWrapper">
-          <div className='commentPostInfo'>
-            <img src="/assets/person/minyon.jpeg" alt="" />
-            <div>
-              <div className='flex items-center'>
-                <h3>パクミニョン</h3>
-                <p>@minyon01</p>
+        {comments.map((comment) => (
+          <div className="commentPostWrapper">
+            <div className='commentPostInfo'>
+              <img src={users.filter((user) => user.id === comment.user_id)[0].icon_url} alt="" />
+              <div>
+                <div className='flex items-center'>
+                  <h3>{users.filter((user) => user.id === comment.user_id)[0].name}</h3>
+                  <p>@{users.filter((user) => user.id === comment.user_id)[0].username}</p>
+                  {currentUser.id == users.filter((user) => user.id === comment.user_id)[0].id && (
+                    <button
+                    className='commentDelete'
+                    onClick={() => deleteCommentHandler(comment)}
+                  >
+                    削除
+                  </button>
+                  )}
+                </div>
+                <p>{comment.comment_content}</p>
               </div>
-              <p>ありがとうございます。</p>
             </div>
           </div>
-          <div className='flex'>
-            <FaRegComment className='commentToCommentIcon' />
-            <span className='commentToCommentIconNumber'>2</span>
-          </div>
-        </div>
-        <div className="commentPostWrapper">
-          <div className='commentPostInfo'>
-            <img src="/assets/person/minyon.jpeg" alt="" />
-            <div>
-              <div className='flex items-center'>
-                <h3>パクミニョン</h3>
-                <p>@minyon01</p>
-              </div>
-              <p>ありがとうございます。</p>
-            </div>
-          </div>
-          <div className='flex'>
-            <FaRegComment className='commentToCommentIcon' />
-            <span className='commentToCommentIconNumber'>2</span>
-          </div>
-        </div>
-
+        ))}
       </div>
     </div>
   )

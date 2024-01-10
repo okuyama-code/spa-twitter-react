@@ -11,10 +11,11 @@ import useCurrentUser from '../../hooks/useCurrentUser';
 const Share = () => {
   const [postContent, setPostContent] = useState("");
   const [image, setImage] = useState({data: "", name: ""})
-  const currentUser = useRecoilValue(currentUserState);
+  // const currentUser = useRecoilValue(currentUserState);
   const navigate = useNavigate();
 
-  useCurrentUser();
+  const { currentUser } = useCurrentUser();
+
 
   const PostSubmit = async (e) => {
     e.preventDefault();
@@ -65,9 +66,9 @@ const Share = () => {
     <div className='share'>
       <div className="shareWrapper">
         <div className="shareTop">
-          <Link to={{ pathname: `/users/${currentUser.id}` }}>
+          {currentUser ? (<Link to={{ pathname: `/users/${currentUser.id}` }}>
             <img src={currentUser.icon_url} alt="" className='shareProfileImg'/>
-          </Link>
+          </Link>) : (<img src="/assets/person/default.png" alt="" className='shareProfileImg'/>)}
           <input
             type="text"
             name="tweet_content"

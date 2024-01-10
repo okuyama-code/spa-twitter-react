@@ -18,13 +18,14 @@ const Login = () => {
 
 
 
-  useEffect(() => {
 
+
+  useEffect(() => {
     if (Cookies.get("_access_token")) {
       navigate("/home");
+      window.location.reload();
+
     }
-
-
   }, [navigate]);
 
   const login = async (e) => {
@@ -35,8 +36,9 @@ const Login = () => {
       Cookies.set("_client", res.headers["client"]);
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"))
-      navigate('/home');
-      toast.success("ログインに成功しました");
+
+      navigate('/signup');
+      // toast.success("ログインに成功しました");
     } catch (e) {
       console.log(e);
       console.log(e.response.data.errors[0]);

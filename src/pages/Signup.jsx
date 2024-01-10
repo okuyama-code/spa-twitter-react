@@ -22,6 +22,7 @@ const Signup = () => {
   useEffect(() => {
     if (Cookies.get("_access_token")) {
       navigate("/home");
+      window.location.reload();
     }
   }, [navigate]);
 
@@ -34,7 +35,7 @@ const Signup = () => {
       Cookies.set("_uid", res.headers["uid"]);
       setIsLogin(Cookies.get("_access_token"));
       toast.success("新規登録に成功しました");
-      navigate('/home');
+      navigate('/');
     } catch (e) {
       console.log(e);
       console.log(e.response.data.errors.fullMessages);
