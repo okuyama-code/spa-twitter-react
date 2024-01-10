@@ -28,3 +28,7 @@ export const followUser = (user_id, params) => {
 export const unfollowUser = (user_id, params) => {
   return client.post(`/users/${user_id}/unfollow`,  params)
 }
+
+export const Withdrawal = (params) => {
+  return client.post('/current_user/destroy',params)
+}
