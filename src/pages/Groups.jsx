@@ -48,7 +48,7 @@ const Groups = () => {
                       <h2>{users.filter((user) => user.id == another_entriy.user_id)[0].name}</h2>
                       <p>@{users.filter((user) => user.id == another_entriy.user_id)[0].username}</p>
                     </div>
-                   
+
                   </div>
                   </Link>
                 </div>
@@ -60,10 +60,6 @@ const Groups = () => {
           </div>
 
         )}
-
-
-
-
       </div>
     </div>
   )

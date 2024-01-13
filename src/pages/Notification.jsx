@@ -25,6 +25,18 @@ const Notification = () => {
     loadNotifications();
   }, [])
 
+  // PR修正
+  const NOTIFICATION_TEXT = {
+    "like": "さんの投稿にいいねをしました",
+    "follow": "さんをフォローしました",
+    "comment": "さんの投稿にコメントしました",
+  }
+
+  const findUserByUserId = (userId) => {
+    const user = users.find((user) => user.id == userId)
+    if (user) return user.name
+    return ""
+  }
 
 
   return (
@@ -44,18 +56,9 @@ const Notification = () => {
                 <img src={users.filter((user) => user.id == notification.visited_id)[0].icon_url}  alt="" />
               </Link>
             )}
-            {notification.action == "like" && (
 
-              <h3>{users.filter((user) => user.id == notification.visitor_id)[0].name}さんが{users.filter((user) => user.id == notification.visited_id)[0].name}さんの投稿にいいねをしました</h3>
-            )}
-            {notification.action == "follow" && (
-
-              <h3>{users.filter((user) => user.id == notification.visitor_id)[0].name}さんが{users.filter((user) => user.id == notification.visited_id)[0].name}さんをフォローしました</h3>
-            )}
-            {notification.action == "comment" && (
-
-              <h3>{users.filter((user) => user.id == notification.visitor_id)[0].name}さんが{users.filter((user) => user.id == notification.visited_id)[0].name}さんの投稿にコメントしました</h3>
-            )}
+            {/* <h3>{users.filter((user) => user.id == notification.visitor_id)[0].name}さんが{users.filter((user) => user.id == notification.visited_id)[0].name}{NOTIFICATION_TEXT[notification.action]}</h3> */}
+            <h3>{findUserByUserId(notification.visitor_id)}さんが{findUserByUserId(notification.visited_id)}{NOTIFICATION_TEXT[notification.action]}</h3>
           </div>
           ))}
         </div>
