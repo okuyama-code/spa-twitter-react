@@ -56,8 +56,6 @@ const Notification = () => {
                 <img src={users.filter((user) => user.id == notification.visited_id)[0].icon_url}  alt="" />
               </Link>
             )}
-
-            {/* <h3>{users.filter((user) => user.id == notification.visitor_id)[0].name}さんが{users.filter((user) => user.id == notification.visited_id)[0].name}{NOTIFICATION_TEXT[notification.action]}</h3> */}
             <h3>{findUserByUserId(notification.visitor_id)}さんが{findUserByUserId(notification.visited_id)}{NOTIFICATION_TEXT[notification.action]}</h3>
           </div>
           ))}
