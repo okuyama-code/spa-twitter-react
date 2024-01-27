@@ -73,4 +73,16 @@ export const deleteLike = (post_id, params) => {
   )
 }
 
+export const createBookmark = (post_id, params) => {
+  return client.post(`/posts/${post_id}/bookmarks`, params
+  )
+}
+
+export const deleteBookmark = (post_id, params) => {
+  return client.delete(`/posts/${post_id}/bookmarks`, { data: params }
+  )
+}
+
+
+
 

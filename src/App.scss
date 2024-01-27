@@ -189,6 +189,21 @@ html {
   }
 }
 
+.profileMessageButton {
+  position: absolute;
+  right: 300px;
+  top: 270px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  background: rgb(44, 229, 27);
+
+  &:hover {
+    transition: 0.2s;
+    opacity: 0.7;
+  }
+}
+
 .profilefollowButton {
   position: absolute;
   right: 220px;
@@ -308,7 +323,7 @@ html {
   }
 }
 
-// ============== message ====================
+// ============== group ====================
 .message_header {
   h2 {
     padding: 10px;
@@ -354,7 +369,9 @@ html {
 }
 
 .messages_lists {
-  margin: 10px;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .messages_icon {
@@ -364,7 +381,7 @@ html {
   border-radius: 50%;
 }
 
-//============= messageBox ===================
+//============= GroupDetail ===================
 
 .message-box-header {
   display: flex;
@@ -403,11 +420,12 @@ html {
 }
 
 .message-box-body-info p {
-  background-color: rgb(56, 55, 55);
+  background-color: rgb(122, 118, 118);
   border: 1px solid beige;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 10px 40px 10px;
+  color: #ececec;
 }
 
 .message-box-body-info-other {
@@ -421,6 +439,28 @@ html {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+}
+
+.messageForm {
+  input {
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 3px;
+    background-color: rgb(138, 229, 138);
+
+  }
+
+  button {
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(139, 221, 139);
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 

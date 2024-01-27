@@ -4,14 +4,11 @@ import { CiImageOn } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createPost, imageAttach } from '../../lib/api/post';
-import { currentUserState } from '../../atoms/currentUserState';
-import { useRecoilValue } from 'recoil';
 import useCurrentUser from '../../hooks/useCurrentUser';
 
 const Share = () => {
   const [postContent, setPostContent] = useState("");
   const [image, setImage] = useState({data: "", name: ""})
-  // const currentUser = useRecoilValue(currentUserState);
   const navigate = useNavigate();
 
   const { currentUser } = useCurrentUser();
@@ -47,8 +44,6 @@ const Share = () => {
   const handleImageSelect = (e) => {
     const reader = new FileReader();
     const files = e.target.files;
-    // console.log(reader);
-    // console.log(files);
     // console.log(files[0]);
     // console.log(files[0].name);
     if (files) {

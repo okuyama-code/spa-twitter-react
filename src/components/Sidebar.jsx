@@ -17,6 +17,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { currentUserState } from '../atoms/currentUserState';
 import useCurrentUser from '../hooks/useCurrentUser';
+import { Withdrawal } from '../lib/api/user';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -32,6 +33,23 @@ const Sidebar = () => {
     setIsLogin(Cookies.get("_access_token"));
     toast.success("ログアウトしました");
     navigate('/');
+  }
+
+  const currentUserDestroy = async (e) => {
+    e.preventDefault()
+    try {
+      const params = {
+        "id": currentUser.id
+      }
+      await Withdrawal(params);
+      Cookies.remove('_access_token');
+      Cookies.remove('_client');
+      Cookies.remove('_uid');
+      toast.success("退会しました");
+      navigate('/');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -54,7 +72,7 @@ const Sidebar = () => {
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>通知</span>
           </li>
         </Link>
-        <Link to={{ pathname: "/messages" }}>
+        <Link to={{ pathname: "/groups" }}>
           <li className='flex items-center mb-3 sidebar_items'>
             <IoMailOutline size={40} className='mx-2 mb-3' />
             <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>DM</span>
@@ -79,7 +97,9 @@ const Sidebar = () => {
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>その他</span>
         </li>
         <li className='flex items-center mb-3 sidebar_items'>
+        <button onClick={currentUserDestroy}>
           <ImExit size={40} className='ml-3 mr-1 mb-3' />
+       </button>
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>退会</span>
         </li>
         <li className='flex items-center mb-3 sidebar_items post_side_icon'>

@@ -19,6 +19,8 @@ function useUserList() {
     };
     fetchUser();
   }, []);
+
+  return { users }
 }
 
 export default useUserList;
