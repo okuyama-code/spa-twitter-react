@@ -102,20 +102,7 @@ const Sidebar = () => {
        </button>
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>退会</span>
         </li>
-        <li className='flex items-center mb-3 sidebar_items post_side_icon'>
-          <GiBirdTwitter size={50} className='mx-2 mb-3 mt-3' />
-          <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>投稿</span>
-        </li>
-        <Link to="/signUp">
-          <li className='flex items-center mb-3 sidebar_items'>
-            新規登録
-          </li>
-        </Link>
-        <Link to="/postShow">
-          <li className='flex items-center mb-3 sidebar_items'>
-            投稿詳細
-          </li>
-        </Link>
+        
       </ul>
     </div>
   )

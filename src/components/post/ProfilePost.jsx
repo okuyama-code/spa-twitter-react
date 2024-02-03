@@ -47,23 +47,27 @@ const ProfilePost = ({ post, currentUser }) => {
     }
   }
 
+  if (!users) {
+    return <div></div>
+  }
+
   return (
     <>
       <div className='post'>
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
-              <Link to={`/users/${users.filter((user) => user.id === post.user_id)[0].id}`}>
+              <Link to={`/users/${users?.filter((user) => user.id === post.user_id)[0].id}`}>
                 <img src={users.filter((user) => user.id === post.user_id)[0].icon_url} alt="" className='postProfileImg' />
               </Link>
               <span className='postName text-xl font-bold'>
-                {users.filter((user) => user.id === post.user_id)[0].name}
+                {users?.filter((user) => user.id === post.user_id)[0].name}
               </span>
               <span className="postUsername">
-                @{users.filter((user) => user.id === post.user_id)[0].username}
+                @{users?.filter((user) => user.id === post.user_id)[0].username}
               </span>
               <span className="postDate">{handleToDate(post.created_at)}</span>
-              {currentUser.id == post.user_id && (
+              {currentUser?.id == post.user_id && (
                  <button
                  className='deleteBtn'
                  onClick={() => deletePostHandler(post.id)}

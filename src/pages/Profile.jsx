@@ -115,12 +115,12 @@ const Profile = () => {
         {isEdit && (<EditModal user={user} id={id} handleClick={handleClick} />)}
         <div className='profileRight'>
           <div className="profileCover">
-            <img src={user.header_url} alt="" className='profileCoverImg'/>
-            <img src={user.icon_url} alt="" className='profileUserImg'/>
-            {currentUser.id == id && (<button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>)}
+            <img src={user?.header_url} alt="" className='profileCoverImg'/>
+            <img src={user?.icon_url} alt="" className='profileUserImg'/>
+            {currentUser?.id == id && (<button className='profileEditButton' onClick={handleClick} disabled={isEdit}>Edit Profile</button>)}
 
             {/* followボタンはここ */}
-            {currentUser.id != id && (<div>
+            {currentUser?.id != id && (<div>
              { isfollowed ? ( <button
                 onClick={() => handleClickUnfollow(user.id)}
                 className='profileUnfollowButton'>follow解除</button>)
@@ -141,49 +141,51 @@ const Profile = () => {
           </div>
 
           <div className="profileInfo">
-              <h4 className='profileInfoName'>{user.name}</h4>
-              <p className='profileInfoUsername'>@{user.username}</p>
-              <span className='profileInfoDesc'>{user.self_introduction}</span>
+              <h4 className='profileInfoName'>{user?.name}</h4>
+              <p className='profileInfoUsername'>@{user?.username}</p>
+              <span className='profileInfoDesc'>{user?.self_introduction}</span>
 
             <div className='profile_icons'>
               <div className='profile_icon'>
                 <FaLink />
-                <span className='profile_icon_link'><a  href={user.website} rel="noopener noreferrer" target="_blank" >{user.website}</a></span>
+                <span className='profile_icon_link'><a  href={user?.website} rel="noopener noreferrer" target="_blank" >{user?.website}</a></span>
               </div>
               <div className='profile_icon2'>
                 <FaBirthdayCake />
-                <span>{user.date_of_birth}</span>
+                <span>{user?.date_of_birth}</span>
               </div>
             </div>
               <div className='profile_icon3'>
               <CiLocationOn />
-              <span>{user.location}</span>
+              <span>{user?.location}</span>
             </div>
 
             <div className='follow_profile'>
               <p><Link to={{ pathname: "/followings" }}><span>110</span></Link> Following</p>
               <p><Link to={{ pathname: "/followings" }}><span>100</span></Link> Follower</p>
             </div>
-            <div className='profile_tabs'>
-              <Tabs>
-                <TabList className="tablist">
-                  <Tab><h2>投稿一覧</h2></Tab>
-                  <Tab><h2>コメント一覧</h2></Tab>
-                </TabList>
+            {currentUser && (
+              <div className='profile_tabs'>
+                <Tabs>
+                  <TabList className="tablist">
+                    <Tab><h2>投稿一覧</h2></Tab>
+                    <Tab><h2>コメント一覧</h2></Tab>
+                  </TabList>
 
-                <TabPanel className="tabPanel">
-                  {userPosts.map((post) => (
-                    <ProfilePost post={post} key={post. id} currentUser={currentUser} />))
-                  }
-                </TabPanel>
-                <TabPanel>
-                {userComments.map((post) => (
-                    <ProfileComments post={post} key={post. id} currentUser={currentUser} />))
-                  }
-                </TabPanel>
+                  <TabPanel className="tabPanel">
+                    {userPosts.map((post) => (
+                      <ProfilePost post={post} key={post. id} currentUser={currentUser} />))
+                    }
+                  </TabPanel>
+                  <TabPanel>
+                  {userComments.map((post) => (
+                      <ProfileComments post={post} key={post. id} currentUser={currentUser} />))
+                    }
+                  </TabPanel>
 
-              </Tabs>
-            </div>
+                </Tabs>
+              </div>
+            )}
 
           </div>
         </div>

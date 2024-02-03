@@ -63,7 +63,7 @@ const GroupDetail = () => {
           {/* ============= DMの文章部分 ==================  */}
           <div class="message-box-header">
           <Link to={{ pathname: "/groups" }}><p className='following_header'><FaArrowLeft /></p></Link>
-            <h3>{users.filter((user) => user.id === another_entry.user_id)[0].name}</h3>
+            <h3>{users.filter((user) => user.id === another_entry.user_id)[0]?.name}</h3>
           </div>
           {/* メッセージ投稿フォーム */}
           <div>
