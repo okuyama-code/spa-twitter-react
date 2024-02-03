@@ -102,7 +102,7 @@ const Sidebar = () => {
        </button>
           <span className='hidden xl:inline text-3xl font-bold pb-3 ml-3'>退会</span>
         </li>
-        
+
       </ul>
     </div>
   )
